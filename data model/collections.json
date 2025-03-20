@@ -1,0 +1,184 @@
+{
+  "professions": [
+    {
+      "id": "1",
+      "name": "Бизнес-аналитик",
+      "category": "Аналитика",
+      "skills": [
+        "Анализ бизнес-процессов",
+        "Работа с заказчиками",
+        "Документирование требований",
+        "Прототипирование",
+        "Моделирование данных"
+      ],
+      "technologies": [
+        "SQL",
+        "Python",
+        "API (REST, SOAP)",
+        "BI-системы (Power BI, Tableau)",
+        "ERP",
+        "CRM-системы"
+      ],
+      "tools": [
+        "Bizagi",
+        "Lucidchart",
+        "Microsoft Visio",
+        "Jira",
+        "Confluence",
+        "Trello",
+        "Excel",
+        "Power BI",
+        "Tableau",
+        "PowerPoint",
+        "Google Slides"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "QA-инженер",
+      "category": "Тестирование",
+      "skills": [
+        "Разработка тест-кейсов",
+        "Автоматизация тестирования",
+        "Работа с баг-трекингами",
+        "Анализ требований",
+        "Тестирование API"
+      ],
+      "technologies": [
+        "Selenium",
+        "Appium",
+        "Cypress",
+        "Python",
+        "Java",
+        "JavaScript",
+        "Jenkins",
+        "GitLab CI",
+        "SQL"
+      ],
+      "tools": [
+        "TestRail",
+        "Zephyr",
+        "Selenium WebDriver",
+        "JMeter",
+        "Gatling",
+        "Jira",
+        "Bugzilla",
+        "Redmine",
+        "Postman",
+        "SoapUI",
+        "Kibana",
+        "Splunk"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Back-end разработчик",
+      "category": "Разработка",
+      "skills": [
+        "Разработка API",
+        "Проектирование баз данных",
+        "Юнит-тестирование",
+        "Работа с CI/CD",
+        "Сетевая безопасность"
+      ],
+      "technologies": [
+        "Java",
+        "Python",
+        "Ruby",
+        "PHP",
+        "C#",
+        "Django",
+        "Flask",
+        "Spring",
+        "Ruby on Rails",
+        "Laravel",
+        "Docker",
+        "JUnit",
+        "pytest",
+        "Mocha/Chai"
+      ],
+      "tools": [
+        "Visual Studio Code",
+        "IntelliJ IDEA",
+        "PyCharm",
+        "Postman",
+        "DBeaver",
+        "Jenkins",
+        "GitHub Actions",
+        "GitLab CI/CD",
+        "Swagger/OpenAPI",
+        "MySQL",
+        "PostgreSQL",
+        "Oracle DB",
+        "MongoDB",
+        "Redis"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Аналитика"
+    },
+    {
+      "id": "2",
+      "name": "Тестирование"
+    },
+    {
+      "id": "3",
+      "name": "Разработка"
+    }
+  ],
+  "skills": [
+    { "id": "1", "name": "Анализ бизнес-процессов" },
+    { "id": "2", "name": "Работа с заказчиками" },
+    { "id": "3", "name": "Документирование требований" },
+    { "id": "4", "name": "Прототипирование" },
+    { "id": "5", "name": "Моделирование данных" },
+    { "id": "6", "name": "Разработка тест-кейсов" },
+    { "id": "7", "name": "Автоматизация тестирования" },
+    { "id": "8", "name": "Работа с баг-трекингами" },
+    { "id": "9", "name": "Тестирование API" },
+    { "id": "10", "name": "Разработка API" },
+    { "id": "11", "name": "Проектирование баз данных" },
+    { "id": "12", "name": "Юнит-тестирование" },
+    { "id": "13", "name": "Работа с CI/CD" },
+    { "id": "14", "name": "Сетевая безопасность" }
+  ],
+  "technologies": [
+    { "id": "1", "name": "SQL", "description": "Язык структурированных запросов" },
+    { "id": "2", "name": "Python", "description": "Язык программирования" },
+    { "id": "3", "name": "Java", "description": "Язык программирования" },
+    { "id": "4", "name": "Docker", "description": "Среда контейнеризации" }
+  ],
+  "tools": [
+    { "id": "1", "name": "Postman", "description": "Инструмент тестирования API" },
+    { "id": "2", "name": "Jira", "description": "Баг-трекинговая система" },
+    { "id": "3", "name": "Tableau", "description": "BI-система" },
+    { "id": "4", "name": "Visual Studio Code", "description": "Редактор кода" }
+  ],
+  "technology_groups": [
+    {
+      "id": "1",
+      "name": "Языки программирования",
+      "technologies": ["Python", "Java", "Ruby", "PHP", "C#"]
+    },
+    {
+      "id": "2",
+      "name": "Фреймворки",
+      "technologies": ["Django", "Flask", "Spring", "Ruby on Rails", "Laravel"]
+    }
+  ],
+  "tool_groups": [
+    {
+      "id": "1",
+      "name": "Среды разработки",
+      "tools": ["Visual Studio Code", "IntelliJ IDEA", "PyCharm"]
+    },
+    {
+      "id": "2",
+      "name": "Библиотеки и фреймворки для тестирования",
+      "tools": ["Selenium WebDriver", "JMeter", "Postman"]
+    }
+  ]
+}
