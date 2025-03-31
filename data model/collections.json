@@ -1,184 +1,290 @@
 {
-  "professions": [
+  "nodes": [
     {
-      "id": "1",
-      "name": "Бизнес-аналитик",
-      "category": "Аналитика",
-      "skills": [
-        "Анализ бизнес-процессов",
-        "Работа с заказчиками",
-        "Документирование требований",
-        "Прототипирование",
-        "Моделирование данных"
-      ],
-      "technologies": [
-        "SQL",
-        "Python",
-        "API (REST, SOAP)",
-        "BI-системы (Power BI, Tableau)",
-        "ERP",
-        "CRM-системы"
-      ],
-      "tools": [
-        "Bizagi",
-        "Lucidchart",
-        "Microsoft Visio",
-        "Jira",
-        "Confluence",
-        "Trello",
-        "Excel",
-        "Power BI",
-        "Tableau",
-        "PowerPoint",
-        "Google Slides"
-      ]
+      "label": "Profession",
+      "properties": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "name": "Software Engineer"
+      }
     },
     {
-      "id": "2",
-      "name": "QA-инженер",
-      "category": "Тестирование",
-      "skills": [
-        "Разработка тест-кейсов",
-        "Автоматизация тестирования",
-        "Работа с баг-трекингами",
-        "Анализ требований",
-        "Тестирование API"
-      ],
-      "technologies": [
-        "Selenium",
-        "Appium",
-        "Cypress",
-        "Python",
-        "Java",
-        "JavaScript",
-        "Jenkins",
-        "GitLab CI",
-        "SQL"
-      ],
-      "tools": [
-        "TestRail",
-        "Zephyr",
-        "Selenium WebDriver",
-        "JMeter",
-        "Gatling",
-        "Jira",
-        "Bugzilla",
-        "Redmine",
-        "Postman",
-        "SoapUI",
-        "Kibana",
-        "Splunk"
-      ]
+      "label": "Profession",
+      "properties": {
+        "id": "223e4567-e89b-12d3-a456-426614174111",
+        "name": "Data Scientist"
+      }
     },
     {
-      "id": "3",
-      "name": "Back-end разработчик",
-      "category": "Разработка",
-      "skills": [
-        "Разработка API",
-        "Проектирование баз данных",
-        "Юнит-тестирование",
-        "Работа с CI/CD",
-        "Сетевая безопасность"
-      ],
-      "technologies": [
-        "Java",
-        "Python",
-        "Ruby",
-        "PHP",
-        "C#",
-        "Django",
-        "Flask",
-        "Spring",
-        "Ruby on Rails",
-        "Laravel",
-        "Docker",
-        "JUnit",
-        "pytest",
-        "Mocha/Chai"
-      ],
-      "tools": [
-        "Visual Studio Code",
-        "IntelliJ IDEA",
-        "PyCharm",
-        "Postman",
-        "DBeaver",
-        "Jenkins",
-        "GitHub Actions",
-        "GitLab CI/CD",
-        "Swagger/OpenAPI",
-        "MySQL",
-        "PostgreSQL",
-        "Oracle DB",
-        "MongoDB",
-        "Redis"
-      ]
+      "label": "Profession",
+      "properties": {
+        "id": "323e4567-e89b-12d3-a456-426614174222",
+        "name": "DevOps Engineer"
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "423e4567-e89b-12d3-a456-426614174333",
+        "name": "Development",
+        "description": "Information Technology. Включает различные профессии и роли, связанные с программированием, обработкой данных и поддержанием компьютерных систем."
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "523e4567-e89b-12d3-a456-426614174444",
+        "name": "Data Science",
+        "description": "Категория, ориентированная на анализ и обработку данных, использование статистических методов и машинного обучения для извлечения знаний."
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "623e4567-e89b-12d3-a456-426614174555",
+        "name": "Programming"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "723e4567-e89b-12d3-a456-426614174666",
+        "name": "Data Analysis"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "823e4567-e89b-12d3-a456-426614174777",
+        "name": "Machine Learning"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "923e4567-e89b-12d3-a456-426614174888",
+        "name": "Cloud Computing"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "a23e4567-e89b-12d3-a456-426614174999",
+        "name": "System Administration"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "b23e4567-e89b-12d3-a456-426614175000",
+        "name": "JavaScript",
+        "description": "Язык программирования, используемый для создания динамических веб-страниц и приложений. Широко используется для фронтенд-разработки."
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "c23e4567-e89b-12d3-a456-426614175111",
+        "name": "Python",
+        "description": "Язык программирования высокого уровня, широко используемый в области анализа данных, машинного обучения, веб-разработки и автоматизации."
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "d23e4567-e89b-12d3-a456-426614175222",
+        "name": "AWS",
+        "description": "Облачная платформа от Amazon, предоставляющая услуги по вычислениям, хранению данных и другим облачным решениям."
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "e23e4567-e89b-12d3-a456-426614175333",
+        "name": "Visual Studio Code",
+        "description": "Популярный редактор кода, широко используемый разработчиками для написания программного обеспечения. Имеет расширяемую систему плагинов."
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "f23e4567-e89b-12d3-a456-426614175444",
+        "name": "Jupyter Notebook",
+        "description": "Интерактивная среда для разработки, ориентированная на работу с Python и другими языками для анализа данных и машинного обучения."
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "g23e4567-e89b-12d3-a456-426614175555",
+        "name": "Docker",
+        "description": "Платформа для разработки, доставки и запуска приложений с использованием контейнеров. Позволяет создавать изолированные среды для приложений."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "h23e4567-e89b-12d3-a456-426614175666",
+        "name": "Web Development",
+        "description": "Группа технологий, ориентированных на создание веб-приложений и сайтов, включая фронтенд и бэкенд решения."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "i23e4567-e89b-12d3-a456-426614175777",
+        "name": "Cloud Computing",
+        "description": "Группа технологий для создания, хранения и управления вычислительными ресурсами через интернет."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "j23e4567-e89b-12d3-a456-426614175888",
+        "name": "Data Science",
+        "description": "Группа технологий и инструментов, используемых для анализа и обработки больших данных, включая статистику и машинное обучение."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "k23e4567-e89b-12d3-a456-426614175999",
+        "name": "IDE",
+        "description": "Группа инструментов для разработки программного обеспечения, включающая текстовые редакторы, отладчики и системы сборки."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "l23e4567-e89b-12d3-a456-426614176000",
+        "name": "Containerization",
+        "description": "Инструменты для упаковки приложений и их зависимостей в контейнеры для упрощения развертывания."
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "m23e4567-e89b-12d3-a456-426614176111",
+        "name": "Programming Skills",
+        "description": "Навыки, связанные с программированием на различных языках, включая работу с алгоритмами, структурами данных и написанием кода."
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "n23e4567-e89b-12d3-a456-426614176222",
+        "name": "Data Science Skills",
+        "description": "Навыки, связанные с анализом и обработкой данных, включая статистику, машинное обучение и работу с большими данными."
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "o23e4567-e89b-12d3-a456-426614176333",
+        "name": "Cloud Computing Skills",
+        "description": "Навыки, связанные с облачными технологиями и платформами, такими как AWS, Google Cloud, и Microsoft Azure."
+      }
     }
   ],
-  "categories": [
+  "relationships": [
     {
-      "id": "1",
-      "name": "Аналитика"
+      "type": "BELONGS_TO",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "423e4567-e89b-12d3-a456-426614174333"
     },
     {
-      "id": "2",
-      "name": "Тестирование"
+      "type": "BELONGS_TO",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "523e4567-e89b-12d3-a456-426614174444"
     },
     {
-      "id": "3",
-      "name": "Разработка"
-    }
-  ],
-  "skills": [
-    { "id": "1", "name": "Анализ бизнес-процессов" },
-    { "id": "2", "name": "Работа с заказчиками" },
-    { "id": "3", "name": "Документирование требований" },
-    { "id": "4", "name": "Прототипирование" },
-    { "id": "5", "name": "Моделирование данных" },
-    { "id": "6", "name": "Разработка тест-кейсов" },
-    { "id": "7", "name": "Автоматизация тестирования" },
-    { "id": "8", "name": "Работа с баг-трекингами" },
-    { "id": "9", "name": "Тестирование API" },
-    { "id": "10", "name": "Разработка API" },
-    { "id": "11", "name": "Проектирование баз данных" },
-    { "id": "12", "name": "Юнит-тестирование" },
-    { "id": "13", "name": "Работа с CI/CD" },
-    { "id": "14", "name": "Сетевая безопасность" }
-  ],
-  "technologies": [
-    { "id": "1", "name": "SQL", "description": "Язык структурированных запросов" },
-    { "id": "2", "name": "Python", "description": "Язык программирования" },
-    { "id": "3", "name": "Java", "description": "Язык программирования" },
-    { "id": "4", "name": "Docker", "description": "Среда контейнеризации" }
-  ],
-  "tools": [
-    { "id": "1", "name": "Postman", "description": "Инструмент тестирования API" },
-    { "id": "2", "name": "Jira", "description": "Баг-трекинговая система" },
-    { "id": "3", "name": "Tableau", "description": "BI-система" },
-    { "id": "4", "name": "Visual Studio Code", "description": "Редактор кода" }
-  ],
-  "technology_groups": [
-    {
-      "id": "1",
-      "name": "Языки программирования",
-      "technologies": ["Python", "Java", "Ruby", "PHP", "C#"]
+      "type": "BELONGS_TO",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "423e4567-e89b-12d3-a456-426614174333"
     },
     {
-      "id": "2",
-      "name": "Фреймворки",
-      "technologies": ["Django", "Flask", "Spring", "Ruby on Rails", "Laravel"]
-    }
-  ],
-  "tool_groups": [
-    {
-      "id": "1",
-      "name": "Среды разработки",
-      "tools": ["Visual Studio Code", "IntelliJ IDEA", "PyCharm"]
+      "type": "REQUIRES",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "623e4567-e89b-12d3-a456-426614174555"
     },
     {
-      "id": "2",
-      "name": "Библиотеки и фреймворки для тестирования",
-      "tools": ["Selenium WebDriver", "JMeter", "Postman"]
+      "type": "REQUIRES",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "723e4567-e89b-12d3-a456-426614174666"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "923e4567-e89b-12d3-a456-426614174888"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "b23e4567-e89b-12d3-a456-426614175000"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "c23e4567-e89b-12d3-a456-426614175111"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "d23e4567-e89b-12d3-a456-426614175222"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "e23e4567-e89b-12d3-a456-426614175333"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "f23e4567-e89b-12d3-a456-426614175444"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "g23e4567-e89b-12d3-a456-426614175555"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "b23e4567-e89b-12d3-a456-426614175000",
+      "endNode": "h23e4567-e89b-12d3-a456-426614175666"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "c23e4567-e89b-12d3-a456-426614175111",
+      "endNode": "i23e4567-e89b-12d3-a456-426614175777"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "d23e4567-e89b-12d3-a456-426614175222",
+      "endNode": "j23e4567-e89b-12d3-a456-426614175888"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "e23e4567-e89b-12d3-a456-426614175333",
+      "endNode": "k23e4567-e89b-12d3-a456-426614175999"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "f23e4567-e89b-12d3-a456-426614175444",
+      "endNode": "l23e4567-e89b-12d3-a456-426614176000"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "623e4567-e89b-12d3-a456-426614174555",
+      "endNode": "m23e4567-e89b-12d3-a456-426614176111"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "723e4567-e89b-12d3-a456-426614174666",
+      "endNode": "n23e4567-e89b-12d3-a456-426614176222"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "923e4567-e89b-12d3-a456-426614174888",
+      "endNode": "o23e4567-e89b-12d3-a456-426614176333"
     }
   ]
 }
