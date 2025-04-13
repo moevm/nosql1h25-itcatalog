@@ -1,0 +1,25 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.pagination__next-button,
+.pagination__prev-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination__next-button:hover,
+.pagination__prev-button:hover {
+    background-color: #f5f5f5;
+}

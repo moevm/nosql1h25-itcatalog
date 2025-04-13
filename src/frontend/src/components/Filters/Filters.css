@@ -1,0 +1,43 @@
+.filters {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.filters__categories,
+.filters__tools,
+.filters__technologies,
+.filters__search {
+    width: 300px;
+    height: 32px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.filters__search {
+    background-color: #f8f3fd;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px 16px;
+    padding-right: 30px;
+    border: 1px solid #ccc;
+    height: 32px;
+    width: 200px;
+}
+
+.filters__categories-tools,
+.filters__search-tools,
+.filters__categories-technologies,
+.filters__search-technologies,
+.filters__categories-skills,
+.filters__search-skills {
+    width: 420px;
+}

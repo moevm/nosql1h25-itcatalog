@@ -1,0 +1,45 @@
+.sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.sections__main-buttons,
+.sections__group-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.sections__button,
+.sections__group-button {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 235px;
+    height: 32px;
+    position: relative;
+    z-index: 1;
+    outline: none;
+}
+
+.sections__button:hover,
+.sections__group-button:hover {
+    background-color: #f5f5f5;
+}
+
+.sections__button.active,
+.sections__group-button.active {
+    background-color: #f8f3fd;
+    border: none;
+}
