@@ -79,17 +79,17 @@ async def get_tools_sorted_by_toolgroups():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/toolgroups/{id}")
-async def get_tools_filtered_by_toolgroup(id: str):
+@router.get("/filter/toolgroups/{name}")
+async def get_tools_filtered_by_toolgroup(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (g:ToolGroup)-[:GROUPS_TOOL]->(t:Tool)
-                WHERE g.id = $id
+                WHERE g.name = $name
                 RETURN t.name AS tool_name, g.name AS group_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
