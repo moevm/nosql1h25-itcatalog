@@ -1,0 +1,100 @@
+from fastapi import HTTPException
+# include "main.py"
+from docker.backend.main import driver, app
+
+@app.get("/api/skills")
+async def get_skills():
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
+                RETURN s.name AS skill_name, g.name AS group_name
+                """
+            )
+            return [
+                {
+                    "skill": record["skill_name"],
+                    "skill_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/skills/{id}")
+async def get_skill(id: str):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
+                WHERE s.id = $skill_id
+                OPTIONAL MATCH (p:Profession)-[:REQUIRES]->(s)
+                RETURN s.name AS skill_name, g.name AS group_name, collect(p.name) AS professions
+                """,
+                {"skill_id": id}
+            )
+            record = result.single()
+            if not record:
+                raise HTTPException(status_code=404, detail="The skill not found")
+
+            return {
+                "skill": record["skill_name"],
+                "skill_group": record["group_name"],
+                "professions": record["professions"],
+                "image": "http://localhost:8000/static/images/in_progress.jpg"
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/skills/filter/skillgroups")
+async def get_skills_sorted_by_skillgroups():
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
+                RETURN s.name AS skill_name, g.name AS group_name
+                ORDER BY g.name, s.name
+                """
+            )
+            grouped_skills = {}
+            for record in result:
+                group = record["group_name"]
+                skill = record["skill_name"]
+                if group not in grouped_skills:
+                    grouped_skills[group] = []
+                grouped_skills[group].append(skill)
+            return [
+                {
+                    "skill_group": group,
+                    "skills": skills
+                }
+                for group, skills in grouped_skills.items()
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/skills/filter/skillgroups/{id}")
+async def get_skills_filtered_by_skillgroup(id: str):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (g:SkillGroup)-[:GROUPS_SKILL]->(s:Skill)
+                WHERE g.id = $id
+                RETURN s.name AS skill_name, g.name AS group_name
+                """,
+                {"id": id}
+            )
+            return [
+                {
+                    "skill": record["skill_name"],
+                    "skill_group": record["group_name"]
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
