@@ -18,24 +18,34 @@ async def get_groups(group_type: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         
-@router.get("/search/{search_term}")
-async def search_groups(search_term: str = ""):
+@router.get("/categories/search/{search_term}")
+async def search_categories(search_term: str):
+    return await search_group_type("Category", search_term)
+
+@router.get("/skillgroups/search/{search_term}")
+async def search_skillgroups(search_term: str):
+    return await search_group_type("SkillGroup", search_term)
+
+@router.get("/technologygroups/search/{search_term}")
+async def search_technologygroups(search_term: str):
+    return await search_group_type("TechnologyGroup", search_term)
+
+@router.get("/toolgroups/search/{search_term}")
+async def search_toolgroups(search_term: str):
+    return await search_group_type("ToolGroup", search_term)
+
+async def search_group_type(neo4j_label: str, search_term: str):
     try:
         with driver.session() as session:
             result = session.run(
-                """
-                MATCH (g:Group)
+                f"""
+                MATCH (g:{neo4j_label})
                 WHERE toLower(g.name) CONTAINS toLower($search_term)
-                RETURN g.name AS name, labels(g)[0] AS type
+                RETURN g.name AS name
                 """,
                 {"search_term": search_term.strip()}
             )
-            return [
-                {
-                    "name": record["name"],
-                    "type": record["type"].removesuffix("Group").lower() + "groups"
-                }
-                for record in result
-            ]
+            return [record["name"] for record in result]
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
