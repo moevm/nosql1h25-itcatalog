@@ -80,7 +80,28 @@ async def get_technologies_sorted_by_technologygroups():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/search")
+@router.get("/filter/technologygroups/{id}")
+async def get_technologies_filtered_by_technologygroup(id: str):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (g:TechnologyGroup)-[:GROUPS_TECH]->(t:Technology)
+                WHERE g.id = $id
+                RETURN t.name AS tech_name, g.name AS group_name
+                """, {"id": id}
+            )
+            return [
+                {
+                    "technology_group": record["group_name"],
+                    "technology": record["tech_name"]
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+        
+@router.get("/search/{search_term}")
 async def search_technologies(search_term: str = ""):
     try:
         with driver.session() as session:
@@ -97,27 +118,6 @@ async def search_technologies(search_term: str = ""):
                     "technology": record["tech_name"],
                     "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
-                }
-                for record in result
-            ]
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@router.get("/filter/technologygroups/{id}")
-async def get_technologies_filtered_by_technologygroup(id: str):
-    try:
-        with driver.session() as session:
-            result = session.run(
-                """
-                MATCH (g:TechnologyGroup)-[:GROUPS_TECH]->(t:Technology)
-                WHERE g.id = $id
-                RETURN t.name AS tech_name, g.name AS group_name
-                """, {"id": id}
-            )
-            return [
-                {
-                    "technology_group": record["group_name"],
-                    "technology": record["tech_name"]
                 }
                 for record in result
             ]
