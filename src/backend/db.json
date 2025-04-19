@@ -1,0 +1,4564 @@
+{
+  "nodes": [
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000001",
+        "name": "Бизнес-аналитик"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000002",
+        "name": "CRM-специалист"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000003",
+        "name": "QA-инженер"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000004",
+        "name": "Тестировщик программного обеспечения (ручной тестировщик)"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000005",
+        "name": "Программист Kotlin"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000006",
+        "name": "Программист 1С"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000007",
+        "name": "Data Engineer"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000008",
+        "name": "Big Data Analyst (аналитик больших данных)"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-000000000009",
+        "name": "Разработчик нейросетей"
+      }
+    },
+    {
+      "label": "Profession",
+      "properties": {
+        "id": "efcafab0-d000-1000-a100-00000000000a",
+        "name": "Специалист по машинному обучению (ML-специалист)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-000000000001",
+        "name": "Навык взаимодействия с заказчиками"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-000000000002",
+        "name": "Аналитическое мышление: проблемное мышление, критическое мышление, внимание к деталям"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-000000000003",
+        "name": "Навык анализа и моделирования бизнес-процессов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-000000000004",
+        "name": "Владение стандартами автоматизации: ERP, CRM, MRP"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000005",
+        "name": "Навык работы с системами CRM: анализ, выявление проблем, разработка эффективных решений"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000006",
+        "name": "Навык сбора статистических данных"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000007",
+        "name": "Маркетинговая аналитика: анализ данных о клиентах"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000008",
+        "name": "Навык работы с документами, таблицами и презентациями, умение составлять отчеты и презентации"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000009",
+        "name": "Навык работы с инструментами проектирования и моделирования процессов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000a",
+        "name": "Навык анализа эффективности работы и разработки рекомендаций"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000b",
+        "name": "Коммуникативные навыки: способность четко и грамотно доносить информацию до технических и нетехнических специалистов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000c",
+        "name": "Понимание задачи, поставленной заказчиком, анализ требований к продукту"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000d",
+        "name": "Понимание жизненного цикла разработки ПО (SDLC)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000e",
+        "name": "Навык работы с CI/CD"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000000f",
+        "name": "Навык планирования процесса тестирования"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000010",
+        "name": "Навык работы с тестовой документацией (тест-план, чек-листы, тест-кейсы)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000011",
+        "name": "Навык проведения функционального, регрессионного, интеграционного тестирования"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000012",
+        "name": "Навык документирования дефектов (создание баг-репортов)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000013",
+        "name": "Навык автоматизации тестирования"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000014",
+        "name": "Коммуникативные навыки: коммуникация с разработчиками по исправлению багов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000015",
+        "name": "Понимание возможностей реализации задачи, поставленной заказчиком, оценка затрат на ее создание, предложения собственных вариантов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000016",
+        "name": "Навык работы с основными функциями Kotlin, библиотеками и фреймворками для Kotlin"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000017",
+        "name": "Навык работы с ООП и функциональным программированием"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000018",
+        "name": "Навык разработки Android-приложений (Activity, Fragments, ViewModel, LiveData и т. д.)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000019",
+        "name": "Умение оптимизировать производительность кода"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001a",
+        "name": "Умение пользоваться базами данных"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001b",
+        "name": "Навык проектирования и оптимизации баз данных, используемых в 1С"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001c",
+        "name": "Навык работы с языком программирования 1С"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001d",
+        "name": "Навык проектирования и построения архитектур данных"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001e",
+        "name": "Навыки работы с большими объемами данных, включая их сбор, очистку и обработку с помощью библиотек и фреймворков для анализа данных"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-0000000001f",
+        "name": "Навык разработки ETL/ELT-процессов (Extract, Transform, Load)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000020",
+        "name": "Умение оптимизировать производительность баз данных и пайплайнов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000021",
+        "name": "Навык работы с облачными технологиями"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000022",
+        "name": "Понимание бизнес-метрик и ключевых показателей эффективности (KPI)"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000023",
+        "name": "Понимание линейной алгебры, теории вероятностей и математической статистики"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000024",
+        "name": "Понимание основных методов и алгоритмов машинного обучения, включая линейную регрессию, деревья решений, SVM и ансамблевые методы"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000025",
+        "name": "Навык разработки нейронных сетей, таких как сверточные нейронные сети (CNN), рекуррентные нейронные сети (RNN) и трансформеры"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000026",
+        "name": "Умение выбирать подходящую архитектуру нейросетей для конкретной задачи"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000027",
+        "name": "Умение проводить гиперпараметрическую настройку, валидацию и тестирование моделей для достижения наилучших результатов"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000028",
+        "name": "API: навык работы с RESTful API и понимание принципов проектирования API"
+      }
+    },
+    {
+      "label": "Skill",
+      "properties": {
+        "id": "efcafab0-d000-1000-a200-00000000029",
+        "name": "Коммуникативные навыки: способность объяснять сложные концепции и результаты техническим и нетехническим специалистам"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000001",
+        "name": "BPMN",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000002",
+        "name": "ERP",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000003",
+        "name": "CRM",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000004",
+        "name": "MRP",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000005",
+        "name": "SQL",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000006",
+        "name": "Python",
+        "description": "Язык программирования высокого уровня, широко используемый в области анализа данных, машинного обучения, веб-разработки и автоматизации."
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000007",
+        "name": "Java",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000008",
+        "name": "JavaScript",
+        "description": "Язык программирования, используемый для создания динамических веб-страниц и приложений. Широко используется для фронтенд-разработки."
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000009",
+        "name": "Agile",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000a",
+        "name": "Scrum",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000b",
+        "name": "Waterfall",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000c",
+        "name": "Selenium WebDriver",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000d",
+        "name": "Appium",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000e",
+        "name": "XML-RPC",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000000f",
+        "name": "SOAP",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000010",
+        "name": "RESTful API",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000011",
+        "name": "Git",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000012",
+        "name": "Kotlin",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000013",
+        "name": "RxJava",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000014",
+        "name": "RxKotlin",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000015",
+        "name": "Kotlin Flow",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000016",
+        "name": "Ktor",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000017",
+        "name": "Kotlinx.serialization",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000018",
+        "name": "Kotlin Multiplatform",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000019",
+        "name": "Jetpack Compose",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001a",
+        "name": "Mockito",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001b",
+        "name": "JUnit",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001c",
+        "name": "Espresso",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001d",
+        "name": "KotlinTest",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001e",
+        "name": "GraphQL",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000001f",
+        "name": "Room",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000020",
+        "name": "Exposed: ORM",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000021",
+        "name": "1С",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000022",
+        "name": "Apache Hadoop",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000023",
+        "name": "Apache Kafka",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000024",
+        "name": "Apache Spark",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000025",
+        "name": "NumPy",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000026",
+        "name": "SciPy",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000027",
+        "name": "Pandas",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000028",
+        "name": "Matplotlib",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000029",
+        "name": "Seaborn",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002a",
+        "name": "Scikit-learn",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002b",
+        "name": "TensorFlow",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002c",
+        "name": "PyTorch",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002d",
+        "name": "Keras",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002e",
+        "name": "MXNet",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-0000000002f",
+        "name": "CatBoost",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000030",
+        "name": "Transformers",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000031",
+        "name": "NoSQL",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000032",
+        "name": "AWS",
+        "description": "Облачная платформа от Amazon, предоставляющая услуги по вычислениям, хранению данных и другим облачным решениям."
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000033",
+        "name": "Azure",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000034",
+        "name": "Google Cloud",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000035",
+        "name": "OpenStack",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000036",
+        "name": "C++",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000037",
+        "name": "OpenCV",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000001",
+        "name": "Microsoft Word",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000002",
+        "name": "Microsoft Excel",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000003",
+        "name": "Microsoft PowerPoint",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000004",
+        "name": "Google Docs",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000005",
+        "name": "Google Sheets",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000006",
+        "name": "Google Slides",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000007",
+        "name": "Microsoft Visio",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000008",
+        "name": "Bizagi",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000009",
+        "name": "Lucidchart",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000a",
+        "name": "Glide",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000b",
+        "name": "Miro",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000c",
+        "name": "Notion",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000d",
+        "name": "Yonote",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000e",
+        "name": "Trello",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000000f",
+        "name": "Asana",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000010",
+        "name": "Jira",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000011",
+        "name": "Slack",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000012",
+        "name": "Power BI",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000013",
+        "name": "Google Analytics",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000014",
+        "name": "Tableau",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000015",
+        "name": "SurveyMonkey",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000016",
+        "name": "Typeform",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000017",
+        "name": "Qualtrics",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000018",
+        "name": "Zendesk",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000019",
+        "name": "Salesforce",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001a",
+        "name": "HubSpot",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001b",
+        "name": "Zoho CRM",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001c",
+        "name": "Mailchimp",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001d",
+        "name": "SendGrid",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001e",
+        "name": "ActiveCampaign",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000001f",
+        "name": "Android Studio",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000020",
+        "name": "Xcode",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000021",
+        "name": "Selenium IDE",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000022",
+        "name": "Postman",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000023",
+        "name": "SoapUI",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000024",
+        "name": "Qase",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000025",
+        "name": "Rational Quality Manager",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000026",
+        "name": "TestRail",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000027",
+        "name": "Apache JMeter",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000028",
+        "name": "Appium Studio",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000029",
+        "name": "Appium Desktop",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002a",
+        "name": "Cypress",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002b",
+        "name": "Playwright",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002c",
+        "name": "BrowserStack",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002d",
+        "name": "CrossBrowserTesting",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002e",
+        "name": "Jenkins",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000002f",
+        "name": "GitHub",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000030",
+        "name": "GitLab",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000031",
+        "name": "Vim",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000032",
+        "name": "IntelliJ IDEA",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000033",
+        "name": "Eclipse",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000034",
+        "name": "1С:Предприятие",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000035",
+        "name": "Конфигуратор 1С",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000036",
+        "name": "1C:EDT",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000037",
+        "name": "Visual Studio Code",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000038",
+        "name": "Microsoft SQL Server",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000039",
+        "name": "PyCharm",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003a",
+        "name": "Jupyter Notebook",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003b",
+        "name": "Google Colab",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003c",
+        "name": "RapidMiner",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003d",
+        "name": "Prometheus",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003e",
+        "name": "Apache Airflow",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003f",
+        "name": "Talend",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000040",
+        "name": "Informatica",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000041",
+        "name": "ELK Stack (Elasticsearch, Logstash, Kibana)",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000042",
+        "name": "Grafana",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000043",
+        "name": "PostgreSQL",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000044",
+        "name": "MySQL",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000045",
+        "name": "SQLite",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000046",
+        "name": "MongoDB",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000047",
+        "name": "Cassandra",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000048",
+        "name": "Oracle NoSQL Database",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000049",
+        "name": "Microsoft Azure",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004a",
+        "name": "Amazon Athena",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004b",
+        "name": "Google Cloud Platform",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004c",
+        "name": "Microsoft Azure ML",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000001",
+        "name": "Аналитика",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000002",
+        "name": "Тестирование",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000003",
+        "name": "Разработка, проектирование",
+        "description": "Information Technology. Включает различные профессии и роли, связанные с программированием, обработкой данных и поддержанием компьютерных систем."
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000004",
+        "name": "Data Science",
+        "description": "Категория, ориентированная на анализ и обработку данных, использование статистических методов и машинного обучения для извлечения знаний."
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000005",
+        "name": "ML-специалист",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b200-000000000001",
+        "name": "Hard skills",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b200-000000000002",
+        "name": "Soft skills",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000001",
+        "name": "Нотации для моделирования процессов",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000002",
+        "name": "Стандарты автоматизации",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000003",
+        "name": "Языки управления базами данных",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000004",
+        "name": "Языки программирования",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000005",
+        "name": "Методологии тестирования",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000006",
+        "name": "Библиотеки и фреймворки для тестирования",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000007",
+        "name": "Веб-API",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000008",
+        "name": "DevOps",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000009",
+        "name": "Библиотеки и фреймворки для разработки",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000a",
+        "name": "Библиотеки для работы с базами данных",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000b",
+        "name": "Библиотеки и фреймворки для анализа данных",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000c",
+        "name": "Библиотеки и фреймворки для машинного обучения",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000d",
+        "name": "Облачные технологии",
+        "description": "Группа технологий для создания, хранения и управления вычислительными ресурсами через интернет."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000001",
+        "name": "Работа с документами",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000002",
+        "name": "Проектирование и моделирование процессов",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000003",
+        "name": "Инструменты для распределения командной работы",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000004",
+        "name": "Программы для анализа данных",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000005",
+        "name": "Проведение опросов, клиент-аналитика",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000006",
+        "name": "IDE",
+        "description": "Группа инструментов для разработки программного обеспечения, включающая текстовые редакторы, отладчики и системы сборки."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000007",
+        "name": "QA IDE (Инструменты для тестирования)",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000008",
+        "name": "DevOps",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000009",
+        "name": "Текстовые редакторы",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-00000000000a",
+        "name": "Системы управления базами данных (СУБД)",
+        "description": "_________description_________"
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-00000000000b",
+        "name": "Облачные хранилища",
+        "description": "_________description_________"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-b100-000000000001"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a300-00000000001"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a300-00000000002"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a300-00000000003"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a300-00000000004"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000001"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000002"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000003"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000004"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000006"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000007"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000008"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000009"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000012"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000013"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a400-00000000014"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-b100-000000000001"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a300-00000000001"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a300-00000000002"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a300-00000000003"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a300-00000000004"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000001"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000002"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000003"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000004"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000006"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000007"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000008"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000009"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000015"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000016"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000017"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000018"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000019"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000001b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000001c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000001d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000001e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000012"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000013"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a400-00000000014"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-b100-000000000002"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000007"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000008"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000009"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-0000000000f"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000010"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000001"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000002"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000004"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000001f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000020"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000021"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000022"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000023"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000024"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000025"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000026"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000027"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000028"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000029"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-0000000002f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a400-00000000030"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-b100-000000000002"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-00000000008"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-00000000009"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-0000000000f"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-00000000010"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000001"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000002"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000004"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000005"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000001f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000020"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000021"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000022"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000023"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000024"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000025"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000026"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a400-0000000002f"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-b100-000000000003"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000012"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000013"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000014"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000015"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000016"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000017"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000019"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-0000000001f"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000020"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000010"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000031"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000032"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000001f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000033"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000022"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-b100-000000000003"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a300-00000000021"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000034"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000035"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000036"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000037"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000032"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-0000000000b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-0000000000c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-0000000000d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-0000000000e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-0000000000f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000010"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000011"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a400-00000000038"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000007"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000022"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000023"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000024"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000025"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000026"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000027"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000028"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000029"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000031"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000032"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000033"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000034"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a300-00000000035"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000039"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-0000000003f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000040"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000042"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000038"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000043"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000044"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000045"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000046"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000047"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000048"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a400-00000000049"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000007"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000022"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000023"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000024"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000025"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000026"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000027"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000028"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000029"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-0000000002a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-0000000002b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-0000000002c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-0000000002d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-0000000002e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000030"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000031"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000032"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000033"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000034"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a300-00000000035"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000039"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000012"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003d"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003e"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000003f"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000040"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000042"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000038"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000043"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000044"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000045"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000046"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000047"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000048"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-00000000049"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000004a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a400-0000000004b"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-b100-000000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000036"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000037"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000025"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000026"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000027"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000028"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000029"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-0000000002a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-0000000002b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-0000000002c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-0000000002d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-0000000002e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000030"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000031"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000032"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000033"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000034"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a300-00000000035"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a400-00000000039"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a400-0000000003a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a400-0000000003b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a400-0000000003c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a400-0000000004c"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-b100-000000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000036"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000037"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000006"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000025"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000026"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000027"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000028"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000029"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-0000000002a"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-0000000002b"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-0000000002c"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-0000000002d"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-0000000002e"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000030"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000005"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000031"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000011"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000032"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000033"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000034"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a300-00000000035"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a400-00000000039"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a400-0000000003a"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a400-0000000003b"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a400-0000000003c"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a400-0000000004c"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-b100-000000000004"
+    },
+    {
+      "type": "BELONGS_TO",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-b100-000000000004"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "623e4567-e89b-12d3-a456-426614174555"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "723e4567-e89b-12d3-a456-426614174666"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "923e4567-e89b-12d3-a456-426614174888"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "b23e4567-e89b-12d3-a456-426614175000"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "c23e4567-e89b-12d3-a456-426614175111"
+    },
+    {
+      "type": "USES_TECH",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "d23e4567-e89b-12d3-a456-426614175222"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "123e4567-e89b-12d3-a456-426614174000",
+      "endNode": "e23e4567-e89b-12d3-a456-426614175333"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "223e4567-e89b-12d3-a456-426614174111",
+      "endNode": "f23e4567-e89b-12d3-a456-426614175444"
+    },
+    {
+      "type": "USES_TOOL",
+      "startNode": "323e4567-e89b-12d3-a456-426614174222",
+      "endNode": "g23e4567-e89b-12d3-a456-426614175555"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "b23e4567-e89b-12d3-a456-426614175000",
+      "endNode": "h23e4567-e89b-12d3-a456-426614175666"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "c23e4567-e89b-12d3-a456-426614175111",
+      "endNode": "i23e4567-e89b-12d3-a456-426614175777"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "d23e4567-e89b-12d3-a456-426614175222",
+      "endNode": "j23e4567-e89b-12d3-a456-426614175888"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "e23e4567-e89b-12d3-a456-426614175333",
+      "endNode": "k23e4567-e89b-12d3-a456-426614175999"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "f23e4567-e89b-12d3-a456-426614175444",
+      "endNode": "l23e4567-e89b-12d3-a456-426614176000"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "623e4567-e89b-12d3-a456-426614174555",
+      "endNode": "m23e4567-e89b-12d3-a456-426614176111"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "723e4567-e89b-12d3-a456-426614174666",
+      "endNode": "n23e4567-e89b-12d3-a456-426614176222"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "923e4567-e89b-12d3-a456-426614174888",
+      "endNode": "o23e4567-e89b-12d3-a456-426614176333"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-000000000001",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-000000000002",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000b",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000014",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000015",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000029",
+      "endNode": "efcafab0-d000-1000-b200-000000000002"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-000000000003",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-000000000004",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000005",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000006",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000007",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000008",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000009",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000a",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000c",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000d",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000e",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000000f",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000010",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000011",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000012",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000013",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000016",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000017",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000018",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000019",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001a",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001b",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001c",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001d",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001e",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-0000000001f",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000020",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000021",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000022",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000023",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000024",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000025",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000026",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000027",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_SKILL",
+      "startNode": "efcafab0-d000-1000-a200-00000000028",
+      "endNode": "efcafab0-d000-1000-b200-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000001",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000002",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000003",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000004",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000005",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000006",
+      "endNode": "efcafab0-d000-1000-b400-000000000001"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000007",
+      "endNode": "efcafab0-d000-1000-b400-000000000002"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000008",
+      "endNode": "efcafab0-d000-1000-b400-000000000002"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000009",
+      "endNode": "efcafab0-d000-1000-b400-000000000002"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000a",
+      "endNode": "efcafab0-d000-1000-b400-000000000002"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000b",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000c",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000d",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000e",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000000f",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000010",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000011",
+      "endNode": "efcafab0-d000-1000-b400-000000000003"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000012",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000013",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000014",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000015",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000016",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000017",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000018",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000019",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001a",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001b",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001c",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001d",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001e",
+      "endNode": "efcafab0-d000-1000-b400-000000000005"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000021",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000022",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000023",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000024",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000025",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000026",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000027",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000028",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000029",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002a",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002b",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002c",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002d",
+      "endNode": "efcafab0-d000-1000-b400-000000000007"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002e",
+      "endNode": "efcafab0-d000-1000-b400-000000000008"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000002f",
+      "endNode": "efcafab0-d000-1000-b400-000000000008"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000030",
+      "endNode": "efcafab0-d000-1000-b400-000000000008"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000031",
+      "endNode": "efcafab0-d000-1000-b400-000000000009"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000038",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000003c",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000003d",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000003e",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000003f",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000040",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000041",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000042",
+      "endNode": "efcafab0-d000-1000-b400-000000000004"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000043",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000044",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000045",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000046",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000047",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000048",
+      "endNode": "efcafab0-d000-1000-b400-00000000000a"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000049",
+      "endNode": "efcafab0-d000-1000-b400-00000000000b"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000004a",
+      "endNode": "efcafab0-d000-1000-b400-00000000000b"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000004b",
+      "endNode": "efcafab0-d000-1000-b400-00000000000b"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000004c",
+      "endNode": "efcafab0-d000-1000-b400-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000001",
+      "endNode": "efcafab0-d000-1000-b300-000000000001"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000002",
+      "endNode": "efcafab0-d000-1000-b300-000000000002"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000003",
+      "endNode": "efcafab0-d000-1000-b300-000000000002"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000004",
+      "endNode": "efcafab0-d000-1000-b300-000000000002"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000005",
+      "endNode": "efcafab0-d000-1000-b300-000000000003"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000006",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000007",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000008",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000009",
+      "endNode": "efcafab0-d000-1000-b300-000000000005"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000a",
+      "endNode": "efcafab0-d000-1000-b300-000000000005"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000b",
+      "endNode": "efcafab0-d000-1000-b300-000000000005"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000e",
+      "endNode": "efcafab0-d000-1000-b300-000000000007"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000f",
+      "endNode": "efcafab0-d000-1000-b300-000000000007"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000010",
+      "endNode": "efcafab0-d000-1000-b300-000000000007"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000011",
+      "endNode": "efcafab0-d000-1000-b300-000000000008"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000012",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000013",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000014",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000015",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000016",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000017",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000018",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000019",
+      "endNode": "efcafab0-d000-1000-b300-000000000009"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000001e",
+      "endNode": "efcafab0-d000-1000-b300-000000000003"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000001f",
+      "endNode": "efcafab0-d000-1000-b300-00000000000a"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000020",
+      "endNode": "efcafab0-d000-1000-b300-00000000000a"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000021",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000022",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000023",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000024",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000025",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000026",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000027",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000028",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000029",
+      "endNode": "efcafab0-d000-1000-b300-00000000000b"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002a",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002b",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002c",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002d",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002e",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000002f",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000030",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000031",
+      "endNode": "efcafab0-d000-1000-b300-000000000003"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000032",
+      "endNode": "efcafab0-d000-1000-b300-00000000000d"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000033",
+      "endNode": "efcafab0-d000-1000-b300-00000000000d"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000034",
+      "endNode": "efcafab0-d000-1000-b300-00000000000d"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000035",
+      "endNode": "efcafab0-d000-1000-b300-00000000000d"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000036",
+      "endNode": "efcafab0-d000-1000-b300-000000000004"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-00000000037",
+      "endNode": "efcafab0-d000-1000-b300-00000000000c"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-000000000001"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-000000000002"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-000000000003"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-000000000004"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-00000000006"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-00000000008"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-00000000009"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-0000000000a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000001",
+      "endNode": "efcafab0-d000-1000-a200-0000000000b"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-000000000001"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-000000000002"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-000000000003"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-000000000004"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-00000000005"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-00000000006"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-00000000007"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-00000000008"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-00000000009"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-0000000000a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000002",
+      "endNode": "efcafab0-d000-1000-a200-0000000000b"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-0000000000c"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-0000000000d"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-0000000000e"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-0000000000f"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-00000000010"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-00000000011"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-00000000012"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-00000000013"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000003",
+      "endNode": "efcafab0-d000-1000-a200-00000000014"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-0000000000c"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-0000000000d"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-0000000000f"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-00000000010"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-00000000011"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-00000000012"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000004",
+      "endNode": "efcafab0-d000-1000-a200-00000000014"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000016"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000017"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000018"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000019"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000005",
+      "endNode": "efcafab0-d000-1000-a200-00000000028"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-000000000002"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-000000000003"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-0000000001b"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000006",
+      "endNode": "efcafab0-d000-1000-a200-0000000001c"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-0000000001d"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-0000000001e"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-0000000001f"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-00000000020"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-00000000021"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000007",
+      "endNode": "efcafab0-d000-1000-a200-00000000029"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000022"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-0000000001d"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-0000000001e"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-0000000001f"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000020"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000023"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000024"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000025"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000026"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000027"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000021"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000008",
+      "endNode": "efcafab0-d000-1000-a200-00000000029"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000023"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000024"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000025"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000026"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000027"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000021"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-000000000009",
+      "endNode": "efcafab0-d000-1000-a200-00000000029"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000015"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-0000000001a"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-0000000001e"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000023"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000024"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000025"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000026"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000027"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-00000000021"
+    },
+    {
+      "type": "REQUIRES",
+      "startNode": "efcafab0-d000-1000-a100-00000000000a",
+      "endNode": "efcafab0-d000-1000-a200-0000000000b"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-0000000001f",
+      "endNode": "efcafab0-d000-1000-b400-000000000006"
+    },
+    {
+      "type": "GROUPS_TOOL",
+      "startNode": "efcafab0-d000-1000-a400-00000000020",
+      "endNode": "efcafab0-d000-1000-b400-000000000006"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000c",
+      "endNode": "efcafab0-d000-1000-b300-000000000006"
+    },
+    {
+      "type": "GROUPS_TECH",
+      "startNode": "efcafab0-d000-1000-a300-0000000000d",
+      "endNode": "efcafab0-d000-1000-b300-000000000006"
+    }
+  ]
+}
