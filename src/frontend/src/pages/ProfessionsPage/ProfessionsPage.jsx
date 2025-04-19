@@ -19,7 +19,6 @@ const ProfessionsPage = () => {
     tools: [],
     technologies: []
   });
-  const [searchQuery, setSearchQuery] = useState('');
   const [allCategories, setAllCategories] = useState([]);
   const [allTools, setAllTools] = useState([]);
   const [allTechnologies, setAllTechnologies] = useState([]);
@@ -56,39 +55,36 @@ const ProfessionsPage = () => {
         setLoading(true);
         let filteredProfessions = [];
         
-        // Если есть активные фильтры
         if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
-          const promises = [];
+          const categoryPromises = filters.categories.map(catId => 
+            fetchProfessionsFilteredByCategory(catId)
+          );
           
-          // Фильтрация по категориям
-          filters.categories.forEach(catId => {
-            promises.push(fetchProfessionsFilteredByCategory(catId));
-          });
+          const toolPromises = filters.tools.map(toolId => 
+            fetchProfessionsFilteredByTool(toolId)
+          );
           
-          // Фильтрация по инструментам
-          filters.tools.forEach(toolId => {
-            promises.push(fetchProfessionsFilteredByTool(toolId));
-          });
+          const techPromises = filters.technologies.map(techId => 
+            fetchProfessionsFilteredByTechnology(techId)
+          );
           
-          // Фильтрация по технологиям
-          filters.technologies.forEach(techId => {
-            promises.push(fetchProfessionsFilteredByTechnology(techId));
-          });
+          const [categoryResults, toolResults, techResults] = await Promise.all([
+            Promise.all(categoryPromises),
+            Promise.all(toolPromises),
+            Promise.all(techPromises)
+          ]);
           
-          const results = await Promise.all(promises);
-          filteredProfessions = results.flat();
-
-          filteredProfessions = filteredProfessions.filter((p, index, self) =>
-            index === self.findIndex(prof => prof.id === p.id)
+          const allResults = [
+            ...categoryResults.flat(),
+            ...toolResults.flat(),
+            ...techResults.flat()
+          ];
+          
+          filteredProfessions = allResults.filter((prof, index, self) =>
+            index === self.findIndex(p => p.profession === prof.profession)
           );
         } else {
           filteredProfessions = await fetchProfessions();
-        }
-
-        if (searchQuery) {
-          filteredProfessions = filteredProfessions.filter(p =>
-            p.profession.toLowerCase().includes(searchQuery.toLowerCase())
-          );
         }
 
         setProfessions(filteredProfessions);
@@ -100,7 +96,7 @@ const ProfessionsPage = () => {
     };
 
     filterProfessions();
-  }, [filters, searchQuery]);
+  }, [filters]);
 
   const handleFilterChange = (type, id) => {
     setFilters(prev => ({
@@ -109,10 +105,6 @@ const ProfessionsPage = () => {
         ? prev[type].filter(item => item !== id)
         : [...prev[type], id]
     }));
-  };
-
-  const handleSearchChange = (query) => {
-    setSearchQuery(query);
   };
 
   return (
@@ -124,8 +116,7 @@ const ProfessionsPage = () => {
           technologies={allTechnologies} 
           selectedFilters={filters}
           onFilterChange={handleFilterChange}
-          onSearchChange={handleSearchChange}
-          showSearch={true}
+          showSearch={true}  
         />
 
         {loading ? (
