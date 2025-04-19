@@ -24,6 +24,9 @@
 `http GET http://localhost:8000/api/professions/filter/tools`
         * `@app.get("/api/professions/filter/tools/{name}")` </br>
 `http GET http://localhost:8000/api/professions/filter/tools/efcafab0-d000-1000-a400-00000000001`
+    - поиск: `@app.get("/api/professions/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/professions/search/Бизнес-аналитик`
+
 2) skills
     - список: `@app.get("/api/skills")` </br>
 `http GET http://localhost:8000/api/skills`
@@ -34,6 +37,9 @@
 `http GET http://localhost:8000/api/skills/filter/skillgroups`
         * `@app.get("/api/skills/filter/skillgroups/{name}")` </br>
 `http GET http://localhost:8000/api/skills/filter/skillgroups/efcafab0-d000-1000-b200-000000000001`
+    - поиск: `@app.get("/api/skills//search/{search_term}")` </br>
+`http GET http://localhost:8000/api/skills//search/"Навык взаимодействия с заказчиками"`
+
 3) technologies
     - список: `@app.get("/api/technologies")` </br>
 `http GET http://localhost:8000/api/technologies`
@@ -44,6 +50,9 @@
 `http GET http://localhost:8000/api/technologies/filter/technologygroups`
         * `@app.get("/api/technologies/filter/technologygroups/{name}")` </br>
 `http GET http://localhost:8000/api/technologies/filter/technologygroups/efcafab0-d000-1000-b300-000000000001`
+    - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/technologies/search/BPMN`
+
 4) tools
     - список: `@app.get("/api/tools")` </br>
 `http GET http://localhost:8000/api/tools`
@@ -54,14 +63,24 @@
 `http GET http://localhost:8000/api/tools/filter/toolgroups`
         * `@app.get("/api/tools/filter/toolgroups/{name}")` </br>
 `http GET http://localhost:8000/api/tools/filter/toolgroups/efcafab0-d000-1000-b400-000000000001`
+    - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/technologies/search/"Microsoft Word"`
 
 #### b. Запросы для отображения списков категорий, групп навыков, групп технологий и групп инструментов
 
 `@app.get("/api/groups/{group_type}")`
 1) `http GET http://localhost:8000/api/groups/categories`
-2) `http GET http://localhost:8000/api/groups/skillgroups`
-3) `http GET http://localhost:8000/api/groups/technologygroups`
-4) `http GET http://localhost:8000/api/groups/toolgroups`
+    - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/groups/categories/search/Аналитика`
+3) `http GET http://localhost:8000/api/groups/skillgroups`
+    - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/groups/skillgroups/search/"Hard skills"`
+4) `http GET http://localhost:8000/api/groups/technologygroups`
+    - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/groups/technologygroups/search/"Нотации для моделирования процессов"`
+5) `http GET http://localhost:8000/api/groups/toolgroups`
+    - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/groups/toolgroups/search/"Работа с документами"`
 
 #### Импорт и экспорт
 
