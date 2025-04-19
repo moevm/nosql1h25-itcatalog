@@ -33,7 +33,7 @@ async def import_data(file: UploadFile = File(...)):
         if check_database_empty(driver):
             initialize_data(data)
         else:
-            delete_nodes()
+            delete_nodes(driver)
             initialize_data(data)
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON format")

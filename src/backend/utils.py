@@ -1,6 +1,6 @@
 from neo4j import GraphDatabase
 
-def delete_nodes():
+def delete_nodes(driver):
     with driver.session() as session:
         session.run("MATCH (n) DETACH DELETE n")
 
