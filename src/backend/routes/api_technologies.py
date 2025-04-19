@@ -80,16 +80,16 @@ async def get_technologies_sorted_by_technologygroups():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/technologygroups/{name}")
-async def get_technologies_filtered_by_technologygroup(name: str):
+@router.get("/filter/technologygroups/{id}")
+async def get_technologies_filtered_by_technologygroup(id: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (g:TechnologyGroup)-[:GROUPS_TECH]->(t:Technology)
-                WHERE g.name = $name
+                WHERE g.id = $id
                 RETURN t.name AS tech_name, g.name AS group_name
-                """, {"name": name}
+                """, {"id": id}
             )
             return [
                 {

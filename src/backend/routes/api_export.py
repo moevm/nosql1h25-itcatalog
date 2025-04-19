@@ -1,7 +1,8 @@
+from fastapi import APIRouter, HTTPException, UploadFile, File
+from database import driver, check_database_empty
 import json
-from fastapi import HTTPException
-from fastapi.responses import Response
-from docker.backend.main import driver, app
+
+router = APIRouter(prefix="/api", tags=["export"])
 
 
 def export_to_json(driver):
@@ -31,7 +32,7 @@ def export_to_json(driver):
     return result
 
 
-@app.get("/api/export")
+@router.get("/export")
 async def export_data():
     try:
         # Получаем данные из Neo4j

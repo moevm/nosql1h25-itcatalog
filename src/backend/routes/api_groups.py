@@ -1,8 +1,10 @@
-from fastapi import HTTPException
-# include "main.py"
-from docker.backend.main import driver, app
+from fastapi import APIRouter, HTTPException
+from database import driver
 
-@app.get("/api/groups/{group_type}")
+router = APIRouter(prefix="/api/groups", tags=["groups"])
+
+
+@router.get("/{group_type}")
 async def get_groups(group_type: str):
     valid_types = {"categories": "Category", "skillgroups": "SkillGroup", "technologygroups": "TechnologyGroup", "toolgroups": "ToolGroup"}
     if group_type not in valid_types.keys():

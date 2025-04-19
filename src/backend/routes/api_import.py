@@ -1,7 +1,9 @@
+from fastapi import APIRouter, HTTPException, UploadFile, File
+from database import driver, check_database_empty
+from utils import delete_nodes, create_node, create_relationship
 import json
-from fastapi import HTTPException, UploadFile, File
-from fastapi.responses import Response
-from docker.backend.main import driver, app, create_node, create_relationship, check_database_empty, delete_nodes
+
+router = APIRouter(prefix="/api", tags=["import"])
 
 
 def load_data_from_json(data):
@@ -22,7 +24,7 @@ def initialize_data(data):
     load_data_from_json(data)
 
 
-@app.post("/api/import")
+@router.post("/import")
 async def import_data(file: UploadFile = File(...)):
     try:
         # Читаем содержимое файла в память
