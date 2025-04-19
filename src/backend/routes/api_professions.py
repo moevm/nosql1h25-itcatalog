@@ -126,11 +126,13 @@ async def get_professions_sorted_by_skills():
                 category = record["category_name"]
                 profession = record["profession_name"]
                 if category not in categories_professions:
-                    categories_professions[category] = []
-                categories_professions[category].append(profession)
+                    categories_professions[category] = set()  # Используем множество
+                categories_professions[category].add(profession)  # Добавляем без дубликатов
+            
+            # Преобразуем множества обратно в списки
             return [
                 {
-                    "professions": professions,
+                    "professions": list(professions),  # Конвертируем set в list
                     "category": category
                 }
                 for category, professions in categories_professions.items()
@@ -167,7 +169,7 @@ async def get_professions_sorted_by_technologies():
             result = session.run(
                 """
                 MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
-                OPTIONAL MATCH (p)-[:USES_TECH]->(s:Technology)
+                OPTIONAL MATCH (p)-[:USES_TECH]->(t:Technology)
                 RETURN p.name AS profession_name, c.name AS category_name, t.name AS technology_name
                 ORDER BY t.name, p.name
                 """
@@ -218,7 +220,7 @@ async def get_professions_sorted_by_tools():
             result = session.run(
                 """
                 MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
-                OPTIONAL MATCH (p)-[:USES_TOOL]->(s:Tool)
+                OPTIONAL MATCH (p)-[:USES_TOOL]->(t:Tool)
                 RETURN p.name AS profession_name, c.name AS category_name, t.name AS tool_name
                 ORDER BY t.name, p.name
                 """
