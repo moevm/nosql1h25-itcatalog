@@ -99,3 +99,36 @@ export const fetchTechnologyById = async (id) => {
     throw error;
   }
 };
+
+export const fetchProfessionsFilteredByCategory = async (categoryId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/filter/categories/${categoryId}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching professions by category:', error);
+    throw error;
+  }
+};
+
+export const fetchProfessionsFilteredByTool = async (toolId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/filter/tools/${toolId}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching professions by tool:', error);
+    throw error;
+  }
+};
+
+export const fetchProfessionsFilteredByTechnology = async (techId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/filter/technologies/${techId}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching professions by technology:', error);
+    throw error;
+  }
+};

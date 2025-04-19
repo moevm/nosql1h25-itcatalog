@@ -7,10 +7,7 @@ import GraphPage from './pages/GraphPage/GraphPage';
 import ToolsPage from './pages/ToolsPage/ToolsPage';
 import TechnologiesPage from './pages/TechnologiesPage/TechnologiesPage';
 import SkillsPage from './pages/SkillsPage/SkillsPage';
-import ProfessionsGroupPage from './pages/GroupPages/ProfessionsGroupPage';
-import ToolsGroupPage from './pages/GroupPages/ToolsGroupPage';
-import TechnologiesGroupPage from './pages/GroupPages/TechnologiesGroupPage';
-import SkillsGroupPage from './pages/GroupPages/SkillsGroupPage';
+import GroupPage from './pages/GroupPage/GroupPage'; 
 import Pagination from './components/Pagination/Pagination';
 
 function App() {
@@ -29,13 +26,7 @@ function App() {
 
   const renderPage = () => {
     if (activeGroup) {
-      switch (activeGroup) {
-        case 'professions': return <ProfessionsGroupPage />;
-        case 'tools': return <ToolsGroupPage />;
-        case 'technologies': return <TechnologiesGroupPage />;
-        case 'skills': return <SkillsGroupPage />;
-        default: return null;
-      }
+      return <GroupPage groupType={activeGroup} />;
     } else {
       switch (activePage) {
         case 'professions': return <ProfessionsPage />;
