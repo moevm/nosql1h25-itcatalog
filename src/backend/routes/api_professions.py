@@ -243,29 +243,6 @@ async def get_professions_sorted_by_tools():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/search")
-async def search_professions(search_term: str = ""):
-    try:
-        with driver.session() as session:
-            result = session.run(
-                """
-                MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
-                WHERE toLower(p.name) CONTAINS toLower($search_term)
-                RETURN p.name AS profession_name, c.name AS category_name
-                """,
-                {"search_term": search_term.strip()}
-            )
-            return [
-                {
-                    "profession": record["profession_name"],
-                    "category": record["category_name"],
-                    "image": "http://localhost:8000/static/images/in_progress.jpg"
-                }
-                for record in result
-            ]
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
 @router.get("/filter/tools/{id}")
 async def get_professions_filtered_by_tool(id: str):
     try:
@@ -283,6 +260,29 @@ async def get_professions_filtered_by_tool(id: str):
                 {
                     "profession": record["profession_name"],
                     "category": record["category_name"]
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/search/{search_term}")
+async def search_professions(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
+                WHERE toLower(p.name) CONTAINS toLower($search_term)
+                RETURN p.name AS profession_name, c.name AS category_name
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "profession": record["profession_name"],
+                    "category": record["category_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
