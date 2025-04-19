@@ -37,8 +37,8 @@
 `http GET http://localhost:8000/api/skills/filter/skillgroups`
         * `@app.get("/api/skills/filter/skillgroups/{name}")` </br>
 `http GET http://localhost:8000/api/skills/filter/skillgroups/"Hard skills"`
-    - поиск: `@app.get("/api/skills//search/{search_term}")` </br>
-`http GET http://localhost:8000/api/skills//search/"Навык взаимодействия с заказчиками"`
+    - поиск: `@app.get("/api/skills/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/skills/search/"Навык взаимодействия с заказчиками"`
 
 3) technologies
     - список: `@app.get("/api/technologies")` </br>
