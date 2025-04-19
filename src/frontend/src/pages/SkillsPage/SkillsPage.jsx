@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
-
-const skillsData = [
-  { title: 'Коммуникация', category: 'Мягкие навыки' },
-  { title: 'Работа в команде', category: 'Мягкие навыки' },
-  { title: 'Алгоритмы', category: 'Технические навыки' },
-  { title: 'Управление проектами', category: 'Управленческие навыки' },
-  { title: 'Критическое мышление', category: 'Мягкие навыки' },
-  { title: 'SQL', category: 'Технические навыки' },
-];
+import { fetchSkills, fetchGroups } from '../../services/api';
 
 const SkillsPage = () => {
+  const [skills, setSkills] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [skillsData, groupsData] = await Promise.all([
+          fetchSkills(),
+          fetchGroups('skillgroups')
+        ]);
+        setSkills(skillsData);
+        setGroups(groupsData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="page">
       <div className="container">
         <Filters 
-          categories={['Технические', 'Мягкие', 'Управленческие']}
+          categories={groups}
           showSearch={true}
           searchPlaceholder="Введите текст для поиска"
           categoryLabel="Группы навыков"
         />
         <div className="cards">
-          {skillsData.map((skill, index) => (
+          {skills.map((skill, index) => (
             <Card
               key={index}
-              image={skill.image}
-              title={skill.title}
-              category={skill.category}
+              title={skill.skill}
+              category={skill.skill_group}
             />
           ))}
         </div>

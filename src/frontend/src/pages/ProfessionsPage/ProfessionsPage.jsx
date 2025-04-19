@@ -1,42 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
-
-const professionsData = [
-  { title: 'Бизнес-аналитик', category: 'Аналитика' },
-  { title: 'CRM-специалист', category: 'Маркетинг' },
-  { title: 'Продуктовый аналитик', category: 'Аналитика' },
-  { title: 'Web-аналитик', category: 'IT' },
-  { title: 'Security researcher', category: 'Кибербезопасность' },
-  { title: 'Системный аналитик', category: 'IT' },
-  { title: 'SEO-специалист', category: 'Маркетинг' },
-  { title: 'SMM-специалист', category: 'Маркетинг' },
-  { title: 'Контент-менеджер', category: 'Маркетинг' },
-  { title: 'Фронтенд разработчик', category: 'IT' },
-  { title: 'Бэкенд разработчик', category: 'IT' },
-  { title: 'Копирайтер', category: 'Контент' },
-];
+import { fetchProfessions } from '../../services/api';
 
 const ProfessionsPage = () => {
+  const [professions, setProfessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProfessions = async () => {
+      try {
+        const data = await fetchProfessions();
+        setProfessions(data);
+      } catch (error) {
+        console.error('Ошибка при получении профессий:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfessions();
+  }, []);
+
   return (
     <div className="page active">
       <div className="container">
         <Filters 
-          categories={[]}
-          tools={[]}
-          technologies={[]}
+          categories={[]} 
+          tools={[]} 
+          technologies={[]} 
           showSearch={true}
         />
-        <div className="cards">
-          {professionsData.map((profession, index) => (
-            <Card
-              key={index}
-              image={profession.image}
-              title={profession.title}
-              category={profession.category}
-            />
-          ))}
-        </div>
+
+        {loading ? (
+          <p>Загрузка...</p>
+        ) : professions.length === 0 ? (
+          <p>Профессии не найдены.</p>
+        ) : (
+          <div className="cards">
+            {professions.map((profession, index) => (
+              <Card
+                key={index}
+                image={profession.image ? profession.image : '/static/images/default.png'}
+                title={profession.profession}
+                category={profession.category}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

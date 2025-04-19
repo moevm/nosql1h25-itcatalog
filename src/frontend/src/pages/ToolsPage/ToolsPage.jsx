@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
-
-const toolsData = [
-  { title: 'Visual Studio Code', category: 'IDE' },
-  { title: 'Git', category: 'Система контроля версий' },
-  { title: 'Figma', category: 'Графический редактор' },
-  { title: 'PostgreSQL', category: 'База данных' },
-  { title: 'Docker', category: 'Виртуализация' },
-  { title: 'Jira', category: 'Управление проектами' },
-];
+import { fetchTools, fetchGroups } from '../../services/api';
 
 const ToolsPage = () => {
+  const [tools, setTools] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [toolsData, groupsData] = await Promise.all([
+          fetchTools(),
+          fetchGroups('toolgroups')
+        ]);
+        setTools(toolsData);
+        setGroups(groupsData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="page">
       <div className="container">
         <Filters 
-          categories={['IDE', 'Системы контроля версий', 'Графические редакторы', 'Базы данных']}
+          categories={groups}
           showSearch={true}
           searchPlaceholder="Введите текст для поиска"
           categoryLabel="Группа инструментов"
         />
         <div className="cards">
-          {toolsData.map((tool, index) => (
+          {tools.map((tool, index) => (
             <Card
               key={index}
-              image={tool.image}
-              title={tool.title}
-              category={tool.category}
+              title={tool.tool}
+              category={tool.tool_group}
             />
           ))}
         </div>
