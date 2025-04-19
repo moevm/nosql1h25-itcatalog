@@ -77,17 +77,17 @@ async def get_skills_sorted_by_skillgroups():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/skills/filter/skillgroups/{id}")
-async def get_skills_filtered_by_skillgroup(id: str):
+@app.get("/api/skills/filter/skillgroups/{name}")
+async def get_skills_filtered_by_skillgroup(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (g:SkillGroup)-[:GROUPS_SKILL]->(s:Skill)
-                WHERE g.id = $id
+                WHERE g.name = $name
                 RETURN s.name AS skill_name, g.name AS group_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
