@@ -68,10 +68,12 @@ def create_relationship(tx, start_node_id, end_node_id, relationship_type):
     """
     tx.run(query, start_node_id=start_node_id, end_node_id=end_node_id)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-
-    
-
-
-
+app.include_router(professions.router)
+app.include_router(skills.router)
+app.include_router(technologies.router)
+app.include_router(tools.router)
+app.include_router(import_export.router)
+app.include_router(filters.router)
     
