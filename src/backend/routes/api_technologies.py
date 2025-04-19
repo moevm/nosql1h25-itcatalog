@@ -86,7 +86,7 @@ async def get_technologies_filtered_by_technologygroup(name: str):
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (g:TechnologyGroup)-[:GROUPS_TECH]->(t:Technology)
+                MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
                 WHERE g.name = $name
                 RETURN t.name AS tech_name, g.name AS group_name
                 """,
