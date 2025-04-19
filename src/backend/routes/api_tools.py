@@ -100,4 +100,26 @@ async def get_tools_filtered_by_toolgroup(id: str):
             ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
+        
+@router.get("/search/{search_term}")
+async def search_tools(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
+                WHERE toLower(t.name) CONTAINS toLower($search_term)
+                RETURN t.name AS tool_name, g.name AS group_name
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "tool": record["tool_name"],
+                    "tool_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
