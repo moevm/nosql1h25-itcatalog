@@ -87,17 +87,17 @@ async def get_professions_sorted_by_categories():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/professions/filter/categories/{id}")
-async def get_professions_filtered_by_category(id: str):
+@app.get("/api/professions/filter/categories/{name}")
+async def get_professions_filtered_by_category(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (c:Category)<-[:BELONGS_TO]-(p:Profession)
-                WHERE c.id = $id
+                WHERE c.name = $name
                 RETURN p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -138,18 +138,18 @@ async def get_professions_sorted_by_skills():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/professions/filter/skills/{id}")
-async def get_professions_filtered_by_skill(id: str):
+@app.get("/api/professions/filter/skills/{name}")
+async def get_professions_filtered_by_skill(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (s:Skill)<-[:REQUIRES]-(p:Profession)
                 OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE s.id = $id
+                WHERE s.name = $name
                 RETURN p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -190,18 +190,18 @@ async def get_professions_sorted_by_technologies():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/professions/filter/technologies/{id}")
-async def get_professions_filtered_by_technology(id: str):
+@app.get("/api/professions/filter/technologies/{name}")
+async def get_professions_filtered_by_technology(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Technology)<-[:USES_TECH]-(p:Profession)
                 OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE t.id = $id
+                WHERE t.name = $name
                 RETURN p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -242,18 +242,18 @@ async def get_professions_sorted_by_tools():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/professions/filter/tools/{id}")
-async def get_professions_filtered_by_tool(id: str):
+@app.get("/api/professions/filter/tools/{name}")
+async def get_professions_filtered_by_tool(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Tool)<-[:USES_TOOL]-(p:Profession)
                 OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE t.id = $id
+                WHERE t.name = $name
                 RETURN p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
