@@ -80,7 +80,8 @@ async def get_professions_sorted_by_categories():
             return [
                 {
                     "category": category,
-                    "professions": professions
+                    "professions": professions,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for category, professions in categories_professions.items()
             ]
@@ -102,7 +103,8 @@ async def get_professions_filtered_by_category(name: str):
             return [
                 {
                     "profession": record["profession_name"],
-                    "category": record["category_name"]
+                    "category": record["category_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
@@ -133,7 +135,8 @@ async def get_professions_sorted_by_skills():
             return [
                 {
                     "professions": list(professions),  # Конвертируем set в list
-                    "category": category
+                    "category": category,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for category, professions in categories_professions.items()
             ]
@@ -155,7 +158,8 @@ async def get_professions_filtered_by_skill(name: str):
             return [
                 {
                     "profession": record["profession_name"],
-                    "category": record["category_name"]
+                    "category": record["category_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
@@ -184,7 +188,8 @@ async def get_professions_sorted_by_technologies():
             return [
                 {
                     "category": category,
-                    "professions": professions
+                    "professions": professions,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for category, professions in categories_professions.items()
             ]
@@ -206,7 +211,8 @@ async def get_professions_filtered_by_technology(name: str):
             return [
                 {
                     "profession": record["profession_name"],
-                    "category": record["category_name"]
+                    "category": record["category_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
@@ -235,7 +241,8 @@ async def get_professions_sorted_by_tools():
             return [
                 {
                     "category": category,
-                    "professions": professions
+                    "professions": professions,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for category, professions in categories_professions.items()
             ]
@@ -257,7 +264,8 @@ async def get_professions_filtered_by_tool(name: str):
             return [
                 {
                     "profession": record["profession_name"],
-                    "category": record["category_name"]
+                    "category": record["category_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]

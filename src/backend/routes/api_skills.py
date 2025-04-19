@@ -71,7 +71,8 @@ async def get_skills_sorted_by_skillgroups():
             return [
                 {
                     "skill_group": group,
-                    "skills": skills
+                    "skills": skills,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for group, skills in grouped_skills.items()
             ]
@@ -93,7 +94,8 @@ async def get_skills_filtered_by_skillgroup(name: str):
             return [
                 {
                     "skill": record["skill_name"],
-                    "skill_group": record["group_name"]
+                    "skill_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]

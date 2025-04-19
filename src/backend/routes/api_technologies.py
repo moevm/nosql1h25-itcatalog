@@ -73,7 +73,8 @@ async def get_technologies_sorted_by_technologygroups():
             return [
                 {
                     "technologies": technologies,
-                    "technology_group": group
+                    "technology_group": group,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for group, technologies in grouped_technologies.items()
             ]
@@ -95,7 +96,8 @@ async def get_technologies_filtered_by_technologygroup(name: str):
             return [
                 {
                     "technology_group": record["group_name"],
-                    "technology": record["tech_name"]
+                    "technology": record["tech_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]

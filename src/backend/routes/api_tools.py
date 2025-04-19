@@ -73,7 +73,8 @@ async def get_tools_sorted_by_toolgroups():
             return [
                 {
                     "tool_group": group,
-                    "tools": tools
+                    "tools": tools,
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for group, tools in grouped_tools.items()
             ]
@@ -95,7 +96,8 @@ async def get_tools_filtered_by_toolgroup(name: str):
             return [
                 {
                     "tool": record["tool_name"],
-                    "tool_group": record["group_name"]
+                    "tool_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
