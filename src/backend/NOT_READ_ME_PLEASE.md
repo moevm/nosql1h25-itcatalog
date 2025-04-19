@@ -11,19 +11,19 @@
         * `@app.get("/api/professions/filter/categories")` </br>
 `http GET http://localhost:8000/api/professions/filter/categories`
         * `@app.get("/api/professions/filter/categories/{name}")` </br>
-`http GET http://localhost:8000/api/professions/filter/categories/efcafab0-d000-1000-b100-000000000001`
+`http GET http://localhost:8000/api/professions/filter/categories/Аналитика`
         * `@app.get("/api/professions/filter/skills")` </br>
 `http GET http://localhost:8000/api/professions/filter/skills`
         * `@app.get("/api/professions/filter/skills/{name}")` </br>
-`http GET http://localhost:8000/api/professions/filter/skills/efcafab0-d000-1000-a200-000000000001`
+`http GET http://localhost:8000/api/professions/filter/skills/"Навык взаимодействия с заказчиками"`
         * `@app.get("/api/professions/filter/technologies")` </br>
 `http GET http://localhost:8000/api/professions/filter/technologies`
         * `@app.get("/api/professions/filter/technologies/{name}")` </br>
-`http GET http://localhost:8000/api/professions/filter/technologies/efcafab0-d000-1000-a300-00000000001`
+`http GET http://localhost:8000/api/professions/filter/technologies/BPMN`
         * `@app.get("/api/professions/filter/tools")` </br>
 `http GET http://localhost:8000/api/professions/filter/tools`
         * `@app.get("/api/professions/filter/tools/{name}")` </br>
-`http GET http://localhost:8000/api/professions/filter/tools/efcafab0-d000-1000-a400-00000000001`
+`http GET http://localhost:8000/api/professions/filter/tools/"Microsoft Word"`
     - поиск: `@app.get("/api/professions/search/{search_term}")` </br>
 `http GET http://localhost:8000/api/professions/search/Бизнес-аналитик`
 
@@ -36,7 +36,7 @@
         * `@app.get("/api/skills/filter/skillgroups")` </br>
 `http GET http://localhost:8000/api/skills/filter/skillgroups`
         * `@app.get("/api/skills/filter/skillgroups/{name}")` </br>
-`http GET http://localhost:8000/api/skills/filter/skillgroups/efcafab0-d000-1000-b200-000000000001`
+`http GET http://localhost:8000/api/skills/filter/skillgroups/"Hard skills"`
     - поиск: `@app.get("/api/skills//search/{search_term}")` </br>
 `http GET http://localhost:8000/api/skills//search/"Навык взаимодействия с заказчиками"`
 
@@ -49,7 +49,7 @@
         * `@app.get("/api/technologies/filter/technologygroups")` </br>
 `http GET http://localhost:8000/api/technologies/filter/technologygroups`
         * `@app.get("/api/technologies/filter/technologygroups/{name}")` </br>
-`http GET http://localhost:8000/api/technologies/filter/technologygroups/efcafab0-d000-1000-b300-000000000001`
+`http GET http://localhost:8000/api/technologies/filter/technologygroups/"Нотации для моделирования процессов"`
     - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
 `http GET http://localhost:8000/api/technologies/search/BPMN`
 
@@ -62,7 +62,7 @@
         * `@app.get("/api/tools/filter/toolgroups")` </br>
 `http GET http://localhost:8000/api/tools/filter/toolgroups`
         * `@app.get("/api/tools/filter/toolgroups/{name}")` </br>
-`http GET http://localhost:8000/api/tools/filter/toolgroups/efcafab0-d000-1000-b400-000000000001`
+`http GET http://localhost:8000/api/tools/filter/toolgroups/"Работа с документами"`
     - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
 `http GET http://localhost:8000/api/technologies/search/"Microsoft Word"`
 
