@@ -80,6 +80,29 @@ async def get_technologies_sorted_by_technologygroups():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/search")
+async def search_technologies(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
+                WHERE toLower(t.name) CONTAINS toLower($search_term)
+                RETURN t.name AS tech_name, g.name AS group_name
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "technology": record["tech_name"],
+                    "technology_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.get("/filter/technologygroups/{id}")
 async def get_technologies_filtered_by_technologygroup(id: str):
     try:
