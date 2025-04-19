@@ -18,7 +18,7 @@ async def get_groups(group_type: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         
-@router.get("/search")
+@router.get("/search/{search_term}")
 async def search_groups(search_term: str = ""):
     try:
         with driver.session() as session:
