@@ -84,7 +84,7 @@ async def get_skills_filtered_by_skillgroup(name: str):
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (g:SkillGroup)-[:GROUPS_SKILL]->(s:Skill)
+                MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
                 WHERE g.name = $name
                 RETURN s.name AS skill_name, g.name AS group_name
                 """,
