@@ -24,7 +24,6 @@ async def get_tools():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @router.get("/{id}")
 async def get_tool(id: str):
     try:
@@ -38,14 +37,16 @@ async def get_tool(id: str):
                 """,
                 {"tool_id": id}
             )
-            if not result:
-                raise HTTPException(status_code=404, detail="The tool not found")
+            record = result.single()
+            
+            if not record:
+                raise HTTPException(status_code=404, detail="Tool not found")
 
             return {
-                "tool": result["technology_name"],
-                "description": result["description"],
-                "tool_group": result["group_name"],
-                "professions": result["professions"],
+                "tool": record["tool_name"], 
+                "description": record["description"],
+                "tool_group": record["group_name"],
+                "professions": record["professions"],
                 "image": "http://localhost:8000/static/images/in_progress.jpg"
             }
     except Exception as e:
@@ -85,7 +86,7 @@ async def get_tools_filtered_by_toolgroup(name: str):
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (g:ToolGroup)-[:GROUPS_TOOL]->(t:Tool)
+                MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
                 WHERE g.name = $name
                 RETURN t.name AS tool_name, g.name AS group_name
                 """,
