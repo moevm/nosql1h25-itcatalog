@@ -63,8 +63,8 @@
 `http GET http://localhost:8000/api/tools/filter/toolgroups`
         * `@app.get("/api/tools/filter/toolgroups/{name}")` </br>
 `http GET http://localhost:8000/api/tools/filter/toolgroups/"Работа с документами"`
-    - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/technologies/search/"Microsoft Word"`
+    - поиск: `@app.get("/api/tools/search/{search_term}")` </br>
+`http GET http://localhost:8000/api/tools/search/"Microsoft Word"`
 
 #### b. Запросы для отображения списков категорий, групп навыков, групп технологий и групп инструментов
 
