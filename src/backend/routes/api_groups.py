@@ -17,3 +17,25 @@ async def get_groups(group_type: str):
             return [record["name"] for record in result]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+        
+@router.get("/search")
+async def search_groups(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (g:Group)
+                WHERE toLower(g.name) CONTAINS toLower($search_term)
+                RETURN g.name AS name, labels(g)[0] AS type
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "name": record["name"],
+                    "type": record["type"].removesuffix("Group").lower() + "groups"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
