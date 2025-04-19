@@ -21,7 +21,6 @@ async def get_professions():
                 }
                 for record in result
             ]
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -88,17 +87,17 @@ async def get_professions_sorted_by_categories():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/categories/{id}")
-async def get_professions_filtered_by_category(id: str):
+@router.get("/filter/categories/{name}")
+async def get_professions_filtered_by_category(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (c:Category)<-[:BELONGS_TO]-(p:Profession)
-                WHERE c.id = $id
+                WHERE c.name = $name
                 RETURN p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -139,18 +138,17 @@ async def get_professions_sorted_by_skills():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/skills/{id}")
-async def get_professions_filtered_by_skill(id: str):
+@router.get("/filter/skills/{name}")
+async def get_professions_filtered_by_skill(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (s:Skill)<-[:REQUIRES]-(p:Profession)
-                OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE s.id = $id
-                RETURN p.name AS profession_name, c.name AS category_name
+                MATCH (s:Skill)<-[:REQUIRES]-(p:Profession)-[:BELONGS_TO]->(c:Category)
+                WHERE s.name = $name
+                RETURN DISTINCT p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -191,18 +189,17 @@ async def get_professions_sorted_by_technologies():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/technologies/{id}")
-async def get_professions_filtered_by_technology(id: str):
+@router.get("/filter/technologies/{name}")
+async def get_professions_filtered_by_technology(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (t:Technology)<-[:USES_TECH]-(p:Profession)
-                OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE t.id = $id
-                RETURN p.name AS profession_name, c.name AS category_name
+                MATCH (t:Technology)<-[:USES_TECH]-(p:Profession)-[:BELONGS_TO]->(c:Category)
+                WHERE t.name = $name
+                RETURN DISTINCT p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
@@ -243,18 +240,17 @@ async def get_professions_sorted_by_tools():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/filter/tools/{id}")
-async def get_professions_filtered_by_tool(id: str):
+@router.get("/filter/tools/{name}")
+async def get_professions_filtered_by_tool(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
-                MATCH (t:Tool)<-[:USES_TOOL]-(p:Profession)
-                OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
-                WHERE t.id = $id
-                RETURN p.name AS profession_name, c.name AS category_name
+                MATCH (t:Tool)<-[:USES_TOOL]-(p:Profession)-[:BELONGS_TO]->(c:Category)
+                WHERE t.name = $name
+                RETURN DISTINCT p.name AS profession_name, c.name AS category_name
                 """,
-                {"id": id}
+                {"name": name}
             )
             return [
                 {
