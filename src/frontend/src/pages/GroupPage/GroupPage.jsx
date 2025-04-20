@@ -74,7 +74,7 @@ const GroupPage = ({ groupType }) => {
           {groups.map((group, index) => (
             <Card
               key={index}
-              image={config.defaultImage}
+              image={group.image || config.defaultImage}
               title={group}
               category={config.title}
             />
