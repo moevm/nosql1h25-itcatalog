@@ -203,3 +203,15 @@ export const searchSkills = async (searchTerm) => {
     throw error;
   }
 };
+
+
+export const searchTechnologies = async (searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/technologies/search/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error searching technologies:', error);
+    throw error;
+  }
+};
