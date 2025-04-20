@@ -20,7 +20,7 @@ async def lifespan(app):
     yield
     driver.close()
 
-def check_database_empty():
+def check_database_empty(driver):
     with driver.session() as session:
         result = session.run("MATCH (n) RETURN count(n) AS count LIMIT 1")
         return result.single()["count"] == 0
