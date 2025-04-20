@@ -132,3 +132,40 @@ export const fetchProfessionsFilteredByTechnology = async (techId) => {
     throw error;
   }
 };
+
+export const fetchSkillsFilteredByGroup = async (groupName) => {
+  try {
+    const encodedGroup = encodeURIComponent(groupName); 
+    const response = await fetch(`${API_BASE_URL}/skills/filter/skillgroups/${encodedGroup}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching skills by group:', error);
+    throw error;
+  }
+};
+
+export const fetchToolsFilteredByGroup = async (groupName) => {
+  try {
+    const encodedGroup = encodeURIComponent(groupName); 
+    const response = await fetch(`${API_BASE_URL}/tools/filter/toolgroups/${encodedGroup}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching tools by group:', error);
+    throw error;
+  }
+};
+
+
+export const fetchTechnologiesFilteredByGroup = async (groupName) => {
+  try {
+    const encodedGroup = encodeURIComponent(groupName); 
+    const response = await fetch(`${API_BASE_URL}/technologies/filter/technologygroups/${encodedGroup}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching technologies by group:', error);
+    throw error;
+  }
+};
