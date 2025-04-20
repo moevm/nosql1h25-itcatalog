@@ -14,13 +14,7 @@ async def get_groups(group_type: str):
             result = session.run(
                 f"MATCH (g:{valid_types[group_type]}) RETURN g.name as name"
             )
-            return [
-                {
-                    "name": record["name"],
-                    "image": "http://localhost:8000/static/images/in_progress.jpg"
-                }
-                for record in result
-            ]
+            return [record["name"] for record in result]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         
