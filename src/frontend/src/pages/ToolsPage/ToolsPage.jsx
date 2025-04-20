@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchTools, fetchGroups, fetchToolsFilteredByGroup, searchTools } from '../../services/api';
+import { fetchTools, fetchGroups, fetchToolsFilteredByGroup } from '../../services/api';
 
 const ToolsPage = () => {
   const [tools, setTools] = useState([]);
@@ -35,15 +35,7 @@ const ToolsPage = () => {
         setLoading(true);
         let filteredTools = [];
         
-        if (searchTerm && searchTerm.trim() !== '') {
-          filteredTools = await searchTools(searchTerm);
-          
-          if (selectedGroups.length > 0) {
-            filteredTools = filteredTools.filter(tool => 
-              selectedGroups.includes(tool.tool_group)
-            );
-          }
-        } else if (selectedGroups.length > 0) {
+        if (selectedGroups.length > 0) {
           const groupPromises = selectedGroups.map(groupName => 
             fetchToolsFilteredByGroup(groupName)
           );
@@ -54,16 +46,18 @@ const ToolsPage = () => {
           filteredTools = await fetchTools();
         }
 
+        if (searchTerm) {
+          filteredTools = filteredTools.filter(tool => 
+            tool.tool && tool.tool.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+
         setTools(filteredTools);
       } catch (error) {
         console.error('Error filtering tools:', error);
         setError('Ошибка при фильтрации инструментов');
-        try {
-          const allTools = await fetchTools();
-          setTools(allTools);
-        } catch (err) {
-          console.error('Failed to load tools after error:', err);
-        }
+        const allTools = await fetchTools();
+        setTools(allTools);
       } finally {
         setLoading(false);
       }
@@ -80,10 +74,6 @@ const ToolsPage = () => {
     );
   };
 
-  const handleSearchChange = (term) => {
-    setSearchTerm(term);
-  };
-
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>Ошибка: {error}</div>;
 
@@ -94,8 +84,7 @@ const ToolsPage = () => {
           groups={groups}
           selectedGroups={selectedGroups}
           onGroupChange={handleGroupChange}
-          onSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
           showSearch={true}
           searchPlaceholder="Поиск инструментов..."
           groupLabel="Группы инструментов"

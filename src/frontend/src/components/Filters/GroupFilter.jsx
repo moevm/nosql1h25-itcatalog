@@ -6,7 +6,6 @@ const GroupFilter = ({
     selectedGroups = [],
     onGroupChange,
     onSearchChange,
-    searchTerm = '', 
     showSearch = true,
     searchPlaceholder = "Поиск...",
     groupLabel = "Группы"
@@ -61,14 +60,11 @@ const GroupFilter = ({
         {/* Поле поиска */}
         {showSearch && (
           <div className="search-box">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="text"
-                placeholder={searchPlaceholder}
-                value={searchTerm} // связываем с состоянием
-                onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
-              />
-            </form>
+            <input
+              type="text"
+              placeholder={searchPlaceholder}
+              onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
+            />
           </div>
         )}
       </div>

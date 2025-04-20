@@ -8,8 +8,7 @@ import {
   fetchTechnologies,
   fetchProfessionsFilteredByCategory,
   fetchProfessionsFilteredByTool,
-  fetchProfessionsFilteredByTechnology,
-  searchProfessions
+  fetchProfessionsFilteredByTechnology
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -23,13 +22,11 @@ const ProfessionsPage = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [allTools, setAllTools] = useState([]);
   const [allTechnologies, setAllTechnologies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // Добавили состояние для поиска
 
   // Загрузка начальных данных
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        setLoading(true);
         const [professionsData, categoriesData, toolsData, techData] = await Promise.all([
           fetchProfessions(),
           fetchGroups('categories'),
@@ -51,57 +48,14 @@ const ProfessionsPage = () => {
     loadInitialData();
   }, []);
 
+  // Фильтрация профессий
   useEffect(() => {
     const filterProfessions = async () => {
       try {
         setLoading(true);
         let filteredProfessions = [];
         
-        if (searchTerm && searchTerm.trim() !== '') {
-          filteredProfessions = await searchProfessions(searchTerm);
-          
-          if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
-
-            let filteredByCategories = [];
-            let filteredByTools = [];
-            let filteredByTechnologies = [];
-            
-            if (filters.categories.length > 0) {
-              const categoryPromises = filters.categories.map(catId => 
-                fetchProfessionsFilteredByCategory(catId)
-              );
-              filteredByCategories = (await Promise.all(categoryPromises)).flat();
-            }
-            
-            if (filters.tools.length > 0) {
-              const toolPromises = filters.tools.map(toolId => 
-                fetchProfessionsFilteredByTool(toolId)
-              );
-              filteredByTools = (await Promise.all(toolPromises)).flat();
-            }
-            
-            if (filters.technologies.length > 0) {
-              const techPromises = filters.technologies.map(techId => 
-                fetchProfessionsFilteredByTechnology(techId)
-              );
-              filteredByTechnologies = (await Promise.all(techPromises)).flat();
-            }
-            
-            const allFilteredResults = [
-              ...filteredByCategories,
-              ...filteredByTools,
-              ...filteredByTechnologies
-            ];
-            
-            filteredProfessions = filteredProfessions.filter(searchProf => 
-              allFilteredResults.some(filterProf => 
-                filterProf.profession === searchProf.profession
-              )
-            );
-          }
-        } 
-
-        else if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
+        if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
           const categoryPromises = filters.categories.map(catId => 
             fetchProfessionsFilteredByCategory(catId)
           );
@@ -129,12 +83,10 @@ const ProfessionsPage = () => {
           filteredProfessions = allResults.filter((prof, index, self) =>
             index === self.findIndex(p => p.profession === prof.profession)
           );
-        } 
-
-        else {
+        } else {
           filteredProfessions = await fetchProfessions();
         }
-        
+
         setProfessions(filteredProfessions);
       } catch (error) {
         console.error('Error filtering professions:', error);
@@ -142,10 +94,9 @@ const ProfessionsPage = () => {
         setLoading(false);
       }
     };
-    
-    filterProfessions();
-  }, [filters, searchTerm]); 
 
+    filterProfessions();
+  }, [filters]);
 
   const handleFilterChange = (type, id) => {
     setFilters(prev => ({
@@ -154,11 +105,6 @@ const ProfessionsPage = () => {
         ? prev[type].filter(item => item !== id)
         : [...prev[type], id]
     }));
-  };
-
-
-  const handleSearchChange = (term) => {
-    setSearchTerm(term);
   };
 
   return (
@@ -170,10 +116,7 @@ const ProfessionsPage = () => {
           technologies={allTechnologies} 
           selectedFilters={filters}
           onFilterChange={handleFilterChange}
-          showSearch={true}
-          searchPlaceholder="Поиск профессий..."  
-          searchTerm={searchTerm} 
-          onSearchChange={handleSearchChange} 
+          showSearch={true}  
         />
 
         {loading ? (
@@ -182,10 +125,10 @@ const ProfessionsPage = () => {
           <p>Профессии не найдены.</p>
         ) : (
           <div className="cards">
-            {professions.map((profession, index) => (
+            {professions.map((profession) => (
               <Card
-                key={index}
-                image={profession.image || '/static/images/default.png'}
+                key={profession.id}
+                image={profession.image ? profession.image : '/static/images/default.png'}
                 title={profession.profession}
                 category={profession.category}
               />
