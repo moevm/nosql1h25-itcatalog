@@ -90,6 +90,7 @@ const TechnologiesPage = () => {
           {technologies.map((tech, index) => (
             <Card
               key={index}
+              image={tech.image ? tech.image : '/static/images/default.png'}
               title={tech.technology}
               category={tech.technology_group}
             />
