@@ -51,6 +51,11 @@ const GroupPage = ({ groupType }) => {
 
   const config = groupConfig[groupType] || groupConfig.professions;
 
+  // Фильтрация по поисковому запросу
+  const filteredGroups = groups.filter(group => 
+    group.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="page">
       <div className="container">
@@ -71,11 +76,11 @@ const GroupPage = ({ groupType }) => {
         </div>
         
         <div className="cards">
-          {groups.map((group, index) => (
+          {filteredGroups.map((group, index) => (
             <Card
               key={index}
-              image={config.defaultImage}
-              title={group}
+              image={group.image || config.defaultImage}
+              title={group.name}
               category={config.title}
             />
           ))}

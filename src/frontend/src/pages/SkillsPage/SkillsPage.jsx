@@ -90,6 +90,7 @@ const SkillsPage = () => {
           {skills.map((skill, index) => (
             <Card
               key={index}
+              image={skill.image ? skill.image : '/static/images/default.png'}
               title={skill.skill}
               category={skill.skill_group}
             />

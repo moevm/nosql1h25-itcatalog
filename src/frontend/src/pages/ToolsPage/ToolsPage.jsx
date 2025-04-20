@@ -93,6 +93,7 @@ const ToolsPage = () => {
           {tools.map((tool, index) => (
             <Card
               key={index}
+              image={tool.image ? tool.image : '/static/images/default.png'}
               title={tool.tool}
               category={tool.tool_group}
             />
