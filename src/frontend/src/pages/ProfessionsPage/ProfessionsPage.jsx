@@ -128,7 +128,7 @@ const ProfessionsPage = () => {
             {professions.map((profession) => (
               <Card
                 key={profession.id}
-                image={profession.image || '/static/images/default.png'}
+                image={profession.image ? profession.image : '/static/images/default.png'}
                 title={profession.profession}
                 category={profession.category}
               />
