@@ -64,7 +64,6 @@ const GroupPage = ({ groupType }) => {
   return (
     <div className="page">
       <div className="container">
-        <h2 className="page-title">{config.title}</h2>
         <Filters
           categories={groups}
           showSearch={true}
