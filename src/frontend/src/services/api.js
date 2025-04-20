@@ -170,6 +170,16 @@ export const fetchTechnologiesFilteredByGroup = async (groupName) => {
   }
 };
 
+export const searchProfessions = async (searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/search/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error searching professions:', error);
+    throw error;
+  }
+};
 
 export const searchTools = async (searchTerm) => {
   try {
