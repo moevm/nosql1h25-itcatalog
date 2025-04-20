@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup } from '../../services/api';
+import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills } from '../../services/api';
 
 const SkillsPage = () => {
   const [skills, setSkills] = useState([]);
@@ -35,26 +35,35 @@ const SkillsPage = () => {
         setLoading(true);
         let filteredSkills = [];
         
-        if (selectedGroups.length > 0) {
+        if (searchTerm && searchTerm.trim() !== '') {
+          filteredSkills = await searchSkills(searchTerm);
+          
+          if (selectedGroups.length > 0) {
+            filteredSkills = filteredSkills.filter(skill => 
+              selectedGroups.includes(skill.skill_group)
+            );
+          }
+        } else if (selectedGroups.length > 0) {
           const groupPromises = selectedGroups.map(groupName => 
             fetchSkillsFilteredByGroup(groupName)
           );
           
           const groupResults = await Promise.all(groupPromises);
-          filteredSkills = groupResults.flat();
+          filteredSkills = [...new Set(groupResults.flat())];
         } else {
           filteredSkills = await fetchSkills();
-        }
-
-        if (searchTerm) {
-          filteredSkills = filteredSkills.filter(skill => 
-            skill.skill.toLowerCase().includes(searchTerm.toLowerCase())
-          );
         }
 
         setSkills(filteredSkills);
       } catch (error) {
         console.error('Error filtering skills:', error);
+        setError('Ошибка при фильтрации навыков');
+        try {
+          const allSkills = await fetchSkills();
+          setSkills(allSkills);
+        } catch (err) {
+          console.error('Failed to load skills after error:', err);
+        }
       } finally {
         setLoading(false);
       }
@@ -71,8 +80,12 @@ const SkillsPage = () => {
     );
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const handleSearchChange = (term) => {
+    setSearchTerm(term);
+  };
+
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error}</div>;
 
   return (
     <div className="page">
@@ -81,16 +94,16 @@ const SkillsPage = () => {
           groups={groups}
           selectedGroups={selectedGroups}
           onGroupChange={handleGroupChange}
-          onSearchChange={setSearchTerm}
+          onSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
           showSearch={true}
-          searchPlaceholder="Введите текст для поиска"
+          searchPlaceholder="Поиск навыков..."
           groupLabel="Группы навыков"
         />
         <div className="cards">
           {skills.map((skill, index) => (
             <Card
               key={index}
-              image={skill.image ? skill.image : '/static/images/default.png'}
               title={skill.skill}
               category={skill.skill_group}
             />
