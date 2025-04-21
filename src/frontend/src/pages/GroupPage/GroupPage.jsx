@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
-import { fetchGroups } from '../../services/api';
+import { fetchGroups, searchGroups } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
   const groupConfig = {
@@ -46,7 +46,34 @@ const GroupPage = ({ groupType }) => {
     loadData();
   }, [groupType]);
 
-  if (loading) return <div className="loading">Загрузка...</div>;
+  useEffect(() => {
+    const searcherGroups = async () => {
+      try {
+        setLoading(true);
+        let searchedGroups = [];
+
+        if (searchTerm && searchTerm.trim() !== '') {
+          searchedGroups = await searchGroups(config.apiEndpoint, searchTerm);
+          setGroups(searchedGroups);
+        }
+
+      } catch (error) {
+        console.error(`Error searching ${config.apiEndpoint}:`, error);
+        setError(`Ошибка при поиске в ${config.apiEndpoint}`);
+        try {
+          const allGroups = await fetchGroups(config.apiEndpoint);
+          setGroups(allGroups);
+        } catch (err) {
+          console.error(`Failed to load ${config.apiEndpoint} after error:`, err);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    searcherGroups();
+  }, [searchTerm]);
+
   if (error) return <div className="error">Ошибка: {error}</div>;
 
   const config = groupConfig[groupType] || groupConfig.professions;

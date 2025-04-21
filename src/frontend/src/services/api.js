@@ -216,3 +216,15 @@ export const searchSkills = async (searchTerm) => {
     throw error;
   }
 };
+
+
+export const searchGroups = async (groupType, searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/groups/${groupType}/search/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error(`Error searching ${groupType}:`, error);
+    throw error;
+  }
+};
