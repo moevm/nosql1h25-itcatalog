@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
+import AddButton from '../../components/AddButton/AddButton';
 import { 
   fetchProfessions, 
   fetchGroups, 
   fetchTools, 
   fetchTechnologies,
+  fetchSkills,
   fetchProfessionsFilteredByCategory,
   fetchProfessionsFilteredByTool,
   fetchProfessionsFilteredByTechnology,
-  searchProfessions
+  searchProfessions,
+  addProfession
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -23,24 +26,27 @@ const ProfessionsPage = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [allTools, setAllTools] = useState([]);
   const [allTechnologies, setAllTechnologies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // Добавили состояние для поиска
+  const [allSkills, setAllSkills] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Загрузка начальных данных
   useEffect(() => {
     const loadInitialData = async () => {
       try {
         setLoading(true);
-        const [professionsData, categoriesData, toolsData, techData] = await Promise.all([
+        const [professionsData, categoriesData, toolsData, techData, skillsData] = await Promise.all([
           fetchProfessions(),
           fetchGroups('categories'),
           fetchTools(),
-          fetchTechnologies()
+          fetchTechnologies(),
+          fetchSkills()
         ]);
         
         setProfessions(professionsData);
         setAllCategories(categoriesData);
         setAllTools(toolsData);
         setAllTechnologies(techData);
+        setAllSkills(skillsData);
       } catch (error) {
         console.error('Error loading initial data:', error);
       } finally {
@@ -161,6 +167,31 @@ const ProfessionsPage = () => {
     setSearchTerm(term);
   };
 
+  const handleAddProfession = async (professionData) => {
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('profession', professionData.profession);
+      if (professionData.image) {
+        formData.append('image', professionData.image);
+      }
+      formData.append('category', professionData.category);
+      
+      professionData.skills.forEach(skill => formData.append('skills', skill));
+      professionData.technologies.forEach(tech => formData.append('technologies', tech));
+      professionData.tools.forEach(tool => formData.append('tools', tool));
+  
+      const newProfession = await addProfession(formData);
+      setProfessions(prev => [...prev, newProfession]);
+    } catch (error) {
+      console.error('Error adding profession:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log("Categories data:", allCategories);
+  
   return (
     <div className="page active">
       <div className="container">
@@ -192,6 +223,14 @@ const ProfessionsPage = () => {
             ))}
           </div>
         )}
+
+        <AddButton 
+          categories={allCategories}
+          skills={allSkills}
+          technologies={allTechnologies}
+          tools={allTools}
+          onAddProfession={handleAddProfession}
+        />
       </div>
     </div>
   );
