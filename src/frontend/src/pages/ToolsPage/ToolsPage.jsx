@@ -84,7 +84,7 @@ const ToolsPage = () => {
     setSearchTerm(term);
   };
 
-  const handleAddTool = async (toolsData)) => {
+  const handleAddTool = async (toolsData) => {
     try {
       setLoading(true);
 
