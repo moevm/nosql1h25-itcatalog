@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
-import { fetchGroups, searchGroups } from '../../services/api';
+import { fetchGroups, searchGroups, app } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
   const groupConfig = {
@@ -74,7 +74,7 @@ const GroupPage = ({ groupType }) => {
     searcherGroups();
   }, [searchTerm]);
 
-  const handleAddGroup = async (groupsData)) => {
+  const handleAddGroup = async (groupsData) => {
     try {
       setLoading(true);
 
