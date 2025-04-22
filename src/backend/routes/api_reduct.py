@@ -12,14 +12,14 @@ async def add_node(file: UploadFile = File(...)):
         data = json.loads(contents)
 
         with driver.session() as session:
-            for node in data["nodes"]:
+            for node in data.get("nodes", []):
                 label = node.get("label")
                 properties = node.get("properties", {})
                 name = properties.get("name")
-                if not name:
-                    continue  # Пропускаем узлы без имени
 
-                # Проверка существования
+                if not name:
+                    continue
+
                 exists = session.execute_read(
                     check_node_exists, 
                     label,
@@ -28,27 +28,21 @@ async def add_node(file: UploadFile = File(...)):
                 if not exists:
                     session.execute_write(
                         create_node,
-                        node["label"],
+                        label,
                         properties
                     )
-                else:
-                    return{"status": "node already exists"}
 
-            # Обработка связей
-            for rel in data["relationships"]:
+            for rel in data.get("relationships", []):
                 session.execute_write(
                     create_relationship,
-                    rel.get("startNode"),
-                    rel.get("endNode"),
-                    rel.get("type")
+                    rel["startNode"],
+                    rel["endNode"],
+                    rel["type"]
                 )
-            return {
-                "status": "node added",
-            }
+
+        return { "status": "node added" }
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=422, detail="Invalid JSON file")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
