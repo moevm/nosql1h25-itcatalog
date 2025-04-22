@@ -113,7 +113,7 @@ const SkillsPage = () => {
         {
           startNode: skillId,
           endNode: groupId,
-          type: "GROUPS_TOOL",
+          type: "GROUPS_SKILL",
         }
       ];
   
