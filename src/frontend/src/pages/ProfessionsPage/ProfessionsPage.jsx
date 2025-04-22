@@ -167,30 +167,71 @@ const ProfessionsPage = () => {
     setSearchTerm(term);
   };
 
-  const handleAddProfession = async (professionData) => {
+ const handleAddProfession = async (professionData) => {
     try {
       setLoading(true);
-      const formData = new FormData();
-      formData.append('profession', professionData.profession);
-      if (professionData.image) {
-        formData.append('image', professionData.image);
-      }
-      formData.append('category', professionData.category);
-      
-      professionData.skills.forEach(skill => formData.append('skills', skill));
-      professionData.technologies.forEach(tech => formData.append('technologies', tech));
-      professionData.tools.forEach(tool => formData.append('tools', tool));
   
-      const newProfession = await addProfession(formData);
+      const data = {
+        nodes: [
+          {
+            label: "Profession",
+            properties: {
+              name: professionData.profession,
+              category: professionData.category,
+              image: professionData.image?.name || "default.png",
+            },
+          },
+          ...professionData.skills.map(skill => ({
+            label: "Skill",
+            properties: { name: skill },
+          })),
+          ...professionData.technologies.map(tech => ({
+            label: "Technology",
+            properties: { name: tech },
+          })),
+          ...professionData.tools.map(tool => ({
+            label: "Tool",
+            properties: { name: tool },
+          })),
+        ],
+        relationships: [
+          ...professionData.skills.map(skill => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Skill", name: skill },
+            type: "HAS_SKILL",
+          })),
+          ...professionData.technologies.map(tech => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Technology", name: tech },
+            type: "USES_TECHNOLOGY",
+          })),
+          ...professionData.tools.map(tool => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Tool", name: tool },
+            type: "USES_TOOL",
+          })),
+        ],
+      };
+  
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      await addProfession(formData);
+  
+      const newProfession = {
+        profession: professionData.profession,
+        category: professionData.category,
+        image: professionData.image?.name || '/static/images/default.png',
+      };
+  
       setProfessions(prev => [...prev, newProfession]);
     } catch (error) {
-      console.error('Error adding profession:', error);
+      console.error("Ошибка при добавлении профессии:", error);
     } finally {
       setLoading(false);
     }
   };
-
-  console.log("Categories data:", allCategories);
   
   return (
     <div className="page active">
