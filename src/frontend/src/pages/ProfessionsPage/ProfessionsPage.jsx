@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
 import AddButton from '../../components/AddButton/AddButton';
+import { v4 as uuidv4 } from 'uuid';
+
 import { 
   fetchProfessions, 
   fetchGroups, 
@@ -12,7 +14,8 @@ import {
   fetchProfessionsFilteredByTool,
   fetchProfessionsFilteredByTechnology,
   searchProfessions,
-  addProfession
+  add,
+  getIdByName
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -167,71 +170,82 @@ const ProfessionsPage = () => {
     setSearchTerm(term);
   };
 
- const handleAddProfession = async (professionData) => {
+  const handleAddProfession = async (professionData) => {
     try {
       setLoading(true);
   
-      const data = {
-        nodes: [
-          {
-            label: "Profession",
-            properties: {
-              name: professionData.profession,
-              category: professionData.category,
-              image: professionData.image?.name || "default.png",
-            },
-          },
-          ...professionData.skills.map(skill => ({
-            label: "Skill",
-            properties: { name: skill },
-          })),
-          ...professionData.technologies.map(tech => ({
-            label: "Technology",
-            properties: { name: tech },
-          })),
-          ...professionData.tools.map(tool => ({
-            label: "Tool",
-            properties: { name: tool },
-          })),
-        ],
-        relationships: [
-          ...professionData.skills.map(skill => ({
-            startNode: { label: "Profession", name: professionData.profession },
-            endNode: { label: "Skill", name: skill },
-            type: "HAS_SKILL",
-          })),
-          ...professionData.technologies.map(tech => ({
-            startNode: { label: "Profession", name: professionData.profession },
-            endNode: { label: "Technology", name: tech },
-            type: "USES_TECHNOLOGY",
-          })),
-          ...professionData.tools.map(tool => ({
-            startNode: { label: "Profession", name: professionData.profession },
-            endNode: { label: "Tool", name: tool },
-            type: "USES_TOOL",
-          })),
-        ],
-      };
+      const professionName = professionData.profession;
+      const categoryName = professionData.category;
+      const skills = professionData.skills || [];
+      const technologies = professionData.technologies || [];
+      const tools = professionData.tools || [];
   
+      const professionId = uuidv4();
+  
+      const categoryId = await getIdByName(categoryName);
+      const skillIds = await Promise.all(skills.map(getIdByName));
+      const techIds = await Promise.all(technologies.map(getIdByName));
+      const toolIds = await Promise.all(tools.map(getIdByName));
+  
+      // Узел профессии
+      const nodes = [
+        {
+          label: "Profession",
+          properties: {
+            id: professionId,
+            name: professionName,
+            image: professionData.image?.name || "default.png",
+          },
+        },
+      ];
+  
+      // Связи
+      const relationships = [
+        {
+          startNode: professionId,
+          endNode: categoryId,
+          type: "BELONGS_TO",
+        },
+        ...skillIds.map((id) => ({
+          startNode: professionId,
+          endNode: id,
+          type: "REQUIRES",
+        })),
+        ...techIds.map((id) => ({
+          startNode: professionId,
+          endNode: id,
+          type: "USES_TECH",
+        })),
+        ...toolIds.map((id) => ({
+          startNode: professionId,
+          endNode: id,
+          type: "USES_TOOL",
+        })),
+      ];
+  
+      const data = { nodes, relationships };
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
   
-      await addProfession(formData);
+      await add(formData);
   
       const newProfession = {
-        profession: professionData.profession,
-        category: professionData.category,
+        profession: professionName,
+        category: categoryName,
         image: professionData.image?.name || '/static/images/default.png',
       };
   
-      setProfessions(prev => [...prev, newProfession]);
+      setProfessions((prev) => [...prev, newProfession]);
+  
     } catch (error) {
       console.error("Ошибка при добавлении профессии:", error);
     } finally {
       setLoading(false);
     }
   };
+  
+
   
   return (
     <div className="page active">

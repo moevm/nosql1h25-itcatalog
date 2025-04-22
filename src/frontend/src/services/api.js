@@ -243,3 +243,14 @@ export const add = async (formData) => {
     throw error;
   }
 };
+
+export const getIdByName = async (name) => {
+  const response = await fetch(`${API_BASE_URL}/get_id/${encodeURIComponent(name)}`);
+  console.log(name);
+  console.log(`${encodeURIComponent(name)}`)
+  if (!response.ok) {
+    throw new Error(`Ошибка получения ID для ${name}`);
+  }
+  const data = await response.json();
+  return data.id;
+};

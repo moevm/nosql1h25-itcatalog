@@ -82,9 +82,13 @@
     - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
 `http GET http://localhost:8000/api/groups/toolgroups/search/"Работа с документами"`
 
-#### Импорт и экспорт
+#### Универсальные запросы
 
-1) `@app.post("/api/import")` </br>
+1) Получение id элемента: `@app.post("/api/get_id/{name}")` </br>
+`http GET http://localhost:8000/get_id/"Программист 1С"`
+2) Добавление карточки: `@app.post("/api/add")` </br>
+`http GET http://localhost:8000/add`
+3) Импорт: `@app.post("/api/import")` </br>
 `http GET http://localhost:8000/api/import`
-2) `@app.get("/api/export")` </br>
+4) Экспорт: `@app.get("/api/export")` </br>
 `http GET http://localhost:8000/api/export`
