@@ -101,7 +101,7 @@ const TechnologiesPage = () => {
     setSearchTerm(term);
   };
 
-  const handleAddTechnology = async (techData)) => {
+  const handleAddTechnology = async (techData) => {
     try {
       setLoading(true);
 
