@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
 
-const AddTechnologyButton = ({ groups, onAddTechnology}) => {
+const AddTechnologyButton = ({ groups, onAddTechnology }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [technologyData, setTechnologyData] = useState({
     name: '',
-    group: groups.length > 0 ? groups[0] : '', 
+    group: '',
     image: null,
     description: ''
   });
+
+  useEffect(() => {
+    if (groups.length > 0 && !technologyData.group) {
+      setTechnologyData(prev => ({
+        ...prev,
+        group: groups[0]
+      }));
+    }
+  }, [groups]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

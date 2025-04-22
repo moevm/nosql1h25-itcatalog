@@ -89,15 +89,13 @@ const SkillsPage = () => {
   const handleAddSkill = async (skillData) => {
     try {
       setLoading(true);
-  
+    
       const skillName = skillData.name;
       const groupName = skillData.group;
-      const description = skillData.description;
-  
+    
       const skillId = uuidv4();
       const groupId = await getIdByName(groupName);
-  
-      // Узел навыка
+    
       const nodes = [
         {
           label: "Skill",
@@ -108,8 +106,7 @@ const SkillsPage = () => {
           },
         },
       ];
-  
-      // Связи
+    
       const relationships = [
         {
           startNode: skillId,
@@ -117,27 +114,26 @@ const SkillsPage = () => {
           type: "GROUPS_SKILL",
         }
       ];
-  
+    
       const data = { nodes, relationships };
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-  
+    
       if (skillData.image) {
         formData.append("image", skillData.image);
       }
-  
+    
       await add(formData);
-  
+    
       const newSkill = {
         skill: skillName,
         skill_group: groupName,
-        image: skillData.image?.name || '/static/images/default.png',
-        description: description
+        image: skillData.image?.name || '/static/images/default.png'
       };
-  
+    
       setSkills(prev => [...prev, newSkill]);
-  
+    
     } catch (error) {
       console.error("Ошибка при добавлении навыка:", error);
       throw error;
@@ -173,7 +169,7 @@ const SkillsPage = () => {
 
         <AddSkillButton 
           groups={groups}
-          onAddTool={handleAddSkill}
+          onAddSkill={handleAddSkill}
         />
       </div>
     </div>

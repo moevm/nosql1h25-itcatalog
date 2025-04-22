@@ -245,12 +245,20 @@ export const add = async (formData) => {
 };
 
 export const getIdByName = async (name) => {
-  const response = await fetch(`${API_BASE_URL}/get_id/${encodeURIComponent(name)}`);
-  console.log(name);
-  console.log(`${encodeURIComponent(name)}`)
-  if (!response.ok) {
-    throw new Error(`Ошибка получения ID для ${name}`);
+  try {
+    const encodedName = encodeURIComponent(name);
+    console.log(`Requesting ID for: ${encodedName}`); 
+    
+    const response = await fetch(`${API_BASE_URL}/get_id/${encodedName}`);
+    
+    if (!response.ok) {
+      throw new Error(`Ошибка получения ID для "${name}" (код ${response.status})`);
+    }
+    
+    const data = await response.json();
+    return data.id;
+  } catch (error) {
+    console.error(`Error getting ID for "${name}":`, error);
+    throw error;
   }
-  const data = await response.json();
-  return data.id;
 };

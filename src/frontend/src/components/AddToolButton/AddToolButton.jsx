@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../../components/Modal/Modal';
 
 const AddToolButton = ({ groups, onAddTool }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toolData, setToolData] = useState({
     name: '',
-    group: groups.length > 0 ? groups[0] : '', 
+    group: '', 
     image: null,
     description: ''
   });
+
+  useEffect(() => {
+    if (groups.length > 0 && !toolData.group) {
+      setToolData(prev => ({
+        ...prev,
+        group: groups[0]
+      }));
+    }
+  }, [groups]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -38,7 +38,7 @@ const GroupPage = ({ groupType }) => {
       try {
         const config = groupConfig[groupType] || groupConfig.professions;
         const groupsData = await fetchGroups(config.apiEndpoint);
-        setGroups(groupsData);
+        setGroups(groupsData.map(g => typeof g === 'object' ? g.group || g.name : g));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -79,12 +79,12 @@ const GroupPage = ({ groupType }) => {
   const handleAddGroup = async (groupData) => {
     try {
       setLoading(true);
-  
+    
       const groupName = groupData.name;
       const description = groupData.description;
-  
+    
       const groupId = uuidv4();
-  
+    
       // Узел группы
       const nodes = [
         {
@@ -97,26 +97,20 @@ const GroupPage = ({ groupType }) => {
           },
         },
       ];
-  
+    
       const data = { nodes };
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-  
+    
       if (groupData.image) {
         formData.append("image", groupData.image);
       }
-  
+    
       await add(formData);
-  
-      const newGroup = {
-        group: groupName,
-        image: groupData.image?.name || '/static/images/default.png',
-        description: description
-      };
-  
-      setGroups(prev => [...prev, newGroup]);
-  
+    
+      setGroups(prev => [...prev, groupName]);
+    
     } catch (error) {
       console.error("Ошибка при добавлении группы:", error);
       throw error;
