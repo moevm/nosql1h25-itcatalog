@@ -74,6 +74,43 @@ const GroupPage = ({ groupType }) => {
     searcherGroups();
   }, [searchTerm]);
 
+  const handleAddGroup = async (groupsData)) => {
+    try {
+      setLoading(true);
+
+      const data = {
+        nodes: [
+          {
+            label: `${config.apiEndpoint}`,
+            properties: {
+              name: groupsData.skill,
+              description: groupsData.description,
+              image: groupsData.image?.name || "default.png",
+            },
+          },
+        ]
+      };
+
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+
+      await add(formData);
+
+      const newGroup = {
+        group: groupsData.skill,
+        description: groupsData.description,
+        image: groupsData.image?.name || '/static/images/default.png',
+      };
+
+      setGroups(prev => [...prev, newGroup]);
+    } catch (error) {
+      console.error("Ошибка при добавлении группы:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div className="error">Ошибка: {error}</div>;
 
   const config = groupConfig[groupType] || groupConfig.professions;
@@ -107,6 +144,10 @@ const GroupPage = ({ groupType }) => {
             />
           ))}
         </div>
+        <AddButton
+          groups={groups}
+          onAddGroup={handleAddGroup}
+        />
       </div>
     </div>
   );
