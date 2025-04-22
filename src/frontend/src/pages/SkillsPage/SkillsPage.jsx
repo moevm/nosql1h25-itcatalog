@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills } from '../../services/api';
+import AddSkillButton from '../../components/AddSkillButton/AddSkillButton';
+import { v4 as uuidv4 } from 'uuid';
+import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, getIdByName, add } from '../../services/api';
 
 const SkillsPage = () => {
   const [skills, setSkills] = useState([]);
@@ -84,7 +86,66 @@ const SkillsPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddSkill = async (skillData) => {
+    try {
+      setLoading(true);
+  
+      const skillName = skillData.name;
+      const groupName = skillData.group;
+      const description = skillData.description;
+  
+      const skillId = uuidv4();
+      const groupId = await getIdByName(groupName);
+  
+      // Узел навыка
+      const nodes = [
+        {
+          label: "Skill",
+          properties: {
+            id: skillId,
+            name: skillName,
+            image: skillData.image?.name || "default.png",
+          },
+        },
+      ];
+  
+      // Связи
+      const relationships = [
+        {
+          startNode: skillId,
+          endNode: groupId,
+          type: "GROUPS_SKILL",
+        }
+      ];
+  
+      const data = { nodes, relationships };
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      if (skillData.image) {
+        formData.append("image", skillData.image);
+      }
+  
+      await add(formData);
+  
+      const newSkill = {
+        skill: skillName,
+        skill_group: groupName,
+        image: skillData.image?.name || '/static/images/default.png',
+        description: description
+      };
+  
+      setSkills(prev => [...prev, newSkill]);
+  
+    } catch (error) {
+      console.error("Ошибка при добавлении навыка:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };  
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -109,6 +170,11 @@ const SkillsPage = () => {
             />
           ))}
         </div>
+
+        <AddSkillButton 
+          groups={groups}
+          onAddTool={handleAddSkill}
+        />
       </div>
     </div>
   );
