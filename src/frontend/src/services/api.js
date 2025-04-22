@@ -229,7 +229,7 @@ export const searchGroups = async (groupType, searchTerm) => {
   }
 };
 
-export const addProfession = async (formData) => {
+export const add = async (formData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/add`, {
       method: 'POST',
@@ -239,7 +239,7 @@ export const addProfession = async (formData) => {
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
-    console.error('Error adding profession:', error);
+    console.error('Error adding the card:', error);
     throw error;
   }
 };
