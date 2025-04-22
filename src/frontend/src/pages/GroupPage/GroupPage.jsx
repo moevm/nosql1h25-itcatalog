@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import AddGroupButton from '../../components/AddGroupButton/AddGroupButton';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchGroups, searchGroups } from '../../services/api';
+import { fetchGroups, searchGroups, add } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
   const groupConfig = {
