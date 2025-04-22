@@ -12,7 +12,7 @@ import {
   fetchProfessionsFilteredByTool,
   fetchProfessionsFilteredByTechnology,
   searchProfessions,
-  addProfession
+  add
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -177,10 +177,13 @@ const ProfessionsPage = () => {
             label: "Profession",
             properties: {
               name: professionData.profession,
-              category: professionData.category,
               image: professionData.image?.name || "default.png",
             },
           },
+          ...professionData.categories.map(category => ({
+            label: "Category",
+            properties: { name: category },
+          })),
           ...professionData.skills.map(skill => ({
             label: "Skill",
             properties: { name: skill },
@@ -197,13 +200,18 @@ const ProfessionsPage = () => {
         relationships: [
           ...professionData.skills.map(skill => ({
             startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Category", name: category },
+            type: "BELONGS_TO",
+          })),
+          ...professionData.skills.map(skill => ({
+            startNode: { label: "Profession", name: professionData.profession },
             endNode: { label: "Skill", name: skill },
-            type: "HAS_SKILL",
+            type: "REQUIRES",
           })),
           ...professionData.technologies.map(tech => ({
             startNode: { label: "Profession", name: professionData.profession },
             endNode: { label: "Technology", name: tech },
-            type: "USES_TECHNOLOGY",
+            type: "USES_TECH",
           })),
           ...professionData.tools.map(tool => ({
             startNode: { label: "Profession", name: professionData.profession },
@@ -217,7 +225,7 @@ const ProfessionsPage = () => {
       const formData = new FormData();
       formData.append("file", blob, "data.json");
   
-      await addProfession(formData);
+      await add(formData);
   
       const newProfession = {
         profession: professionData.profession,
