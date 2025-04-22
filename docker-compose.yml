@@ -19,7 +19,7 @@ services:
       retries: 5
 
   backend:
-    build: ./backend
+    build: ./src/backend
     container_name: fastapi_backend
     environment:
       - NEO4J_URI=bolt://db:7687
@@ -37,7 +37,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./src/frontend
       dockerfile: Dockerfile
     container_name: react_frontend
     environment:
