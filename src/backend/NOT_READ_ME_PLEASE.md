@@ -84,9 +84,9 @@
 
 #### Универсальные запросы
 
-1) Получение id элемента: `@app.post("/api/get_id/{name}") </br>
+1) Получение id элемента: `@app.post("/api/get_id/{name}")` </br>
 `http GET http://localhost:8000/get_id/"Программист 1С"`
-2) Добавление карточки: `@app.post("/api/add") </br>
+2) Добавление карточки: `@app.post("/api/add")` </br>
 `http GET http://localhost:8000/add`
 3) Импорт: `@app.post("/api/import")` </br>
 `http GET http://localhost:8000/api/import`
