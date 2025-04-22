@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
 
-const AddSkillButton = ({ groups, onAddSkill}) => {
+const AddSkillButton = ({ groups, onAddSkill }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [skillData, setSkillData] = useState({
     name: '',
-    group: groups.length > 0 ? groups[0] : '', 
+    group: '', 
     image: null
   });
+
+  useEffect(() => {
+    if (groups.length > 0 && !skillData.group) {
+      setSkillData(prev => ({
+        ...prev,
+        group: groups[0] 
+      }));
+    }
+  }, [groups]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -76,7 +85,7 @@ const AddSkillButton = ({ groups, onAddSkill}) => {
               </div>
 
               <div className="form-group">
-                <label>Изображение навык</label>
+                <label>Изображение навыка</label>
                 <input
                   type="file"
                   accept="image/*"
