@@ -189,9 +189,9 @@ const TechnologiesPage = () => {
           ))}
         </div>
 
-        <AddToolButton 
+        <AddTechnologyButton 
           groups={groups}
-          onAddTool={handleAddTool}
+          onAddTechnology={handleAddTechnology}
         />
       </div>
     </div>
