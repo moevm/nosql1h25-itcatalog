@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills } from '../../services/api';
+import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, add } from '../../services/api';
 
 const SkillsPage = () => {
   const [skills, setSkills] = useState([]);
