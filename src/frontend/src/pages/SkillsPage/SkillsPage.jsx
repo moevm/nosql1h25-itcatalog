@@ -84,7 +84,7 @@ const SkillsPage = () => {
     setSearchTerm(term);
   };
 
-  const handleAddSkill = async (skillsData)) => {
+  const handleAddSkill = async (skillsData) => {
     try {
       setLoading(true);
 
