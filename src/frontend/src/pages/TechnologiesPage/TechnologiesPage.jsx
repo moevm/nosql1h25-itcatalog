@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import AddToolButton from '../../components/AddTechnologyButton/AddTechnologyButton';
+import AddTechnologyButton from '../../components/AddTechnologyButton/AddTechnologyButton';
 import { v4 as uuidv4 } from 'uuid';
 import { 
   fetchTechnologies, 
