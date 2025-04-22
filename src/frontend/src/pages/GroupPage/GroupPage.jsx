@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
+import AddGroupButton from '../../components/AddGroupButton/AddGroupButton';
+import { v4 as uuidv4 } from 'uuid';
 import { fetchGroups, searchGroups } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
@@ -74,6 +76,55 @@ const GroupPage = ({ groupType }) => {
     searcherGroups();
   }, [searchTerm]);
 
+  const handleAddGroup = async (groupData) => {
+    try {
+      setLoading(true);
+  
+      const groupName = groupData.name;
+      const description = groupData.description;
+  
+      const groupId = uuidv4();
+  
+      // Узел группы
+      const nodes = [
+        {
+          label: "Group",
+          properties: {
+            id: groupId,
+            name: groupName,
+            image: groupData.image?.name || "default.png",
+            description: description || "",
+          },
+        },
+      ];
+  
+      const data = { nodes };
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      if (groupData.image) {
+        formData.append("image", groupData.image);
+      }
+  
+      await add(formData);
+  
+      const newGroup = {
+        group: groupName,
+        image: groupData.image?.name || '/static/images/default.png',
+        description: description
+      };
+  
+      setGroups(prev => [...prev, newGroup]);
+  
+    } catch (error) {
+      console.error("Ошибка при добавлении группы:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div className="error">Ошибка: {error}</div>;
 
   const config = groupConfig[groupType] || groupConfig.professions;
@@ -107,6 +158,11 @@ const GroupPage = ({ groupType }) => {
             />
           ))}
         </div>
+
+        <AddGroupButton 
+          groups={groups}
+          onAddGroup={handleAddGroup}
+        />
       </div>
     </div>
   );
