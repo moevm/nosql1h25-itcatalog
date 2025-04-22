@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchTools, fetchGroups, fetchToolsFilteredByGroup, searchTools } from '../../services/api';
+import AddToolButton from '../../components/AddToolButton/AddToolButton';
+import { v4 as uuidv4 } from 'uuid';
+import { 
+  fetchTools, 
+  fetchGroups, 
+  fetchToolsFilteredByGroup, 
+  searchTools,
+  add,
+  getIdByName
+} from '../../services/api';
 
 const ToolsPage = () => {
   const [tools, setTools] = useState([]);
@@ -84,11 +93,71 @@ const ToolsPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddTool = async (toolData) => {
+    try {
+      setLoading(true);
+  
+      const toolName = toolData.name;
+      const groupName = toolData.group;
+      const description = toolData.description;
+  
+      const toolId = uuidv4();
+      const groupId = await getIdByName(groupName);
+  
+      // Узел инструмента
+      const nodes = [
+        {
+          label: "Tool",
+          properties: {
+            id: toolId,
+            name: toolName,
+            image: toolData.image?.name || "default.png",
+            description: description || "",
+          },
+        },
+      ];
+  
+      // Связи
+      const relationships = [
+        {
+          startNode: toolId,
+          endNode: groupId,
+          type: "GROUPS_TOOL",
+        }
+      ];
+  
+      const data = { nodes, relationships };
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      if (toolData.image) {
+        formData.append("image", toolData.image);
+      }
+  
+      await add(formData);
+  
+      const newTool = {
+        tool: toolName,
+        tool_group: groupName,
+        image: toolData.image?.name || '/static/images/default.png',
+        description: description
+      };
+  
+      setTools(prev => [...prev, newTool]);
+  
+    } catch (error) {
+      console.error("Ошибка при добавлении инструмента:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
-    <div className="page">
+    <div className="page active">
       <div className="container">
         <Filters 
           groups={groups}
@@ -107,9 +176,15 @@ const ToolsPage = () => {
               image={tool.image ? tool.image : '/static/images/default.png'}
               title={tool.tool}
               category={tool.tool_group}
+              description={tool.description}
             />
           ))}
         </div>
+
+        <AddToolButton 
+          groups={groups}
+          onAddTool={handleAddTool}
+        />
       </div>
     </div>
   );
