@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
-import { fetchTools, fetchGroups, fetchToolsFilteredByGroup, searchTools } from '../../services/api';
+import { fetchTools, fetchGroups, fetchToolsFilteredByGroup, searchTools, add } from '../../services/api';
 
 const ToolsPage = () => {
   const [tools, setTools] = useState([]);
@@ -84,7 +84,54 @@ const ToolsPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddTool = async (toolsData)) => {
+    try {
+      setLoading(true);
+
+      const data = {
+        nodes: [
+          {
+            label: "Tool",
+            properties: {
+              name: toolsData.tool,
+              description: toolsData.description,
+              image: toolsData.image?.name || "default.png",
+            },
+          },
+          ...toolsData.groups.map(group => ({
+            label: "ToolGroup",
+            properties: { name: group },
+          })),
+        ],
+        relationships: [
+          ...toolsData.tools.map(tool => ({
+            startNode: { label: "Tool", name: toolsData.skill },
+            endNode: { label: "ToolGroup", name: group },
+            type: "GROUPS_TOOL",
+          })),
+        ],
+      };
+
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+
+      await add(formData);
+
+      const newTool = {
+        tool: toolsData.skill,
+        description: toolsData.description,
+        image: toolsData.image?.name || '/static/images/default.png',
+      };
+
+      setSkills(prev => [...prev, newTool]);
+    } catch (error) {
+      console.error("Ошибка при добавлении инструмента:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -110,6 +157,10 @@ const ToolsPage = () => {
             />
           ))}
         </div>
+        <AddButton
+          groups={groups}
+          onAddTool={handleAddTool}
+        />
       </div>
     </div>
   );
