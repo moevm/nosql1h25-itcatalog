@@ -7,7 +7,9 @@ import {
   fetchTechnologies, 
   fetchGroups, 
   fetchTechnologiesFilteredByGroup,
-  searchTechnologies 
+  searchTechnologies,
+  getIdByName,
+  add
 } from '../../services/api';
 
 const TechnologiesPage = () => {
