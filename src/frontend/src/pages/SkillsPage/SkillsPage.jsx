@@ -84,7 +84,54 @@ const SkillsPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddSkill = async (skillsData)) => {
+    try {
+      setLoading(true);
+
+      const data = {
+        nodes: [
+          {
+            label: "Skill",
+            properties: {
+              name: skillsData.skill,
+              description: skillsData.description,
+              image: skillsData.image?.name || "default.png",
+            },
+          },
+          ...skillsData.groups.map(group => ({
+            label: "SkillGroup",
+            properties: { name: group },
+          })),
+        ],
+        relationships: [
+          ...skillsData.skills.map(skill => ({
+            startNode: { label: "Skill", name: skillsData.skill },
+            endNode: { label: "SkillGroup", name: group },
+            type: "GROUPS_SKILL",
+          })),
+        ],
+      };
+
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+
+      await add(formData);
+
+      const newSkill = {
+        skill: skillsData.skill,
+        description: skillsData.description,
+        image: skillsData.image?.name || '/static/images/default.png',
+      };
+
+      setSkills(prev => [...prev, newSkill]);
+    } catch (error) {
+      console.error("Ошибка при добавлении навыка:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -109,6 +156,10 @@ const SkillsPage = () => {
             />
           ))}
         </div>
+        <AddButton
+          groups={groups}
+          onAddSkill={handleAddSkill}
+        />
       </div>
     </div>
   );
