@@ -121,7 +121,7 @@ const TechnologiesPage = () => {
           })),
         ],
         relationships: [
-          ...techData.technologies.map(skill => ({
+          ...techData.technologies.map(technology => ({
             startNode: { label: "Technology", name: techData.technology },
             endNode: { label: "TechnologyGroup", name: group },
             type: "GROUPS_TECH",
