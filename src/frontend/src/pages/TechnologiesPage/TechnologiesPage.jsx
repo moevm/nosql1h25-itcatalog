@@ -5,7 +5,8 @@ import {
   fetchTechnologies, 
   fetchGroups, 
   fetchTechnologiesFilteredByGroup,
-  searchTechnologies 
+  searchTechnologies,
+  add
 } from '../../services/api';
 
 const TechnologiesPage = () => {
@@ -100,7 +101,54 @@ const TechnologiesPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddTechnology = async (techData)) => {
+    try {
+      setLoading(true);
+
+      const data = {
+        nodes: [
+          {
+            label: "Technology",
+            properties: {
+              name: techData.technology,
+              description: techData.description,
+              image: techData.image?.name || "default.png",
+            },
+          },
+          ...techData.groups.map(group => ({
+            label: "TechnologyGroup",
+            properties: { name: group },
+          })),
+        ],
+        relationships: [
+          ...techData.technologies.map(skill => ({
+            startNode: { label: "Technology", name: techData.technology },
+            endNode: { label: "TechnologyGroup", name: group },
+            type: "GROUPS_TECH",
+          })),
+        ],
+      };
+
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+
+      await add(formData);
+
+      const newTechnology = {
+        technology: techData.technology,
+        description: techData.description,
+        image: techData.image?.name || '/static/images/default.png',
+      };
+
+      setSkills(prev => [...prev, newTechnology]);
+    } catch (error) {
+      console.error("Ошибка при добавлении технологии:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -126,6 +174,10 @@ const TechnologiesPage = () => {
             />
           ))}
         </div>
+        <AddButton
+          groups={groups}
+          onAddTechnology={handleAddTechnology}
+        />
       </div>
     </div>
   );
