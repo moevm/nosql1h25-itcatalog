@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
 import AddSkillButton from '../../components/AddSkillButton/AddSkillButton';
+import { v4 as uuidv4 } from 'uuid';
 import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills } from '../../services/api';
 
 const SkillsPage = () => {
