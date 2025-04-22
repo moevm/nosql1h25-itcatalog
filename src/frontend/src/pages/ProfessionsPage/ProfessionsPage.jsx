@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
+import AddButton from '../../components/AddButton/AddButton';
 import { 
   fetchProfessions, 
   fetchGroups, 
   fetchTools, 
   fetchTechnologies,
+  fetchSkills,
   fetchProfessionsFilteredByCategory,
   fetchProfessionsFilteredByTool,
   fetchProfessionsFilteredByTechnology,
-  searchProfessions
+  searchProfessions,
+  addProfession
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -23,24 +26,27 @@ const ProfessionsPage = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [allTools, setAllTools] = useState([]);
   const [allTechnologies, setAllTechnologies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // Добавили состояние для поиска
+  const [allSkills, setAllSkills] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Загрузка начальных данных
   useEffect(() => {
     const loadInitialData = async () => {
       try {
         setLoading(true);
-        const [professionsData, categoriesData, toolsData, techData] = await Promise.all([
+        const [professionsData, categoriesData, toolsData, techData, skillsData] = await Promise.all([
           fetchProfessions(),
           fetchGroups('categories'),
           fetchTools(),
-          fetchTechnologies()
+          fetchTechnologies(),
+          fetchSkills()
         ]);
         
         setProfessions(professionsData);
         setAllCategories(categoriesData);
         setAllTools(toolsData);
         setAllTechnologies(techData);
+        setAllSkills(skillsData);
       } catch (error) {
         console.error('Error loading initial data:', error);
       } finally {
@@ -161,6 +167,72 @@ const ProfessionsPage = () => {
     setSearchTerm(term);
   };
 
+ const handleAddProfession = async (professionData) => {
+    try {
+      setLoading(true);
+  
+      const data = {
+        nodes: [
+          {
+            label: "Profession",
+            properties: {
+              name: professionData.profession,
+              category: professionData.category,
+              image: professionData.image?.name || "default.png",
+            },
+          },
+          ...professionData.skills.map(skill => ({
+            label: "Skill",
+            properties: { name: skill },
+          })),
+          ...professionData.technologies.map(tech => ({
+            label: "Technology",
+            properties: { name: tech },
+          })),
+          ...professionData.tools.map(tool => ({
+            label: "Tool",
+            properties: { name: tool },
+          })),
+        ],
+        relationships: [
+          ...professionData.skills.map(skill => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Skill", name: skill },
+            type: "HAS_SKILL",
+          })),
+          ...professionData.technologies.map(tech => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Technology", name: tech },
+            type: "USES_TECHNOLOGY",
+          })),
+          ...professionData.tools.map(tool => ({
+            startNode: { label: "Profession", name: professionData.profession },
+            endNode: { label: "Tool", name: tool },
+            type: "USES_TOOL",
+          })),
+        ],
+      };
+  
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      await addProfession(formData);
+  
+      const newProfession = {
+        profession: professionData.profession,
+        category: professionData.category,
+        image: professionData.image?.name || '/static/images/default.png',
+      };
+  
+      setProfessions(prev => [...prev, newProfession]);
+    } catch (error) {
+      console.error("Ошибка при добавлении профессии:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <div className="page active">
       <div className="container">
@@ -192,6 +264,14 @@ const ProfessionsPage = () => {
             ))}
           </div>
         )}
+
+        <AddButton 
+          categories={allCategories}
+          skills={allSkills}
+          technologies={allTechnologies}
+          tools={allTools}
+          onAddProfession={handleAddProfession}
+        />
       </div>
     </div>
   );

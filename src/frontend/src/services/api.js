@@ -228,3 +228,18 @@ export const searchGroups = async (groupType, searchTerm) => {
     throw error;
   }
 };
+
+export const addProfession = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/add`, {
+      method: 'POST',
+      body: formData,
+    });
+    
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error adding profession:', error);
+    throw error;
+  }
+};
