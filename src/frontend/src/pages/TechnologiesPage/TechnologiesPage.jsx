@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
+import AddToolButton from '../../components/AddTechnologyButton/AddTechnologyButton';
+import { v4 as uuidv4 } from 'uuid';
 import { 
   fetchTechnologies, 
   fetchGroups, 
@@ -100,7 +102,67 @@ const TechnologiesPage = () => {
     setSearchTerm(term);
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  const handleAddTechnology = async (technologyData) => {
+    try {
+      setLoading(true);
+  
+      const technologyName = technologyData.name;
+      const groupName = technologyData.group;
+      const description = technologyData.description;
+  
+      const technologyId = uuidv4();
+      const groupId = await getIdByName(groupName);
+  
+      // Узел технологии
+      const nodes = [
+        {
+          label: "Technology",
+          properties: {
+            id: technologyId,
+            name: technologyName,
+            image: technologyData.image?.name || "default.png",
+            description: description || "",
+          },
+        },
+      ];
+  
+      // Связи
+      const relationships = [
+        {
+          startNode: technologyId,
+          endNode: groupId,
+          type: "GROUPS_TECH",
+        }
+      ];
+  
+      const data = { nodes, relationships };
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const formData = new FormData();
+      formData.append("file", blob, "data.json");
+  
+      if (technologyData.image) {
+        formData.append("image", technologyData.image);
+      }
+  
+      await add(formData);
+  
+      const newTechnology = {
+        technology: technologyName,
+        technology_group: groupName,
+        image: technologyData.image?.name || '/static/images/default.png',
+        description: description
+      };
+  
+      setTechnologies(prev => [...prev, newTechnology]);
+  
+    } catch (error) {
+      console.error("Ошибка при добавлении технологий:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -126,6 +188,11 @@ const TechnologiesPage = () => {
             />
           ))}
         </div>
+
+        <AddToolButton 
+          groups={groups}
+          onAddTool={handleAddTool}
+        />
       </div>
     </div>
   );
