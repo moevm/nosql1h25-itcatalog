@@ -3,7 +3,23 @@ from database import driver
 from utils import check_node_exists, create_node, create_relationship
 import json
 
-router = APIRouter(prefix="/api", tags=["reduct"])
+router = APIRouter(prefix="/api", tags=["redact"])
+
+@router.get("/get_id/{name}")
+async def get_id(name: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (n)
+                WHERE n.name == $name
+                RETURN n.id AS id
+                """,
+                {"name": name}
+            )
+            return id
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/add")
 async def add_node(file: UploadFile = File(...)):
