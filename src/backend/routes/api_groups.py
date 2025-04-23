@@ -20,7 +20,8 @@ async def get_groups(group_type: str):
             )
             return [
                 {"name": record["name"],
-                 "description": record.get("description", "")}
+                 "description": record.get("description", ""),
+                 "image": "http://localhost:8000/static/images/in_progress.jpg"}
                 for record in result
             ]
     except Exception as e:
