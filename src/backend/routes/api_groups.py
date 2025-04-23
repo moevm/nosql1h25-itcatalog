@@ -41,7 +41,8 @@ async def search_group_type(neo4j_label: str, search_term: str):
                 f"""
                 MATCH (g:{neo4j_label})
                 WHERE toLower(g.name) CONTAINS toLower($search_term)
-                RETURN g.name AS name
+                RETURN g.name AS name, t.description AS description
+                ORDER BY toLower(g.name)
                 """,
                 {"search_term": search_term.strip()}
             )

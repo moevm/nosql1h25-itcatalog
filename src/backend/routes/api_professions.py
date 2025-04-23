@@ -11,6 +11,7 @@ async def get_professions():
                 """
                 MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
                 RETURN p.name AS profession_name, c.name AS category_name
+                ORDER BY toLower(p.name)
                 """
             )
             return [
