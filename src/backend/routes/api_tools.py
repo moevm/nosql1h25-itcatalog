@@ -10,7 +10,8 @@ async def get_tools():
             result = session.run(
                 """
                 MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
-                RETURN t.name AS tool_name, g.name AS group_name
+                RETURN t.name AS tool_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
                 """
             )
             return [
