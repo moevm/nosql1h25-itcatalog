@@ -49,12 +49,12 @@ const ToolsPage = () => {
           
           if (selectedGroups.length > 0) {
             filteredTools = filteredTools.filter(tool => 
-              selectedGroups.includes(tool.tool_group)
+              selectedGroups.some(group => group.name === tool.tool_group)
             );
           }
         } else if (selectedGroups.length > 0) {
-          const groupPromises = selectedGroups.map(groupName => 
-            fetchToolsFilteredByGroup(groupName)
+          const groupPromises = selectedGroups.map(group => 
+            fetchToolsFilteredByGroup(group.name)
           );
           
           const groupResults = await Promise.all(groupPromises);
@@ -81,11 +81,11 @@ const ToolsPage = () => {
     filterTools();
   }, [selectedGroups, searchTerm]);
 
-  const handleGroupChange = (groupName) => {
+  const handleGroupChange = (group) => {
     setSelectedGroups(prev => 
-      prev.includes(groupName)
-        ? prev.filter(name => name !== groupName)
-        : [...prev, groupName]
+      prev.some(g => g.name === group.name)
+        ? prev.filter(g => g.name !== group.name)
+        : [...prev, group]
     );
   };
 
@@ -102,9 +102,10 @@ const ToolsPage = () => {
       const description = toolData.description;
   
       const toolId = uuidv4();
-      const groupId = await getIdByName(groupName);
+      
+      const group = groups.find(g => g.name === groupName);
+      const groupId = group?.id || await getIdByName(groupName);
   
-      // Узел инструмента
       const nodes = [
         {
           label: "Tool",
@@ -117,7 +118,6 @@ const ToolsPage = () => {
         },
       ];
   
-      // Связи
       const relationships = [
         {
           startNode: toolId,
@@ -160,14 +160,15 @@ const ToolsPage = () => {
     <div className="page active">
       <div className="container">
         <Filters 
-          groups={groups}
-          selectedGroups={selectedGroups}
-          onGroupChange={handleGroupChange}
+          items={groups}
+          selectedItems={selectedGroups}
+          onItemChange={handleGroupChange}
           onSearchChange={handleSearchChange}
           searchTerm={searchTerm}
           showSearch={true}
           searchPlaceholder="Поиск инструментов..."
-          groupLabel="Группы инструментов"
+          filterLabel="Группы инструментов"
+          itemLabelProp="name"
         />
         <div className="cards">
           {tools.map((tool, index) => (
@@ -182,7 +183,7 @@ const ToolsPage = () => {
         </div>
 
         <AddToolButton 
-          groups={groups}
+          groups={groups.map(g => g.name)}
           onAddTool={handleAddTool}
         />
       </div>
