@@ -10,12 +10,14 @@ async def get_technologies():
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
-                RETURN t.name AS tech_name, g.name AS group_name
+                RETURN t.name AS tech_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
                 """
             )
             return [
                 {
                     "technology": record["tech_name"],
+                    "description": record["description"],
                     "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }

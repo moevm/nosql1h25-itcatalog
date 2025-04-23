@@ -42,12 +42,12 @@ const SkillsPage = () => {
           
           if (selectedGroups.length > 0) {
             filteredSkills = filteredSkills.filter(skill => 
-              selectedGroups.includes(skill.skill_group)
+              selectedGroups.some(group => group.name === skill.skill_group)
             );
           }
         } else if (selectedGroups.length > 0) {
-          const groupPromises = selectedGroups.map(groupName => 
-            fetchSkillsFilteredByGroup(groupName)
+          const groupPromises = selectedGroups.map(group => 
+            fetchSkillsFilteredByGroup(group.name)
           );
           
           const groupResults = await Promise.all(groupPromises);
@@ -74,11 +74,11 @@ const SkillsPage = () => {
     filterSkills();
   }, [selectedGroups, searchTerm]);
 
-  const handleGroupChange = (groupName) => {
+  const handleGroupChange = (group) => {
     setSelectedGroups(prev => 
-      prev.includes(groupName)
-        ? prev.filter(name => name !== groupName)
-        : [...prev, groupName]
+      prev.some(g => g.name === group.name)
+        ? prev.filter(g => g.name !== group.name)
+        : [...prev, group]
     );
   };
 
@@ -94,7 +94,8 @@ const SkillsPage = () => {
       const groupName = skillData.group;
     
       const skillId = uuidv4();
-      const groupId = await getIdByName(groupName);
+      const group = groups.find(g => g.name === groupName);
+      const groupId = group?.id || await getIdByName(groupName);
     
       const nodes = [
         {
@@ -148,14 +149,15 @@ const SkillsPage = () => {
     <div className="page">
       <div className="container">
         <Filters 
-          groups={groups}
-          selectedGroups={selectedGroups}
-          onGroupChange={handleGroupChange}
+          items={groups}
+          selectedItems={selectedGroups}
+          onItemChange={handleGroupChange}
           onSearchChange={handleSearchChange}
           searchTerm={searchTerm}
           showSearch={true}
           searchPlaceholder="Поиск навыков..."
-          groupLabel="Группы навыков"
+          filterLabel="Группы навыков"
+          itemLabelProp="name"
         />
         <div className="cards">
           {skills.map((skill, index) => (
@@ -163,12 +165,13 @@ const SkillsPage = () => {
               key={index}
               title={skill.skill}
               category={skill.skill_group}
+              image={skill.image}
             />
           ))}
         </div>
 
         <AddSkillButton 
-          groups={groups}
+          groups={groups.map(g => g.name)}
           onAddSkill={handleAddSkill}
         />
       </div>

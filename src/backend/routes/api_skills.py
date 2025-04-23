@@ -11,6 +11,7 @@ async def get_skills():
                 """
                 MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
                 RETURN s.name AS skill_name, g.name AS group_name
+                ORDER BY toLower(s.name)
                 """
             )
             return [

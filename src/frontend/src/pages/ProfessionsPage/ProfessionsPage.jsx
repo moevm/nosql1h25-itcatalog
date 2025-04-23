@@ -70,7 +70,6 @@ const ProfessionsPage = () => {
           filteredProfessions = await searchProfessions(searchTerm);
           
           if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
-
             let filteredByCategories = [];
             let filteredByTools = [];
             let filteredByTechnologies = [];
@@ -108,9 +107,7 @@ const ProfessionsPage = () => {
               )
             );
           }
-        } 
-
-        else if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
+        } else if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
           const categoryPromises = filters.categories.map(catId => 
             fetchProfessionsFilteredByCategory(catId)
           );
@@ -138,9 +135,7 @@ const ProfessionsPage = () => {
           filteredProfessions = allResults.filter((prof, index, self) =>
             index === self.findIndex(p => p.profession === prof.profession)
           );
-        } 
-
-        else {
+        } else {
           filteredProfessions = await fetchProfessions();
         }
         
@@ -153,8 +148,7 @@ const ProfessionsPage = () => {
     };
     
     filterProfessions();
-  }, [filters, searchTerm]); 
-
+  }, [filters, searchTerm]);
 
   const handleFilterChange = (type, id) => {
     setFilters(prev => ({
@@ -164,7 +158,6 @@ const ProfessionsPage = () => {
         : [...prev[type], id]
     }));
   };
-
 
   const handleSearchChange = (term) => {
     setSearchTerm(term);
@@ -182,7 +175,11 @@ const ProfessionsPage = () => {
   
       const professionId = uuidv4();
   
-      const categoryId = await getIdByName(categoryName);
+      const category = allCategories.find(cat => 
+        cat.name === categoryName || cat.category === categoryName
+      );
+      const categoryId = category?.id || await getIdByName(categoryName);
+      
       const skillIds = await Promise.all(skills.map(getIdByName));
       const techIds = await Promise.all(technologies.map(getIdByName));
       const toolIds = await Promise.all(tools.map(getIdByName));
@@ -244,14 +241,12 @@ const ProfessionsPage = () => {
       setLoading(false);
     }
   };
-  
 
-  
   return (
     <div className="page active">
       <div className="container">
         <Filters 
-          categories={allCategories} 
+          categories={allCategories.map(cat => cat.name || cat.category || cat)} 
           tools={allTools} 
           technologies={allTechnologies} 
           selectedFilters={filters}
@@ -280,7 +275,7 @@ const ProfessionsPage = () => {
         )}
 
         <AddButton 
-          categories={allCategories}
+          categories={allCategories.map(cat => cat.name || cat.category || cat)}
           skills={allSkills}
           technologies={allTechnologies}
           tools={allTools}

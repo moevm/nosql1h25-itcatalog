@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
+import './AddGroupButton.css';
 
-const AddGroupButton = ({ groups, onAddGroup}) => {
+const AddGroupButton = ({ onAddGroup }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupData, setGroupData] = useState({
     name: '',
@@ -29,7 +30,7 @@ const AddGroupButton = ({ groups, onAddGroup}) => {
         description: ''
       });
     } catch (error) {
-      console.error('Error adding qroup:', error);
+      console.error('Error adding group:', error);
       alert('Ошибка при добавлении группы');
     }
   };
@@ -46,7 +47,7 @@ const AddGroupButton = ({ groups, onAddGroup}) => {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="modal-content">
           <h2>Добавить группу</h2>
-          <form className="add-profession-form" onSubmit={handleSubmit}>
+          <form className="add-group-form" onSubmit={handleSubmit}>
             <div className="form-scrollable">
               <div className="form-group">
                 <label>Название группы</label>
@@ -71,12 +72,12 @@ const AddGroupButton = ({ groups, onAddGroup}) => {
               <div className="form-group">
                 <label>Описание группы</label>
                 <textarea
-                    name="description"
-                    value={groupData.description}
-                    onChange={handleInputChange}
-                    rows={4}
-                    className="description-textarea"
-                    placeholder="Введите описание группы..."
+                  name="description"
+                  value={groupData.description}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="description-textarea"
+                  placeholder="Введите описание группы..."
                 />
               </div>
             </div>

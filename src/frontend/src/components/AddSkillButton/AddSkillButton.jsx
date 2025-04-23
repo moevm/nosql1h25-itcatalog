@@ -16,30 +16,46 @@ const AddSkillButton = ({ groups, onAddSkill }) => {
         group: groups[0] 
       }));
     }
-  }, [groups]);
+  }, [groups]); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setSkillData(prev => ({ ...prev, [name]: value }));
+    setSkillData(prev => ({ 
+      ...prev, 
+      [name]: value 
+    }));
   };
 
   const handleFileChange = (e) => {
-    setSkillData(prev => ({ ...prev, image: e.target.files[0] }));
+    setSkillData(prev => ({ 
+      ...prev, 
+      image: e.target.files[0] 
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!skillData.group) {
+      alert('Пожалуйста, выберите группу навыков');
+      return;
+    }
+
     try {
-      await onAddSkill(skillData);
+      await onAddSkill({
+        ...skillData,
+        group: skillData.group 
+      });
+      
       setIsModalOpen(false);
       setSkillData({
         name: '',
-        group: groups.length > 0 ? groups[0] : '',
+        group: groups.length > 0 ? groups[0] : '', 
         image: null
       });
     } catch (error) {
       console.error('Error adding skill:', error);
-      alert('Ошибка при добавлении навыка');
+      alert('Ошибка при добавлении навыка: ' + error.message);
     }
   };
 

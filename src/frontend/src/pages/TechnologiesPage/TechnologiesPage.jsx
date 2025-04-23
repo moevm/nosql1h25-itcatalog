@@ -20,7 +20,6 @@ const TechnologiesPage = () => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Загрузка начальных данных
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -39,35 +38,28 @@ const TechnologiesPage = () => {
     loadData();
   }, []);
 
-  // Фильтрация и поиск технологий
   useEffect(() => {
     const filterTechnologies = async () => {
       try {
         setLoading(true);
         let filteredTechnologies = [];
         
-        // Если задан поисковый запрос
         if (searchTerm && searchTerm.trim() !== '') {
           filteredTechnologies = await searchTechnologies(searchTerm);
           
-          // Если выбраны группы, дополнительно фильтруем результаты поиска
           if (selectedGroups.length > 0) {
             filteredTechnologies = filteredTechnologies.filter(tech => 
-              selectedGroups.includes(tech.technology_group)
+              selectedGroups.some(group => group.name === tech.technology_group)
             );
           }
-        }
-        // Если заданы только группы
-        else if (selectedGroups.length > 0) {
-          const groupPromises = selectedGroups.map(groupName => 
-            fetchTechnologiesFilteredByGroup(groupName)
+        } else if (selectedGroups.length > 0) {
+          const groupPromises = selectedGroups.map(group => 
+            fetchTechnologiesFilteredByGroup(group.name)
           );
           
           const groupResults = await Promise.all(groupPromises);
           filteredTechnologies = groupResults.flat();
-        }
-        // Если нет ни поиска, ни фильтров
-        else {
+        } else {
           filteredTechnologies = await fetchTechnologies();
         }
 
@@ -76,7 +68,6 @@ const TechnologiesPage = () => {
         console.error('Error filtering technologies:', error);
         setError('Ошибка при фильтрации технологий');
         try {
-          // При ошибке загружаем все технологии
           const allTechnologies = await fetchTechnologies();
           setTechnologies(allTechnologies);
         } catch (err) {
@@ -90,16 +81,14 @@ const TechnologiesPage = () => {
     filterTechnologies();
   }, [selectedGroups, searchTerm]);
 
-  // Обработчик изменения выбранных групп
-  const handleGroupChange = (groupName) => {
+  const handleGroupChange = (group) => {
     setSelectedGroups(prev => 
-      prev.includes(groupName)
-        ? prev.filter(name => name !== groupName)
-        : [...prev, groupName]
+      prev.some(g => g.name === group.name)
+        ? prev.filter(g => g.name !== group.name)
+        : [...prev, group]
     );
   };
 
-  // Обработчик изменения поискового запроса
   const handleSearchChange = (term) => {
     setSearchTerm(term);
   };
@@ -115,7 +104,6 @@ const TechnologiesPage = () => {
       const technologyId = uuidv4();
       const groupId = await getIdByName(groupName);
   
-      // Узел технологии
       const nodes = [
         {
           label: "Technology",
@@ -128,7 +116,6 @@ const TechnologiesPage = () => {
         },
       ];
   
-      // Связи
       const relationships = [
         {
           startNode: technologyId,
@@ -171,14 +158,15 @@ const TechnologiesPage = () => {
     <div className="page">
       <div className="container">
         <Filters 
-          groups={groups}
-          selectedGroups={selectedGroups}
-          onGroupChange={handleGroupChange}
-          onSearchChange={handleSearchChange} // Передаем функцию обработки поиска
-          searchTerm={searchTerm} // Передаем текущее значение поиска
+          items={groups}
+          selectedItems={selectedGroups}
+          onItemChange={handleGroupChange}
+          onSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
           showSearch={true}
           searchPlaceholder="Поиск технологий..."
-          groupLabel="Группы технологий"
+          filterLabel="Группы технологий"
+          itemLabelProp="name"
         />
         <div className="cards">
           {technologies.map((tech, index) => (
@@ -187,12 +175,13 @@ const TechnologiesPage = () => {
               image={tech.image ? tech.image : '/static/images/default.png'}
               title={tech.technology}
               category={tech.technology_group}
+              description={tech.description}
             />
           ))}
         </div>
 
         <AddTechnologyButton 
-          groups={groups}
+          groups={groups.map(g => g.name)}
           onAddTechnology={handleAddTechnology}
         />
       </div>

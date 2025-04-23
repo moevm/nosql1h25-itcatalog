@@ -12,9 +12,18 @@ async def get_groups(group_type: str):
     try:
         with driver.session() as session:
             result = session.run(
-                f"MATCH (g:{valid_types[group_type]}) RETURN g.name as name"
+                f"""
+                MATCH (g:{valid_types[group_type]})
+                RETURN g.name as name, g.description AS description
+                ORDER BY toLower(g.name)
+                """,
             )
-            return [record["name"] for record in result]
+            return [
+                {"name": record["name"],
+                 "description": record.get("description", ""),
+                 "image": "http://localhost:8000/static/images/in_progress.jpg"}
+                for record in result
+            ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         
