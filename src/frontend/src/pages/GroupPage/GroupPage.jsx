@@ -8,23 +8,19 @@ const GroupPage = ({ groupType }) => {
   const groupConfig = {
     professions: {
       title: 'Категории профессий',
-      apiEndpoint: 'categories',
-      defaultImage: '/images/profession-group.png'
+      apiEndpoint: 'categories'
     },
     skills: {
       title: 'Группы навыков',
-      apiEndpoint: 'skillgroups',
-      defaultImage: '/images/skill-group.png'
+      apiEndpoint: 'skillgroups'
     },
     technologies: {
       title: 'Группы технологий',
-      apiEndpoint: 'technologygroups',
-      defaultImage: '/images/tech-group.png'
+      apiEndpoint: 'technologygroups'
     },
     tools: {
       title: 'Группы инструментов',
-      apiEndpoint: 'toolgroups',
-      defaultImage: '/images/tool-group.png'
+      apiEndpoint: 'toolgroups'
     }
   };
 
@@ -32,49 +28,86 @@ const GroupPage = ({ groupType }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const config = groupConfig[groupType] || groupConfig.professions;
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const config = groupConfig[groupType] || groupConfig.professions;
         const groupsData = await fetchGroups(config.apiEndpoint);
-        setGroups(groupsData.map(g => typeof g === 'object' ? g.group || g.name : g));
+        console.log('API Response:', groupsData);
+        
+        const normalizedGroups = groupsData.map(group => {
+          if (typeof group === 'string') {
+            return { 
+              name: group, 
+              description: '',
+              image: config.defaultImage
+            };
+          }
+          
+          if (group.group) {
+            return {
+              name: group.group,
+              description: group.description || '',
+              image: group.image || config.defaultImage
+            };
+          }
+          
+          return {
+            name: group.name,
+            description: group.description || '',
+            image: group.image || config.defaultImage
+          };
+        });
+        
+        setGroups(normalizedGroups);
       } catch (err) {
+        console.error('Error loading data:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+    
     loadData();
-  }, [groupType]);
+  }, [groupType, config.apiEndpoint, config.defaultImage]);
 
   useEffect(() => {
-    const searcherGroups = async () => {
+    const searchGroupsHandler = async () => {
       try {
         setLoading(true);
-        let searchedGroups = [];
-
-        if (searchTerm && searchTerm.trim() !== '') {
-          searchedGroups = await searchGroups(config.apiEndpoint, searchTerm);
-          setGroups(searchedGroups);
+        
+        if (searchTerm.trim() !== '') {
+          const searchedGroups = await searchGroups(config.apiEndpoint, searchTerm);
+          const normalizedGroups = searchedGroups.map(group => ({
+            name: group.name || group.group,
+            description: group.description || '',
+            image: group.image || config.defaultImage
+          }));
+          setGroups(normalizedGroups);
+        } else {
+          const allGroups = await fetchGroups(config.apiEndpoint);
+          const normalizedGroups = allGroups.map(group => ({
+            name: group.name || group.group,
+            description: group.description || '',
+            image: group.image || config.defaultImage
+          }));
+          setGroups(normalizedGroups);
         }
-
       } catch (error) {
         console.error(`Error searching ${config.apiEndpoint}:`, error);
-        setError(`Ошибка при поиске в ${config.apiEndpoint}`);
-        try {
-          const allGroups = await fetchGroups(config.apiEndpoint);
-          setGroups(allGroups);
-        } catch (err) {
-          console.error(`Failed to load ${config.apiEndpoint} after error:`, err);
-        }
+        setError(`Ошибка при поиске ${config.title}`);
       } finally {
         setLoading(false);
       }
     };
 
-    searcherGroups();
-  }, [searchTerm]);
+    const debounceTimer = setTimeout(() => {
+      searchGroupsHandler();
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [searchTerm, config.apiEndpoint, config.title, config.defaultImage]);
 
   const handleAddGroup = async (groupData) => {
     try {
@@ -82,17 +115,18 @@ const GroupPage = ({ groupType }) => {
     
       const groupName = groupData.name;
       const description = groupData.description;
+      const imageFile = groupData.image;
     
       const groupId = uuidv4();
+      const imageName = imageFile ? `${uuidv4()}-${imageFile.name}` : 'default.png';
     
-      // Узел группы
       const nodes = [
         {
           label: "Group",
           properties: {
             id: groupId,
             name: groupName,
-            image: groupData.image?.name || "default.png",
+            image: imageName,
             description: description || "",
           },
         },
@@ -103,13 +137,17 @@ const GroupPage = ({ groupType }) => {
       const formData = new FormData();
       formData.append("file", blob, "data.json");
     
-      if (groupData.image) {
-        formData.append("image", groupData.image);
+      if (imageFile) {
+        formData.append("image", imageFile);
       }
     
       await add(formData);
     
-      setGroups(prev => [...prev, groupName]);
+      setGroups(prev => [...prev, { 
+        name: groupName, 
+        description: description || '',
+        image: `http://localhost:8000/uploads/${imageName}`
+      }]);
     
     } catch (error) {
       console.error("Ошибка при добавлении группы:", error);
@@ -120,8 +158,7 @@ const GroupPage = ({ groupType }) => {
   };
 
   if (error) return <div className="error">Ошибка: {error}</div>;
-
-  const config = groupConfig[groupType] || groupConfig.professions;
+  if (loading) return <div className="loading">Загрузка...</div>;
 
   return (
     <div className="page">
@@ -129,7 +166,7 @@ const GroupPage = ({ groupType }) => {
         <div className="search-container" style={{ marginBottom: '20px' }}>
           <input
             type="text"
-            placeholder="Введите текст для поиска"
+            placeholder={`Поиск ${config.title.toLowerCase()}`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
@@ -146,15 +183,15 @@ const GroupPage = ({ groupType }) => {
           {groups.map((group, index) => (
             <Card
               key={index}
-              image={config.defaultImage}
-              title={group}
+              image={group.image}
+              title={group.name}
               category={config.title}
+              description={group.description}
             />
           ))}
         </div>
 
         <AddGroupButton 
-          groups={groups}
           onAddGroup={handleAddGroup}
         />
       </div>
