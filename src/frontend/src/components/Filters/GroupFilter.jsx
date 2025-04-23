@@ -2,56 +2,59 @@ import React, { useState } from 'react';
 import './Filters.css';
 
 const GroupFilter = ({
-    groups = [],
-    selectedGroups = [],
-    onGroupChange,
+    items = [],
+    selectedItems = [],
+    onItemChange,
     onSearchChange,
     searchTerm = '', 
     showSearch = true,
     searchPlaceholder = "Поиск...",
-    groupLabel = "Группы"
-  }) => {
+    filterLabel = "Фильтры",
+    itemLabelProp = "name"
+}) => {
     const [activeDropdown, setActiveDropdown] = useState(null);
   
     const toggleDropdown = (dropdown) => {
       setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
     };
   
-    const handleGroupToggle = (groupName, e) => {
+    const handleItemToggle = (item, e) => {
       if (e) {
         e.stopPropagation();
         e.preventDefault(); 
       }
       
-      if (onGroupChange) {
-        onGroupChange(groupName);
+      if (onItemChange) {
+        onItemChange(item);
       }
     };
   
     return (
       <div className="filters-container">
-        {/* Фильтр по группам */}
+        {/* Фильтр по элементам */}
         <div className="filter-dropdown">
           <button 
-            className={`dropdown-toggle ${activeDropdown === 'groups' ? 'active' : ''}`}
-            onClick={() => toggleDropdown('groups')}
+            className={`dropdown-toggle ${activeDropdown === 'items' ? 'active' : ''}`}
+            onClick={() => toggleDropdown('items')}
           >
-            {groupLabel}
-            {selectedGroups.length > 0 && (
-              <span className="filter-count">{selectedGroups.length}</span>
+            {filterLabel}
+            {selectedItems.length > 0 && (
+              <span className="filter-count">{selectedItems.length}</span>
             )}
           </button>
   
-          {activeDropdown === 'groups' && (
+          {activeDropdown === 'items' && (
             <div className="dropdown-menu">
-              {groups.map(group => (
-                <label key={group} className="dropdown-item" onClick={(e) => e.stopPropagation()}>
+              {items.map(item => (
+                <label key={item[itemLabelProp]} className="dropdown-item" onClick={(e) => e.stopPropagation()}>
                   <input
                     type="checkbox"
-                    checked={selectedGroups.includes(group)}
-                    onChange={(e) => handleGroupToggle(group, e)}
+                    checked={selectedItems.some(selected => 
+                      selected[itemLabelProp] === item[itemLabelProp]
+                    )}
+                    onChange={(e) => handleItemToggle(item, e)}
                   />
-                  <span>{group}</span>
+                  <span>{item[itemLabelProp]}</span>
                 </label>
               ))}
             </div>
@@ -65,7 +68,7 @@ const GroupFilter = ({
               <input
                 type="text"
                 placeholder={searchPlaceholder}
-                value={searchTerm} // связываем с состоянием
+                value={searchTerm}
                 onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
               />
             </form>
@@ -73,6 +76,6 @@ const GroupFilter = ({
         )}
       </div>
     );
-  };
+};
 
 export default GroupFilter;
