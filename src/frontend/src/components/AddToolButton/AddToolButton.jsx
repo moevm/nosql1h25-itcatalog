@@ -11,10 +11,18 @@ const AddToolButton = ({ groups, onAddTool }) => {
   });
 
   useEffect(() => {
-    if (groups.length > 0 && !toolData.group) {
+    if (groups.length > 0 && typeof groups[0] === 'string') {
+      if (!toolData.group) {
+        setToolData(prev => ({
+          ...prev,
+          group: groups[0]
+        }));
+      }
+    } 
+    else if (groups.length > 0 && !toolData.group) {
       setToolData(prev => ({
         ...prev,
-        group: groups[0]
+        group: groups[0].name 
       }));
     }
   }, [groups]);
@@ -35,7 +43,9 @@ const AddToolButton = ({ groups, onAddTool }) => {
       setIsModalOpen(false);
       setToolData({
         name: '',
-        group: groups.length > 0 ? groups[0] : '',
+        group: groups.length > 0 
+          ? (typeof groups[0] === 'string' ? groups[0] : groups[0].name)
+          : '',
         image: null,
         description: ''
       });
@@ -78,11 +88,15 @@ const AddToolButton = ({ groups, onAddTool }) => {
                   onChange={handleInputChange}
                   required
                 >
-                  {groups.map((group, index) => (
-                    <option key={index} value={group}>
-                      {group}
-                    </option>
-                  ))}
+                  {groups.map((group, index) => {
+                    // Обрабатываем как строки, так и объекты
+                    const groupName = typeof group === 'string' ? group : group.name;
+                    return (
+                      <option key={index} value={groupName}>
+                        {groupName}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
