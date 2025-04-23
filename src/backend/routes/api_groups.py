@@ -12,9 +12,17 @@ async def get_groups(group_type: str):
     try:
         with driver.session() as session:
             result = session.run(
-                f"MATCH (g:{valid_types[group_type]}) RETURN g.name as name"
+                f"""
+                MATCH (g:{valid_types[group_type]})
+                RETURN g.name as name, g.description AS description
+                ORDER BY toLower(g.name)
+                """,
             )
-            return [record["name"] for record in result]
+            return [
+                {"name": record["name"],
+                 "description": record.get("description", "")}
+                for record in result
+            ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         
@@ -41,8 +49,7 @@ async def search_group_type(neo4j_label: str, search_term: str):
                 f"""
                 MATCH (g:{neo4j_label})
                 WHERE toLower(g.name) CONTAINS toLower($search_term)
-                RETURN g.name AS name, t.description AS description
-                ORDER BY toLower(g.name)
+                RETURN g.name AS name
                 """,
                 {"search_term": search_term.strip()}
             )

@@ -17,6 +17,7 @@ async def get_technologies():
             return [
                 {
                     "technology": record["tech_name"],
+                    "description": record["description"],
                     "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }

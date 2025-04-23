@@ -17,6 +17,7 @@ async def get_tools():
             return [
                 {
                     "tool": record["tool_name"],
+                    "description": record["description"],
                     "tool_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
