@@ -8,19 +8,23 @@ const GroupPage = ({ groupType }) => {
   const groupConfig = {
     professions: {
       title: 'Категории профессий',
-      apiEndpoint: 'categories'
+      apiEndpoint: 'categories',
+      defaultImage: '/images/default-category.png'
     },
     skills: {
       title: 'Группы навыков',
-      apiEndpoint: 'skillgroups'
+      apiEndpoint: 'skillgroups',
+      defaultImage: '/images/default-skill.png'
     },
     technologies: {
       title: 'Группы технологий',
-      apiEndpoint: 'technologygroups'
+      apiEndpoint: 'technologygroups',
+      defaultImage: '/images/default-technology.png'
     },
     tools: {
       title: 'Группы инструментов',
-      apiEndpoint: 'toolgroups'
+      apiEndpoint: 'toolgroups',
+      defaultImage: '/images/default-tool.png'
     }
   };
 
@@ -30,36 +34,31 @@ const GroupPage = ({ groupType }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const config = groupConfig[groupType] || groupConfig.professions;
 
+  const normalizeGroup = (group) => {
+    if (typeof group === 'string') {
+      return {
+        name: group,
+        description: '',
+        image: config.defaultImage
+      };
+    }
+
+    const name = group.name || group.group || 'Без названия';
+
+    return {
+      name,
+      description: group.description || '',
+      image: group.image || config.defaultImage
+    };
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
         const groupsData = await fetchGroups(config.apiEndpoint);
         console.log('API Response:', groupsData);
-        
-        const normalizedGroups = groupsData.map(group => {
-          if (typeof group === 'string') {
-            return { 
-              name: group, 
-              description: '',
-              image: config.defaultImage
-            };
-          }
-          
-          if (group.group) {
-            return {
-              name: group.group,
-              description: group.description || '',
-              image: group.image || config.defaultImage
-            };
-          }
-          
-          return {
-            name: group.name,
-            description: group.description || '',
-            image: group.image || config.defaultImage
-          };
-        });
-        
+
+        const normalizedGroups = groupsData.map(normalizeGroup);
         setGroups(normalizedGroups);
       } catch (err) {
         console.error('Error loading data:', err);
@@ -68,7 +67,7 @@ const GroupPage = ({ groupType }) => {
         setLoading(false);
       }
     };
-    
+
     loadData();
   }, [groupType, config.apiEndpoint, config.defaultImage]);
 
@@ -76,22 +75,16 @@ const GroupPage = ({ groupType }) => {
     const searchGroupsHandler = async () => {
       try {
         setLoading(true);
-        
+
         if (searchTerm.trim() !== '') {
           const searchedGroups = await searchGroups(config.apiEndpoint, searchTerm);
-          const normalizedGroups = searchedGroups.map(group => ({
-            name: group.name || group.group,
-            description: group.description || '',
-            image: group.image || config.defaultImage
-          }));
+          console.log('Search response:', searchedGroups);
+
+          const normalizedGroups = searchedGroups.map(normalizeGroup);
           setGroups(normalizedGroups);
         } else {
           const allGroups = await fetchGroups(config.apiEndpoint);
-          const normalizedGroups = allGroups.map(group => ({
-            name: group.name || group.group,
-            description: group.description || '',
-            image: group.image || config.defaultImage
-          }));
+          const normalizedGroups = allGroups.map(normalizeGroup);
           setGroups(normalizedGroups);
         }
       } catch (error) {
@@ -112,14 +105,14 @@ const GroupPage = ({ groupType }) => {
   const handleAddGroup = async (groupData) => {
     try {
       setLoading(true);
-    
+
       const groupName = groupData.name;
       const description = groupData.description;
       const imageFile = groupData.image;
-    
+
       const groupId = uuidv4();
       const imageName = imageFile ? `${uuidv4()}-${imageFile.name}` : 'default.png';
-    
+
       const nodes = [
         {
           label: "Group",
@@ -131,24 +124,24 @@ const GroupPage = ({ groupType }) => {
           },
         },
       ];
-    
+
       const data = { nodes };
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-    
+
       if (imageFile) {
         formData.append("image", imageFile);
       }
-    
+
       await add(formData);
-    
-      setGroups(prev => [...prev, { 
-        name: groupName, 
+
+      setGroups(prev => [...prev, {
+        name: groupName,
         description: description || '',
         image: `http://localhost:8000/uploads/${imageName}`
       }]);
-    
+
     } catch (error) {
       console.error("Ошибка при добавлении группы:", error);
       throw error;
@@ -177,20 +170,20 @@ const GroupPage = ({ groupType }) => {
             }}
           />
         </div>
-        
+
         <div className="cards">
           {groups.map((group, index) => (
             <Card
               key={index}
               image={group.image}
-              title={group.name}
+              title={group.name || 'Без названия'}
               category={config.title}
-              description={group.description}
+              description={group.description || 'Описание отсутствует'}
             />
           ))}
         </div>
 
-        <AddGroupButton 
+        <AddGroupButton
           onAddGroup={handleAddGroup}
         />
       </div>
