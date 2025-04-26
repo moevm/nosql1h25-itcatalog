@@ -30,70 +30,30 @@ async def get_groups(group_type: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/categories/search/by_name/{search_term}")
-async def search_categories_by_name(search_term: str):
-    return await search_group_type_by_name("Category", search_term)
+@router.get("/categories/search/{search_term}")
+async def search_categories(search_term: str):
+    return await search_group_type("Category", search_term)
 
-@router.get("/skillgroups/search/by_name/{search_term}")
-async def search_skillgroups_by_name(search_term: str):
-    return await search_group_type_by_name("SkillGroup", search_term)
+@router.get("/skillgroups/search/{search_term}")
+async def search_skillgroups(search_term: str):
+    return await search_group_type("SkillGroup", search_term)
 
-@router.get("/technologygroups/search/by_name/{search_term}")
-async def search_technologygroups_by_name(search_term: str):
-    return await search_group_type_by_name("TechnologyGroup", search_term)
+@router.get("/technologygroups/search/{search_term}")
+async def search_technologygroups(search_term: str):
+    return await search_group_type("TechnologyGroup", search_term)
 
-@router.get("/toolgroups/search/by_name/{search_term}")
-async def search_toolgroups_by_name(search_term: str):
-    return await search_group_type_by_name("ToolGroup", search_term)
+@router.get("/toolgroups/search/{search_term}")
+async def search_toolgroups(search_term: str):
+    return await search_group_type("ToolGroup", search_term)
 
-async def search_group_type_by_name(neo4j_label: str, search_term: str):
+async def search_group_type(neo4j_label: str, search_term: str):
     try:
         with driver.session() as session:
             result = session.run(
                 f"""
                 MATCH (g:{neo4j_label})
                 WHERE toLower(g.name) CONTAINS toLower($search_term)
-                RETURN g.name as name, g.description AS description
-                ORDER BY toLower(g.name)
-                """,
-                {"search_term": search_term.strip()}
-            )
-            return [
-                {
-                    "name": record["name"],
-                    "description": record.get("description", ""),
-                    "image": "http://localhost:8000/static/images/in_progress.jpg"
-                }
-                for record in result
-            ]
-    
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/categories/search/by_description/{search_term}")
-async def search_categories_by_description(search_term: str):
-    return await search_group_type_by_description("Category", search_term)
-
-@router.get("/skillgroups/search/by_description/{search_term}")
-async def search_skillgroups_by_description(search_term: str):
-    return await search_group_type_by_description("SkillGroup", search_term)
-
-@router.get("/technologygroups/search/by_description/{search_term}")
-async def search_technologygroups_by_description(search_term: str):
-    return await search_group_type_by_description("TechnologyGroup", search_term)
-
-@router.get("/toolgroups/search/by_description/{search_term}")
-async def search_toolgroups_by_description(search_term: str):
-    return await search_group_type_by_description("ToolGroup", search_term)
-
-async def search_group_type_by_description(neo4j_label: str, search_term: str):
-    try:
-        with driver.session() as session:
-            result = session.run(
-                f"""
-                MATCH (g:{neo4j_label})
-                WHERE toLower(g.description) CONTAINS toLower($search_term)
+                   OR toLower(g.description) CONTAINS toLower($search_term)
                 RETURN g.name as name, g.description AS description
                 ORDER BY toLower(g.name)
                 """,
