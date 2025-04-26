@@ -8,6 +8,7 @@ import {
   fetchGroups, 
   fetchTechnologiesFilteredByGroup,
   searchTechnologies,
+  searchTechnologiesDescription,
   getIdByName,
   add
 } from '../../services/api';
@@ -19,6 +20,8 @@ const TechnologiesPage = () => {
   const [error, setError] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
+  const [searchMode, setSearchMode] = useState('name'); 
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,7 +47,7 @@ const TechnologiesPage = () => {
         setLoading(true);
         let filteredTechnologies = [];
         
-        if (searchTerm && searchTerm.trim() !== '') {
+        if (searchTerm && searchTerm.trim() !== '' && searchMode === 'name') {
           filteredTechnologies = await searchTechnologies(searchTerm);
           
           if (selectedGroups.length > 0) {
@@ -52,7 +55,17 @@ const TechnologiesPage = () => {
               selectedGroups.some(group => group.name === tech.technology_group)
             );
           }
-        } else if (selectedGroups.length > 0) {
+        } 
+        else if (searchDescriptionTerm && searchDescriptionTerm.trim() !== '' && searchMode === 'description') {
+          filteredTechnologies = await searchTechnologiesDescription(searchDescriptionTerm);
+          
+          if (selectedGroups.length > 0) {
+            filteredTechnologies = filteredTechnologies.filter(tech => 
+              selectedGroups.some(group => group.name === tech.technology_group)
+            );
+          }
+        }
+        else if (selectedGroups.length > 0) {
           const groupPromises = selectedGroups.map(group => 
             fetchTechnologiesFilteredByGroup(group.name)
           );
@@ -79,7 +92,7 @@ const TechnologiesPage = () => {
     };
 
     filterTechnologies();
-  }, [selectedGroups, searchTerm]);
+  }, [selectedGroups, searchTerm, searchDescriptionTerm, searchMode]);
 
   const handleGroupChange = (group) => {
     setSelectedGroups(prev => 
@@ -90,7 +103,11 @@ const TechnologiesPage = () => {
   };
 
   const handleSearchChange = (term) => {
-    setSearchTerm(term);
+    if (searchMode === 'name') {
+      setSearchTerm(term);
+    } else {
+      setSearchDescriptionTerm(term);
+    }
   };
 
   const handleAddTechnology = async (technologyData) => {
@@ -157,14 +174,45 @@ const TechnologiesPage = () => {
   return (
     <div className="page">
       <div className="container">
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+          <button 
+            onClick={() => setSearchMode('name')}
+            style={{
+              padding: '8px 16px',
+              backgroundColor: searchMode === 'name' ? '#007bff' : '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Поиск по названию
+          </button>
+          <button 
+            onClick={() => setSearchMode('description')}
+            style={{
+              padding: '8px 16px',
+              backgroundColor: searchMode === 'description' ? '#007bff' : '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Поиск по описанию
+          </button>
+        </div>
+
         <Filters 
           items={groups}
           selectedItems={selectedGroups}
           onItemChange={handleGroupChange}
           onSearchChange={handleSearchChange}
-          searchTerm={searchTerm}
+          searchTerm={searchMode === 'name' ? searchTerm : searchDescriptionTerm}
           showSearch={true}
-          searchPlaceholder="Поиск технологий..."
+          searchPlaceholder={searchMode === 'name' 
+            ? "Поиск технологий по названию..." 
+            : "Поиск технологий по описанию..."}
           filterLabel="Группы технологий"
           itemLabelProp="name"
         />
