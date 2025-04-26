@@ -114,3 +114,20 @@
     outline: none;
     border-color: #6200ea;
   }
+
+  .search-box-2 {
+    margin-left: auto;
+  }
+  
+  .search-box-2 input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 250px;
+  }
+  
+  .search-box-2 input:focus {
+    outline: none;
+    border-color: #6200ea;
+  }
+
