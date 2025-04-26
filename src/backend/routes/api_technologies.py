@@ -106,15 +106,40 @@ async def get_technologies_filtered_by_technologygroup(name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/search/{search_term}")
-async def search_technologies(search_term: str = ""):
+@router.get("/search/by_name/{search_term}")
+async def search_technologies_by_name(search_term: str = ""):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
                 WHERE toLower(t.name) CONTAINS toLower($search_term)
-                   OR toLower(t.description) CONTAINS toLower($search_term)
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "technology": record["technology_name"],
+                    "description": record["description"],
+                    "technology_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
+@router.get("/search/by_description/{search_term}")
+async def search_technologies_by_description(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
+                WHERE toLower(t.description) CONTAINS toLower($search_term)
                 RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
                 ORDER BY toLower(t.name)
                 """,
