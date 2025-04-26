@@ -61,9 +61,23 @@ const GroupFilter = ({
           )}
         </div>
   
-        {/* Поле поиска */}
+        {/* Поле поиска 1 */}
         {showSearch && (
           <div className="search-box">
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                placeholder={searchPlaceholder}
+                value={searchTerm}
+                onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
+              />
+            </form>
+          </div>
+        )}
+
+        {/* Поле поиска 2 */}
+        {showSearch && (
+          <div className="search-box-2">
             <form onSubmit={(e) => e.preventDefault()}>
               <input
                 type="text"
