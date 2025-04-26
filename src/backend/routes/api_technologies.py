@@ -3,6 +3,7 @@ from database import driver
 
 router = APIRouter(prefix="/api/technologies", tags=["technologies"])
 
+
 @router.get("")
 async def get_technologies():
     try:
@@ -10,13 +11,13 @@ async def get_technologies():
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
-                RETURN t.name AS tech_name, t.description AS description, g.name AS group_name
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
                 ORDER BY toLower(t.name)
                 """
             )
             return [
                 {
-                    "technology": record["tech_name"],
+                    "technology": record["technology_name"],
                     "description": record["description"],
                     "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
@@ -45,14 +46,15 @@ async def get_technology(id: str):
                 raise HTTPException(status_code=404, detail="The technology not found")
 
             return {
-                "skill": record["technology_name"],
+                "technology": record["technology_name"],
                 "description": record["description"],
-                "skill_group": record["group_name"],
+                "technology_group": record["group_name"],
                 "professions": record["professions"],
                 "image": "http://localhost:8000/static/images/in_progress.jpg"
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get("/filter/technologygroups")
 async def get_technologies_sorted_by_technologygroups():
@@ -61,27 +63,22 @@ async def get_technologies_sorted_by_technologygroups():
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
-                RETURN t.name AS tech_name, g.name AS group_name
-                ORDER BY g.name, t.name
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(g.name), toLower(t.name)
                 """
             )
-            grouped_technologies = {}
-            for record in result:
-                group = record["group_name"]
-                technology = record["tech_name"]
-                if group not in grouped_technologies:
-                    grouped_technologies[group] = []
-                grouped_technologies[group].append(technology)
             return [
                 {
-                    "technologies": technologies,
-                    "technology_group": group,
+                    "technology": record["technology_name"],
+                    "description": record["description"],
+                    "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
-                for group, technologies in grouped_technologies.items()
+                for record in result
             ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get("/filter/technologygroups/{name}")
 async def get_technologies_filtered_by_technologygroup(name: str):
@@ -91,36 +88,67 @@ async def get_technologies_filtered_by_technologygroup(name: str):
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
                 WHERE g.name = $name
-                RETURN t.name AS tech_name, g.name AS group_name
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
                 """,
                 {"name": name}
             )
             return [
                 {
+                    "technology": record["technology_name"],
+                    "description": record["description"],
                     "technology_group": record["group_name"],
-                    "technology": record["tech_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
                 for record in result
             ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-        
-@router.get("/search/{search_term}")
-async def search_technologies(search_term: str = ""):
+
+
+@router.get("/search/by_name/{search_term}")
+async def search_technologies_by_name(search_term: str = ""):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
                 WHERE toLower(t.name) CONTAINS toLower($search_term)
-                RETURN t.name AS tech_name, g.name AS group_name
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
                 """,
                 {"search_term": search_term.strip()}
             )
             return [
                 {
-                    "technology": record["tech_name"],
+                    "technology": record["technology_name"],
+                    "description": record["description"],
+                    "technology_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
+@router.get("/search/by_description/{search_term}")
+async def search_technologies_by_description(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
+                WHERE toLower(t.description) CONTAINS toLower($search_term)
+                RETURN t.name AS technology_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "technology": record["technology_name"],
+                    "description": record["description"],
                     "technology_group": record["group_name"],
                     "image": "http://localhost:8000/static/images/in_progress.jpg"
                 }
