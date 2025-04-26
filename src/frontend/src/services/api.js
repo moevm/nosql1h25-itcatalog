@@ -171,7 +171,7 @@ export const fetchTechnologiesFilteredByGroup = async (groupName) => {
 
 export const searchProfessions = async (searchTerm) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/professions/search/${searchTerm}`);
+    const response = await fetch(`${API_BASE_URL}/professions/search/by_name/${searchTerm}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -182,7 +182,7 @@ export const searchProfessions = async (searchTerm) => {
 
 export const searchSkills = async (searchTerm) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/skills/search/${searchTerm}`);
+    const response = await fetch(`${API_BASE_URL}/skills/search/by_name/${searchTerm}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -193,7 +193,18 @@ export const searchSkills = async (searchTerm) => {
 
 export const searchTechnologies = async (searchTerm) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/technologies/search/${searchTerm}`);
+    const response = await fetch(`${API_BASE_URL}/technologies/search/by_name/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error searching technologies:', error);
+    throw error;
+  }
+};
+
+export const searchTechnologiesDescription = async (searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/technologies/search/by_description/${searchTerm}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -204,7 +215,18 @@ export const searchTechnologies = async (searchTerm) => {
 
 export const searchTools = async (searchTerm) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/tools/search/${searchTerm}`);
+    const response = await fetch(`${API_BASE_URL}/tools/search/by_name/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error('Error searching tools:', error);
+    throw error;
+  }
+};
+
+export const searchToolsDescription = async (searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/tools/search/by_description/${searchTerm}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -215,7 +237,18 @@ export const searchTools = async (searchTerm) => {
 
 export const searchGroups = async (groupType, searchTerm) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/groups/${groupType}/search/${searchTerm}`);
+    const response = await fetch(`${API_BASE_URL}/groups/${groupType}/search/by_name/${searchTerm}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error(`Error searching ${groupType}:`, error);
+    throw error;
+  }
+};
+
+export const searchGroupsDescription = async (groupType, searchTerm) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/groups/${groupType}/search/by_description/${searchTerm}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -230,7 +263,7 @@ export const add = async (formData) => {
       method: 'POST',
       body: formData,
     });
-    
+
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
   } catch (error) {
@@ -243,13 +276,13 @@ export const getIdByName = async (name) => {
   try {
     const encodedName = encodeURIComponent(name);
     console.log(`Requesting ID for: ${encodedName}`); 
-    
+
     const response = await fetch(`${API_BASE_URL}/get_id/${encodedName}`);
-    
+
     if (!response.ok) {
       throw new Error(`Ошибка получения ID для "${name}" (код ${response.status})`);
     }
-    
+
     const data = await response.json();
     return data.id;
   } catch (error) {
