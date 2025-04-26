@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import AddGroupButton from '../../components/AddGroupButton/AddGroupButton';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchGroups, searchGroups, add } from '../../services/api';
+import { fetchGroups, searchGroups, searchGroupsDescription, add } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
   const groupConfig = {
@@ -32,6 +32,8 @@ const GroupPage = ({ groupType }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
+  const [searchMode, setSearchMode] = useState('name'); 
   const config = groupConfig[groupType] || groupConfig.professions;
 
   const normalizeGroup = (group) => {
@@ -76,13 +78,19 @@ const GroupPage = ({ groupType }) => {
       try {
         setLoading(true);
 
-        if (searchTerm.trim() !== '') {
+        if (searchTerm.trim() !== '' && searchMode === 'name') {
           const searchedGroups = await searchGroups(config.apiEndpoint, searchTerm);
-          console.log('Search response:', searchedGroups);
-
+          console.log('Search by name response:', searchedGroups);
           const normalizedGroups = searchedGroups.map(normalizeGroup);
           setGroups(normalizedGroups);
-        } else {
+        } 
+        else if (searchDescriptionTerm.trim() !== '' && searchMode === 'description') {
+          const searchedGroups = await searchGroupsDescription(config.apiEndpoint, searchDescriptionTerm);
+          console.log('Search by description response:', searchedGroups);
+          const normalizedGroups = searchedGroups.map(normalizeGroup);
+          setGroups(normalizedGroups);
+        }
+        else {
           const allGroups = await fetchGroups(config.apiEndpoint);
           const normalizedGroups = allGroups.map(normalizeGroup);
           setGroups(normalizedGroups);
@@ -100,7 +108,14 @@ const GroupPage = ({ groupType }) => {
     }, 300);
 
     return () => clearTimeout(debounceTimer);
-  }, [searchTerm, config.apiEndpoint, config.title, config.defaultImage]);
+  }, [
+    searchTerm, 
+    searchDescriptionTerm,
+    searchMode,
+    config.apiEndpoint, 
+    config.title, 
+    config.defaultImage
+  ]);
 
   const handleAddGroup = async (groupData) => {
     try {
@@ -156,19 +171,64 @@ const GroupPage = ({ groupType }) => {
     <div className="page">
       <div className="container">
         <div className="search-container" style={{ marginBottom: '20px' }}>
-          <input
-            type="text"
-            placeholder={`Поиск ${config.title.toLowerCase()}`}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              padding: '10px',
-              width: '100%',
-              maxWidth: '500px',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+            <button 
+              onClick={() => setSearchMode('name')}
+              style={{
+                padding: '8px 16px',
+                backgroundColor: searchMode === 'name' ? '#007bff' : '#6c757d',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Поиск по названию
+            </button>
+            <button 
+              onClick={() => setSearchMode('description')}
+              style={{
+                padding: '8px 16px',
+                backgroundColor: searchMode === 'description' ? '#007bff' : '#6c757d',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Поиск по описанию
+            </button>
+          </div>
+
+          {searchMode === 'name' ? (
+            <input
+              type="text"
+              placeholder={`Поиск ${config.title.toLowerCase()} по названию`}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                maxWidth: '500px',
+                borderRadius: '4px',
+                border: '1px solid #ccc'
+              }}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder={`Поиск ${config.title.toLowerCase()} по описанию`}
+              value={searchDescriptionTerm}
+              onChange={(e) => setSearchDescriptionTerm(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                maxWidth: '500px',
+                borderRadius: '4px',
+                border: '1px solid #ccc'
+              }}
+            />
+          )}
         </div>
 
         <div className="cards">
