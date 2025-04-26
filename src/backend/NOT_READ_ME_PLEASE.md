@@ -45,7 +45,7 @@
         * `@app.get("/api/technologies/filter/technologygroups/{name}")` </br>
 `http GET http://localhost:8000/api/technologies/filter/technologygroups/"Нотации для моделирования процессов"`
     - поиск: `@app.get("/api/technologies/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/technologies/search/BPMN`
+`http GET http://localhost:8000/api/technologies/search/BPMN` </br>
 `http GET http://localhost:8000/api/technologies/search/Стандарт`
 
 4) tools
@@ -59,7 +59,7 @@
         * `@app.get("/api/tools/filter/toolgroups/{name}")` </br>
 `http GET http://localhost:8000/api/tools/filter/toolgroups/"Работа с документами"`
     - поиск: `@app.get("/api/tools/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/tools/search/"Microsoft Word"`
+`http GET http://localhost:8000/api/tools/search/"Microsoft Word"` </br>
 `http GET http://localhost:8000/api/tools/search/"Текстовый редактор"`
 
 #### b. Запросы для отображения списков категорий, групп навыков, групп технологий и групп инструментов
@@ -67,19 +67,19 @@
 `@app.get("/api/groups/{group_type}")`
 1) `http GET http://localhost:8000/api/groups/categories`
     - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/groups/categories/search/Аналитика`
+`http GET http://localhost:8000/api/groups/categories/search/Аналитика` </br>
 `http GET http://localhost:8000/api/groups/categories/search/Технологии`
 3) `http GET http://localhost:8000/api/groups/skillgroups`
     - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/groups/skillgroups/search/"Hard skills"`
+`http GET http://localhost:8000/api/groups/skillgroups/search/"Hard skills"` </br>
 `http GET http://localhost:8000/api/groups/skillgroups/search/"Технические компетенции"`
 4) `http GET http://localhost:8000/api/groups/technologygroups`
     - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/groups/technologygroups/search/"Нотации для моделирования процессов"`
+`http GET http://localhost:8000/api/groups/technologygroups/search/"Нотации для моделирования процессов"` </br>
 `http GET http://localhost:8000/api/groups/technologygroups/search/"Стандартизированные языки визуализации"`
 5) `http GET http://localhost:8000/api/groups/toolgroups`
     - поиск: `@app.get("/api/groups/categories/search/{search_term}")` </br>
-`http GET http://localhost:8000/api/groups/toolgroups/search/"Работа с документами"`
+`http GET http://localhost:8000/api/groups/toolgroups/search/"Работа с документами"` </br>
 `http GET http://localhost:8000/api/groups/toolgroups/search/"Редакторы и платформы"`
 
 #### Универсальные запросы
