@@ -42,7 +42,7 @@ async def get_tool(id: str):
                 {"tool_id": id}
             )
             record = result.single()
-            
+
             if not record:
                 raise HTTPException(status_code=404, detail="Tool not found")
 
@@ -107,15 +107,40 @@ async def get_tools_filtered_by_toolgroup(name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/search/{search_term}")
-async def search_tools(search_term: str = ""):
+@router.get("/search/by_name/{search_term}")
+async def search_tools_by_name(search_term: str = ""):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
                 WHERE toLower(t.name) CONTAINS toLower($search_term)
-                   OR toLower(t.description) CONTAINS toLower($search_term)
+                RETURN t.name AS tool_name, t.description AS description, g.name AS group_name
+                ORDER BY toLower(t.name)
+                """,
+                {"search_term": search_term.strip()}
+            )
+            return [
+                {
+                    "tool": record["tool_name"],
+                    "description": record["description"],
+                    "tool_group": record["group_name"],
+                    "image": "http://localhost:8000/static/images/in_progress.jpg"
+                }
+                for record in result
+            ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/search/by_description/{search_term}")
+async def search_tools_by_description(search_term: str = ""):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
+                WHERE toLower(t.description) CONTAINS toLower($search_term)
                 RETURN t.name AS tool_name, t.description AS description, g.name AS group_name
                 ORDER BY toLower(t.name)
                 """,
