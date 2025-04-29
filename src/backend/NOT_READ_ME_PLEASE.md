@@ -108,3 +108,9 @@
 `http GET http://localhost:8000/api/import`
 4) Экспорт: `@app.get("/api/export")` </br>
 `http GET http://localhost:8000/api/export`
+
+#### Граф
+
+`@app.post("/api/graph")`
+`http GET http://localhost:8000/api/graph`
+
