@@ -15,22 +15,26 @@ async def get_graph_data():
             )
             nodes = []
             relationships = []
+            node_ids = set()
 
             for record in result:
                 node_a = record["n"]
                 node_b = record["m"]
                 relationship = record["r"]
 
-                if node_a not in nodes:
+                if node_a.id not in node_ids:
+                    node_ids.add(node_a.id)
                     nodes.append({
                         "id": node_a.id,
-                        "label": node_a.labels[0],
+                        "label": next(iter(node_a.labels), "Unknown"),
                         "properties": dict(node_a)
                     })
-                if node_b not in nodes:
+
+                if node_b.id not in node_ids:
+                    node_ids.add(node_b.id)
                     nodes.append({
                         "id": node_b.id,
-                        "label": node_b.labels[0],
+                        "label": next(iter(node_b.labels), "Unknown"),
                         "properties": dict(node_b)
                     })
 
@@ -43,7 +47,7 @@ async def get_graph_data():
 
             return {
                 "nodes": nodes,
-                "relationships": relationships
+                "links": relationships
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
