@@ -58,3 +58,35 @@ async def search_group_type(neo4j_label: str, search_term: str):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/id/{id}")
+async def get_group_id(id: str):
+    try:
+        with driver.session() as session:
+            result = session.run(
+                """
+                MATCH (group)
+                WHERE (group:Category OR group:SkillGroup OR group:TechnologyGroup OR group:ToolGroup)
+                AND group.id = $id
+                RETURN group
+                LIMIT 1
+                """,
+                {"id": id}
+            )
+            record = result.single()
+
+            if not record:
+                raise HTTPException(status_code=404, detail="Group not found")
+
+            group_node = record["group"]
+            group_properties = dict(group_node)
+
+            return {
+                "name": group_properties.get("name"),
+                "description": group_properties.get("description"),
+                "image": "http://localhost:8000/static/images/in_progress.jpg"
+            }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
