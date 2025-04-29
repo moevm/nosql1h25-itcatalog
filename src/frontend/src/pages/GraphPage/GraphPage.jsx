@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { fetchGraph } from './api';
+import { fetchGraph } from '../../services/api';
+import * as d3 from 'd3';
 
 const GraphPage = () => {
   useEffect(() => {
@@ -54,8 +55,7 @@ const GraphPage = () => {
     <div className="page">
       <div className="container">
         <div className="graph-container">
-          <p>Здесь будет отображаться граф связей между профессиями, инструментами и технологиями</p>
-          <canvas id="graphCanvas" width="800" height="600"></canvas>
+          <canvas id="graphCanvas" width="1500" height="800"></canvas>
         </div>
       </div>
     </div>
