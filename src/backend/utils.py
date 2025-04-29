@@ -21,3 +21,13 @@ def check_node_exists(tx,label: str, name):
     query = f"MATCH (p:{label}) WHERE toLower(p.name) = toLower($name) RETURN p LIMIT 1"
     result = tx.run(query, name=name)
     return result.single() is not None
+    
+def update_node(tx, old_name, new_label, new_properties):
+    query = (
+        "MATCH (n) "
+        "WHERE n.name=$old_name "
+        "SET n.label = $new_label, n += $new_properties "
+        "RETURN n "
+    )
+    tx.run(query, old_name=old_name, new_label=new_label, new_properties=new_properties)
+

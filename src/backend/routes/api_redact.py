@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver
-from utils import check_node_exists, create_node, create_relationship
+from utils import check_node_exists, create_node, create_relationship,update_node
 import json
 
 router = APIRouter(prefix="/api", tags=["redact"])
@@ -68,6 +68,50 @@ async def add_node(file: UploadFile = File(...)):
                 )
 
         return { "status": "node added" }
+
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=422, detail="Invalid JSON file")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+        
+        
+@router.post("/edit")
+async def edit_node(file: UploadFile = File(...)):
+    try:
+        contents = await file.read()
+        data = json.loads(contents)
+
+        with driver.session() as session:
+            for node in data.get("nodes", []):
+                new_label = node.get("label")
+                new_properties = node.get("properties", {})
+                name = new_properties.get("name")
+
+                if not name:
+                    continue
+
+                exists = session.execute_read(
+                    check_node_exists, 
+                    new_label,
+                    name
+                )
+                if exists:
+                    session.execute_write(
+                        update_node,
+                        name,
+                        new_label,
+                        new_properties
+                    )
+
+            #for rel in data.get("relationships", []):
+            #    session.execute_write(
+            #        create_relationship,
+            #        rel["startNode"],
+            #        rel["endNode"],
+            #        rel["type"]
+            #    )
+
+        return { "status": "node edited" }
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=422, detail="Invalid JSON file")
