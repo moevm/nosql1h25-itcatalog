@@ -301,3 +301,34 @@ export const fetchGraph = async () => {
     throw error;
   }
 };
+
+export const fetchProfessionDetails = async (name) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/${name}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    const data = await response.json();
+    return {
+      ...data,
+      skills: data.skills || [],
+      technologies: data.technologies || [],
+      tools: data.tools || [],
+      description: data.description || 'Описание отсутствует'
+    };
+  } catch (error) {
+    console.error('Error fetching profession details:', error);
+    throw error;
+  }
+};
+
+export const getToolDetails = async (toolName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/tools/${toolName}`);
+    if (!response.ok) {
+      throw new Error('Инструмент не найден');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching tool details:', error);
+    throw error;
+  }
+};
