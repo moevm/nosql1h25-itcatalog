@@ -5,8 +5,8 @@
 1) professions
     - список: `@app.get("/api/professions")` </br>
 `http GET http://localhost:8000/api/professions`
-    - карточка: `@app.get("/api/professions/{id}")` </br>
-`http GET http://localhost:8000/api/professions/efcafab0-d000-1000-a100-000000000001`
+    - карточка: `@app.get("/api/professions/{name}")` </br>
+`http GET http://localhost:8000/api/professions/Бизнес-аналитик`
     - сортировка и фильтрация:
         * `@app.get("/api/professions/filter/categories")` </br>
 `http GET http://localhost:8000/api/professions/filter/categories`
@@ -26,8 +26,8 @@
 2) skills
     - список: `@app.get("/api/skills")` </br>
 `http GET http://localhost:8000/api/skills`
-    - карточка: `@app.get("/api/skills/{id}")` </br>
-`http GET http://localhost:8000/api/skills/efcafab0-d000-1000-a200-000000000001`
+    - карточка: `@app.get("/api/skills/{name}")` </br>
+`http GET http://localhost:8000/api/skills/"Навык взаимодействия с заказчиками"`
     - сортировка и фильтрация:
         * `@app.get("/api/skills/filter/skillgroups")` </br>
 `http GET http://localhost:8000/api/skills/filter/skillgroups`
@@ -41,8 +41,8 @@
 3) technologies
     - список: `@app.get("/api/technologies")` </br>
 `http GET http://localhost:8000/api/technologies`
-    - карточка: `@app.get("/api/technologies/{id}")` </br>
-`http GET http://localhost:8000/api/technologies/efcafab0-d000-1000-a300-00000000001`
+    - карточка: `@app.get("/api/technologies/{name}")` </br>
+`http GET http://localhost:8000/api/technologies/BPMN`
     - сортировка и фильтрация:
         * `@app.get("/api/technologies/filter/technologygroups")` </br>
 `http GET http://localhost:8000/api/technologies/filter/technologygroups`
@@ -57,8 +57,8 @@
 4) tools
     - список: `@app.get("/api/tools")` </br>
 `http GET http://localhost:8000/api/tools`
-    - карточка: `@app.get("/api/tools/{id}")` </br>
-`http GET http://localhost:8000/api/tools/efcafab0-d000-1000-a400-00000000001`
+    - карточка: `@app.get("/api/tools/{name}")` </br>
+`http GET http://localhost:8000/api/tools/"Microsoft Word"`
     - сортировка и фильтрация:
         * `@app.get("/api/tools/filter/toolgroups")` </br>
 `http GET http://localhost:8000/api/tools/filter/toolgroups`
@@ -98,6 +98,10 @@
         * `@app.get("/api/groups/categories/search/by_description/{search_term}")` </br>
 `http GET http://localhost:8000/api/groups/toolgroups/search/by_description/"Редакторы и платформы"`
 
+    - карточки:
+`@app.get("/api/groups/name/{name}")`
+`http GET  http://localhost:8000/api/groups/name/"Нотации для моделирования процессов"`
+
 #### Универсальные запросы
 
 1) Получение id элемента: `@app.post("/api/get_id/{name}")` </br>
@@ -113,4 +117,3 @@
 
 `@app.post("/api/graph")`
 `http GET http://localhost:8000/api/graph`
-
