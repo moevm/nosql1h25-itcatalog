@@ -23,17 +23,6 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
   
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-height: 80vh;
-    width: 500px;
-    max-width: 90vw;
-    display: flex;
-    flex-direction: column;
-  }
-  
   .add-profession-form {
     display: flex;
     flex-direction: column;
