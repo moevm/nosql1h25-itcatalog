@@ -19,9 +19,8 @@ const ToolsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchNameTerm, setSearchNameTerm] = useState('');
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
-  const [searchMode, setSearchMode] = useState('name');
 
   useEffect(() => {
     const loadData = async () => {
@@ -47,33 +46,28 @@ const ToolsPage = () => {
         setLoading(true);
         let filteredTools = [];
         
-        if (searchTerm && searchTerm.trim() !== '' && searchMode === 'name') {
-          filteredTools = await searchTools(searchTerm);
-          
-          if (selectedGroups.length > 0) {
-            filteredTools = filteredTools.filter(tool => 
-              selectedGroups.some(group => group.name === tool.tool_group)
-            );
-          }
-        } 
-        else if (searchDescriptionTerm && searchDescriptionTerm.trim() !== '' && searchMode === 'description') {
-          filteredTools = await searchToolsDescription(searchDescriptionTerm);
-          
-          if (selectedGroups.length > 0) {
-            filteredTools = filteredTools.filter(tool => 
-              selectedGroups.some(group => group.name === tool.tool_group)
-            );
-          }
-        }
-        else if (selectedGroups.length > 0) {
+        if (selectedGroups.length > 0) {
           const groupPromises = selectedGroups.map(group => 
             fetchToolsFilteredByGroup(group.name)
           );
-          
           const groupResults = await Promise.all(groupPromises);
           filteredTools = [...new Set(groupResults.flat())];
         } else {
           filteredTools = await fetchTools();
+        }
+
+        if (searchNameTerm.trim() !== '') {
+          const nameSearchResults = await searchTools(searchNameTerm);
+          filteredTools = filteredTools.filter(tool => 
+            nameSearchResults.some(result => result.tool === tool.tool)
+          );
+        }
+
+        if (searchDescriptionTerm.trim() !== '') {
+          const descSearchResults = await searchToolsDescription(searchDescriptionTerm);
+          filteredTools = filteredTools.filter(tool => 
+            descSearchResults.some(result => result.tool === tool.tool)
+          );
         }
 
         setTools(filteredTools);
@@ -92,7 +86,7 @@ const ToolsPage = () => {
     };
 
     filterTools();
-  }, [selectedGroups, searchTerm, searchDescriptionTerm, searchMode]);
+  }, [selectedGroups, searchNameTerm, searchDescriptionTerm]);
 
   const handleGroupChange = (group) => {
     setSelectedGroups(prev => 
@@ -100,14 +94,6 @@ const ToolsPage = () => {
         ? prev.filter(g => g.name !== group.name)
         : [...prev, group]
     );
-  };
-
-  const handleSearchChange = (term) => {
-    if (searchMode === 'name') {
-      setSearchTerm(term);
-    } else {
-      setSearchDescriptionTerm(term);
-    }
   };
 
   const handleAddTool = async (toolData) => {
@@ -119,9 +105,7 @@ const ToolsPage = () => {
       const description = toolData.description;
   
       const toolId = uuidv4();
-      
-      const group = groups.find(g => g.name === groupName);
-      const groupId = group?.id || await getIdByName(groupName);
+      const groupId = await getIdByName(groupName);
   
       const nodes = [
         {
@@ -176,48 +160,44 @@ const ToolsPage = () => {
   return (
     <div className="page active">
       <div className="container">
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-          <button 
-            onClick={() => setSearchMode('name')}
+        <div className="search-container" style={{ marginBottom: '20px' }}>
+          <input
+            type="text"
+            placeholder="Поиск инструментов по названию..."
+            value={searchNameTerm}
+            onChange={(e) => setSearchNameTerm(e.target.value)}
             style={{
-              padding: '8px 16px',
-              backgroundColor: searchMode === 'name' ? '#007bff' : '#6c757d',
-              color: 'white',
-              border: 'none',
+              padding: '10px',
+              width: '100%',
+              maxWidth: '500px',
               borderRadius: '4px',
-              cursor: 'pointer'
+              border: '1px solid #ccc',
+              marginBottom: '10px'
             }}
-          >
-            Поиск по названию
-          </button>
-          <button 
-            onClick={() => setSearchMode('description')}
+          />
+          <input
+            type="text"
+            placeholder="Поиск инструментов по описанию..."
+            value={searchDescriptionTerm}
+            onChange={(e) => setSearchDescriptionTerm(e.target.value)}
             style={{
-              padding: '8px 16px',
-              backgroundColor: searchMode === 'description' ? '#007bff' : '#6c757d',
-              color: 'white',
-              border: 'none',
+              padding: '10px',
+              width: '100%',
+              maxWidth: '500px',
               borderRadius: '4px',
-              cursor: 'pointer'
+              border: '1px solid #ccc'
             }}
-          >
-            Поиск по описанию
-          </button>
+          />
         </div>
 
         <Filters 
           items={groups}
           selectedItems={selectedGroups}
           onItemChange={handleGroupChange}
-          onSearchChange={handleSearchChange}
-          searchTerm={searchMode === 'name' ? searchTerm : searchDescriptionTerm}
-          showSearch={true}
-          searchPlaceholder={searchMode === 'name' 
-            ? "Поиск инструментов по названию..." 
-            : "Поиск инструментов по описанию..."}
           filterLabel="Группы инструментов"
           itemLabelProp="name"
         />
+        
         <div className="cards">
           {tools.map((tool, index) => (
             <Card
