@@ -290,3 +290,14 @@ export const getIdByName = async (name) => {
     throw error;
   }
 };
+
+export const fetchGraph = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/graph`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    console.error(`Error fetching graph:`, error);
+    throw error;
+  }
+};
