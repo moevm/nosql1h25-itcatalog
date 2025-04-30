@@ -28,18 +28,18 @@ async def get_tools():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/{id}")
-async def get_tool(id: str):
+@router.get("/{name}")
+async def get_tool(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
-                WHERE t.id = $tool_id
+                WHERE t.name = $tool_name
                 OPTIONAL MATCH (p:Profession)-[:USES_TOOL]->(t)
                 RETURN t.name AS tool_name, t.description AS description, g.name AS group_name, collect(p.name) AS professions
                 """,
-                {"tool_id": id}
+                {"tool_name": name}
             )
             record = result.single()
 
