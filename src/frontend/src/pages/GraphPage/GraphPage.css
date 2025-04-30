@@ -1,0 +1,27 @@
+.graph-frame {
+    position: relative;
+    display: inline-block;
+    border: 2px solid #4BC0C0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: #f8f9fa;
+    overflow: hidden;
+  }
+  
+  .graph-frame::before {
+    content: "IT Catalog Graph";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #4BC0C0;
+    color: white;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom-right-radius: 5px;
+  }
+  
+  #graphCanvas {
+    display: block;
+  }
