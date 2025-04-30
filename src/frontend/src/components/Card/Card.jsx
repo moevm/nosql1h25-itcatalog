@@ -1,11 +1,11 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ title, category, description, image }) => {
+const Card = ({ title, category, description, image, onClick }) => {
   const imageUrl = image || "http://localhost:8000/static/images/in_progress.jpg";
 
   return (
-    <div className="card">
+    <div className="card" onClick={onClick}>
       <div className="card__image-container">
         <img 
           src={imageUrl} 
