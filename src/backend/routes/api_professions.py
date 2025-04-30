@@ -27,14 +27,14 @@ async def get_professions():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/{id}")
-async def get_profession(id: str):
+@router.get("/{name}")
+async def get_profession(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (p:Profession)
-                WHERE p.id = $profession_id
+                WHERE p.name = $profession_name
                 OPTIONAL MATCH (p)-[:REQUIRES]->(s:Skill)
                 OPTIONAL MATCH (p)-[:USES_TECH]->(t:Technology)
                 OPTIONAL MATCH (p)-[:USES_TOOL]->(tool:Tool)
@@ -45,7 +45,7 @@ async def get_profession(id: str):
                        collect(DISTINCT t.name) AS technologies,
                        collect(DISTINCT tool.name) AS tools
                 """,
-                {"profession_id": id}
+                {"profession_name": name}
             )
             record = result.single()
             if not record:
