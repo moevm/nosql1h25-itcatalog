@@ -39,10 +39,9 @@ async def get_graph_data():
                     })
 
                 relationships.append({
-                    "source": node_a.id,
-                    "target": node_b.id,
                     "type": relationship.type,
-                    "properties": dict(relationship)
+                    "source": node_a.id,
+                    "target": node_b.id
                 })
 
             return {
