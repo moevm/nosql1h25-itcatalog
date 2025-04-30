@@ -27,18 +27,18 @@ async def get_skills():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/{id}")
-async def get_skill(id: str):
+@router.get("/{name}")
+async def get_skill(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
-                WHERE s.id = $skill_id
+                WHERE s.name = $skill_name
                 OPTIONAL MATCH (p:Profession)-[:REQUIRES]->(s)
                 RETURN s.name AS skill_name, g.name AS group_name, collect(p.name) AS professions
                 """,
-                {"skill_id": id}
+                {"skill_name": name}
             )
             record = result.single()
             if not record:
