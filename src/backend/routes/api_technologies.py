@@ -28,18 +28,18 @@ async def get_technologies():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/{id}")
-async def get_technology(id: str):
+@router.get("/{name}")
+async def get_technology(name: str):
     try:
         with driver.session() as session:
             result = session.run(
                 """
                 MATCH (t:Technology)-[:GROUPS_TECH]->(g:TechnologyGroup)
-                WHERE t.id = $technology_id
+                WHERE t.name = $technology_name
                 OPTIONAL MATCH (p:Profession)-[:USES_TECH]->(t)
                 RETURN t.name AS technology_name, t.description AS description, g.name AS group_name, collect(p.name) AS professions
                 """,
-                {"technology_id": id}
+                {"technology_name": name}
             )
             record = result.single()
             if not record:
