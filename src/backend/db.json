@@ -357,7 +357,7 @@
         "name": "Коммуникативные навыки: способность объяснять сложные концепции и результаты техническим и нетехническим специалистам"
       }
     },
-     {
+    {
       "label": "Technology",
       "properties": {
         "id": "efcafab0-d000-1000-a300-00000000001",
@@ -398,12 +398,12 @@
       }
     },
     {
-       "label": "Technology",
-       "properties": {
-         "id": "efcafab0-d000-1000-a300-00000000006",
-         "name": "Python",
-         "description": "Язык программирования высокого уровня, широко используемый в области анализа данных, машинного обучения, веб-разработки и автоматизации."
-       }
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000006",
+        "name": "Python",
+        "description": "Язык программирования высокого уровня, широко используемый в области анализа данных, машинного обучения, веб-разработки и автоматизации."
+      }
     },
     {
       "label": "Technology",
@@ -414,12 +414,12 @@
       }
     },
     {
-       "label": "Technology",
-       "properties": {
-         "id": "efcafab0-d000-1000-a300-00000000008",
-         "name": "JavaScript",
-         "description": "Язык программирования, используемый для создания динамических веб-страниц и приложений. Широко используется для фронтенд-разработки."
-       }
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000008",
+        "name": "JavaScript",
+        "description": "Язык программирования, используемый для создания динамических веб-страниц и приложений. Широко используется для фронтенд-разработки."
+      }
     },
     {
       "label": "Technology",
@@ -750,13 +750,13 @@
       }
     },
     {
-       "label": "Technology",
-       "properties": {
-         "id": "efcafab0-d000-1000-a300-00000000032",
-         "name": "AWS",
-         "description": "Облачная платформа от Amazon, предоставляющая услуги по вычислениям, хранению данных и другим облачным решениям."
-        }
-    }, 
+      "label": "Technology",
+      "properties": {
+        "id": "efcafab0-d000-1000-a300-00000000032",
+        "name": "AWS",
+        "description": "Облачная платформа от Amazon, предоставляющая услуги по вычислениям, хранению данных и другим облачным решениям."
+      }
+    },
     {
       "label": "Technology",
       "properties": {
@@ -802,7 +802,7 @@
       "properties": {
         "id": "efcafab0-d000-1000-a400-00000000001",
         "name": "Microsoft Word",
-        "description": "Текстовый редактор для создания и форматирования документов."
+        "description": "_________description_________"
       }
     },
     {
@@ -810,7 +810,7 @@
       "properties": {
         "id": "efcafab0-d000-1000-a400-00000000002",
         "name": "Microsoft Excel",
-        "description": "Табличный редактор для анализа данных, расчетов и визуализации."
+        "description": "Текстовый редактор для создания и форматирования документов."
       }
     },
     {
@@ -1214,212 +1214,220 @@
       }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000035",
-            "name": "Конфигуратор 1С",
-            "description": "Инструмент для настройки и разработки решений на платформе 1С."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000035",
+        "name": "Конфигуратор 1С",
+        "description": "Инструмент для настройки и разработки решений на платформе 1С."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000036",
-            "name": "1C:EDT",
-            "description": "Среда разработки для платформы 1С:Предприятие с поддержкой современных инструментов: система контроля версий, рефакторинг кода и кросс-платформенная разработка бизнес-приложений."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000036",
+        "name": "1C:EDT",
+        "description": "Среда разработки для платформы 1С:Предприятие с поддержкой современных инструментов: система контроля версий, рефакторинг кода и кросс-платформенная разработка бизнес-приложений."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000037",
-            "name": "Visual Studio Code",
-            "description": "Легковесный редактор кода с расширяемой экосистемой плагинов, интегрированным Git и поддержкой языков программирования через Language Server Protocol."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000037",
+        "name": "Visual Studio Code",
+        "description": "Легковесный редактор кода с расширяемой экосистемой плагинов, интегрированным Git и поддержкой языков программирования через Language Server Protocol."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000038",
-            "name": "Microsoft SQL Server",
-            "description": "Реляционная СУБД с расширенной аналитикой в реальном времени, встроенным AI и поддержкой гибридных облачных сред."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000038",
+        "name": "Microsoft SQL Server",
+        "description": "Реляционная СУБД с расширенной аналитикой в реальном времени, встроенным AI и поддержкой гибридных облачных сред."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000039",
-            "name": "PyCharm",
-            "description": "IDE для Python с продвинутым автодополнением, интеграцией Jupyter Notebook, средствами профилирования и поддержкой Django/Flask."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000039",
+        "name": "PyCharm",
+        "description": "IDE для Python с продвинутым автодополнением, интеграцией Jupyter Notebook, средствами профилирования и поддержкой Django/Flask."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003a",
-            "name": "Jupyter Notebook",
-            "description": "Интерактивная веб-среда для создания документов с живым кодом (Python/R/Julia), визуализацией данных и уравнениями."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003a",
+        "name": "Jupyter Notebook",
+        "description": "Интерактивная веб-среда для создания документов с живым кодом (Python/R/Julia), визуализацией данных и уравнениями."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003b",
-            "name": "Google Colab",
-            "description": "Облачный Jupyter-сервис с бесплатным доступом к GPU/TPU для машинного обучения и совместной работы в реальном времени."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003b",
+        "name": "Google Colab",
+        "description": "Облачный Jupyter-сервис с бесплатным доступом к GPU/TPU для машинного обучения и совместной работы в реальном времени."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003c",
-            "name": "RapidMiner",
-            "description": "Платформа для визуального конструирования ML-пайплайнов с автоматизированным машинным обучением (AutoML) и ETL-инструментами."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003c",
+        "name": "RapidMiner",
+        "description": "Платформа для визуального конструирования ML-пайплайнов с автоматизированным машинным обучением (AutoML) и ETL-инструментами."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003d",
-            "name": "Prometheus",
-            "description": "Система мониторинга с многомерной моделью данных, гибким языком запросов PromQL и интеграцией с Grafana."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003d",
+        "name": "Prometheus",
+        "description": "Система мониторинга с многомерной моделью данных, гибким языком запросов PromQL и интеграцией с Grafana."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003e",
-            "name": "Apache Airflow",
-            "description": "Платформа для оркестрации ETL-процессов через направленные ациклические графы (DAG) на Python с веб-интерфейсом."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003e",
+        "name": "Apache Airflow",
+        "description": "Платформа для оркестрации ETL-процессов через направленные ациклические графы (DAG) на Python с веб-интерфейсом."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000003f",
-            "name": "Talend",
-            "description": "Инструмент для интеграции данных с поддержкой Big Data (Hadoop/Spark) и 900+ коннекторов для ETL/ELT процессов."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000003f",
+        "name": "Talend",
+        "description": "Инструмент для интеграции данных с поддержкой Big Data (Hadoop/Spark) и 900+ коннекторов для ETL/ELT процессов."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000040",
-            "name": "Informatica",
-            "description": "Корпоративная платформа управления данными с AI-powered качеством данных, MDM и облачной интеграцией."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000040",
+        "name": "Informatica",
+        "description": "Корпоративная платформа управления данными с AI-powered качеством данных, MDM и облачной интеграцией."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000041",
-            "name": "ELK Stack (Elasticsearch, Logstash, Kibana)",
-            "description": "Комплекс для сбора логов (Logstash), поиска/аналитики (Elasticsearch) и визуализации (Kibana) в реальном времени."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000041",
+        "name": "ELK Stack (Elasticsearch, Logstash, Kibana)",
+        "description": "Комплекс для сбора логов (Logstash), поиска/аналитики (Elasticsearch) и визуализации (Kibana) в реальном времени."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000042",
-            "name": "Grafana",
-            "description": "Мультиплатформенная система визуализации метрик с поддержкой 50+ источников данных и кастомизируемыми дашбордами."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000042",
+        "name": "Grafana",
+        "description": "Мультиплатформенная система визуализации метрик с поддержкой 50+ источников данных и кастомизируемыми дашбордами."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000043",
-            "name": "PostgreSQL",
-            "description": "Объектно-реляционная СУБД с поддержкой JSON, геоданных, оконных функций и транзакций ACID."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000043",
+        "name": "PostgreSQL",
+        "description": "Объектно-реляционная СУБД с поддержкой JSON, геоданных, оконных функций и транзакций ACID."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000044",
-            "name": "MySQL",
-            "description": "Популярная open-source реляционная СУБД с оптимизацией для веб-приложений и поддержкой кластеризации."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000044",
+        "name": "MySQL",
+        "description": "Популярная open-source реляционная СУБД с оптимизацией для веб-приложений и поддержкой кластеризации."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000045",
-            "name": "SQLite",
-            "description": "Встраиваемая SQL-библиотека с нулевой конфигурацией, полной ACID-совместимостью и серверной архитектурой."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000045",
+        "name": "SQLite",
+        "description": "Встраиваемая SQL-библиотека с нулевой конфигурацией, полной ACID-совместимостью и серверной архитектурой."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000046",
-            "name": "MongoDB",
-            "description": "Документоориентированная NoSQL БД с горизонтальным масштабированием, агрегационными пайплайнами и полнотекстовым поиском."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000046",
+        "name": "MongoDB",
+        "description": "Документоориентированная NoSQL БД с горизонтальным масштабированием, агрегационными пайплайнами и полнотекстовым поиском."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000047",
-            "name": "Cassandra",
-            "description": "Распределенная NoSQL БД с линейной масштабируемостью, отказоустойчивостью и моделью данных на основе столбцов."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000047",
+        "name": "Cassandra",
+        "description": "Распределенная NoSQL БД с линейной масштабируемостью, отказоустойчивостью и моделью данных на основе столбцов."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000048",
-            "name": "Oracle NoSQL Database",
-            "description": "Key-value и document хранилище с гарантированной задержкой ответа, интеграцией с Oracle Cloud и автономными возможностями."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000048",
+        "name": "Oracle NoSQL Database",
+        "description": "Key-value и document хранилище с гарантированной задержкой ответа, интеграцией с Oracle Cloud и автономными возможностями."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-00000000049",
-            "name": "Microsoft Azure",
-            "description": "Облачная платформа с 200+ сервисами: от виртуальных машин и Kubernetes до Cognitive Services и IoT Edge."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-00000000049",
+        "name": "Microsoft Azure",
+        "description": "Облачная платформа с 200+ сервисами: от виртуальных машин и Kubernetes до Cognitive Services и IoT Edge."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000004a",
-            "name": "Amazon Athena",
-            "description": "Серверный сервис аналитики данных в S3 с использованием стандартного SQL и оплатой за обработанные терабайты."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004a",
+        "name": "Amazon Athena",
+        "description": "Серверный сервис аналитики данных в S3 с использованием стандартного SQL и оплатой за обработанные терабайты."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000004b",
-            "name": "Google Cloud Platform",
-            "description": "Набор облачных сервисов с AI/ML инструментами (TensorFlow), BigQuery и Kubernetes Engine."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004b",
+        "name": "Google Cloud Platform",
+        "description": "Набор облачных сервисов с AI/ML инструментами (TensorFlow), BigQuery и Kubernetes Engine."
+      }
     },
     {
-        "label": "Tool",
-        "properties": {
-            "id": "efcafab0-d000-1000-a400-0000000004c",
-            "name": "Microsoft Azure ML",
-            "description": "Управляемая среда для построения ML-моделей с автоматическим машинным обучением (AutoML) и MLOps-интеграцией."
-        }
+      "label": "Tool",
+      "properties": {
+        "id": "efcafab0-d000-1000-a400-0000000004c",
+        "name": "Microsoft Azure ML",
+        "description": "Управляемая среда для построения ML-моделей с автоматическим машинным обучением (AutoML) и MLOps-интеграцией."
+      }
     },
     {
-        "label": "Category",
-        "properties": {
-            "id": "efcafab0-d000-1000-b100-000000000001",
-            "name": "Аналитика",
-            "description": "Технологии для сбора, обработки и интерпретации данных: BI-системы, инструменты визуализации, платформы прогнозной аналитики."
-        }
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000001",
+        "name": "Аналитика",
+        "description": "Технологии для сбора, обработки и интерпретации данных: BI-системы, инструменты визуализации, платформы прогнозной аналитики."
+      }
     },
     {
-        "label": "Category",
-        "properties": {
-            "id": "efcafab0-d000-1000-b100-000000000002",
-            "name": "Тестирование",
-            "description": "Инструменты автоматизации тестов (unit, integration, e2e), нагрузочного тестирования и управления тестовыми средами."
-        }
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000002",
+        "name": "Тестирование",
+        "description": "Инструменты автоматизации тестов (unit, integration, e2e), нагрузочного тестирования и управления тестовыми средами."
+      }
+    },
+    {
+      "label": "Category",
+      "properties": {
+        "id": "efcafab0-d000-1000-b100-000000000003",
+        "name": "Разработка, проектирование",
+        "description": "Information Technology. Включает различные профессии и роли, связанные с программированием, обработкой данных и поддержанием компьютерных систем."
+      }
     },
     {
       "label": "Category",
@@ -1438,197 +1446,213 @@
       }
     },
     {
-    "label": "SkillGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b200-000000000001",
-      "name": "Hard skills",
-      "description": "Технические компетенции, связанные с конкретными профессиональными знаниями, измеримые и подтверждаемые сертификатами (например, программирование, работа с данными)."
+      "label": "SkillGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b200-000000000001",
+        "name": "Hard skills",
+        "description": "Технические компетенции, связанные с конкретными профессиональными знаниями, измеримые и подтверждаемые сертификатами (например, программирование, работа с данными)."
+      }
+    },
+    {
+      "label": "SkillGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b200-000000000002",
+        "name": "Soft skills",
+        "description": "Навыки межличностного взаимодействия: коммуникация, управление временем, работа в команде, эмоциональный интеллект."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000001",
+        "name": "Нотации для моделирования процессов",
+        "description": "Стандартизированные языки визуализации бизнес-процессов (BPMN, UML) для проектирования workflow и анализа эффективности."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000002",
+        "name": "Стандарты автоматизации",
+        "description": "Протоколы и спецификации для автоматизации задач (RPA, промышленные стандарты IEC, ITIL)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000003",
+        "name": "Языки управления базами данных",
+        "description": "Языки запросов и манипулирования данными (SQL, NoSQL) для взаимодействия с СУБД."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000004",
+        "name": "Языки программирования",
+        "description": "Формальные языки для создания алгоритмов и программного обеспечения (Python, Java, C++)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000005",
+        "name": "Методологии тестирования",
+        "description": "Подходы к обеспечению качества ПО: TDD, Agile-тестирование, регрессионное тестирование."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000006",
+        "name": "Библиотеки и фреймворки для тестирования",
+        "description": "Инструменты для автоматизации проверки ПО (Selenium, JUnit, pytest)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000007",
+        "name": "Веб-API",
+        "description": "Интерфейсы для взаимодействия между сервисами через протоколы (REST, GraphQL, SOAP)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000008",
+        "name": "DevOps",
+        "description": "Практики интеграции разработки и эксплуатации (CI/CD, контейнеризация, инфраструктура как код)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-000000000009",
+        "name": "Библиотеки и фреймворки для разработки",
+        "description": "Готовые решения для ускорения создания приложений (React, Spring, Django)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000a",
+        "name": "Библиотеки для работы с базами данных",
+        "description": "ORM-инструменты и драйверы (Hibernate, SQLAlchemy, JDBC)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000b",
+        "name": "Библиотеки и фреймворки для анализа данных",
+        "description": "Инструменты обработки и визуализации данных (Pandas, NumPy, Matplotlib)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000c",
+        "name": "Библиотеки и фреймворки для машинного обучения",
+        "description": "Платформы для создания AI-моделей (TensorFlow, PyTorch, scikit-learn)."
+      }
+    },
+    {
+      "label": "TechnologyGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b300-00000000000d",
+        "name": "Облачные технологии",
+        "description": "Группа технологий для создания, хранения и управления вычислительными ресурсами через интернет."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000001",
+        "name": "Работа с документами",
+        "description": "Редакторы и платформы для создания текстовых, табличных и презентационных файлов (Microsoft Office, Google Workspace)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000002",
+        "name": "Проектирование и моделирование процессов",
+        "description": "Программы для визуального проектирования workflow (Visio, Lucidchart, Bizagi)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000003",
+        "name": "Инструменты для распределения командной работы",
+        "description": "Платформы для коллаборации и управления задачами (Slack, Trello, Asana)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000004",
+        "name": "Программы для анализа данных",
+        "description": "Инструменты обработки Big Data и бизнес-аналитики (Tableau, Power BI, Excel)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000005",
+        "name": "Проведение опросов, клиент-аналитика",
+        "description": "Сервисы для сбора обратной связи и анализа аудитории (Google Forms, SurveyMonkey, Hotjar)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000006",
+        "name": "IDE",
+        "description": "Группа инструментов для разработки программного обеспечения, включающая текстовые редакторы, отладчики и системы сборки."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000007",
+        "name": "QA IDE (Инструменты для тестирования)",
+        "description": "Специализированные среды для автоматизации тестирования (TestComplete, SoapUI, Postman)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000008",
+        "name": "DevOps",
+        "description": "Инструменты для развертывания и мониторинга (Docker, Kubernetes, Jenkins)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-000000000009",
+        "name": "Текстовые редакторы",
+        "description": "Программы для написания и редактирования кода (VS Code, Sublime Text, Atom)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-00000000000a",
+        "name": "Системы управления базами данных (СУБД)",
+        "description": "ПО для администрирования и работы с базами (MySQL, PostgreSQL, MongoDB)."
+      }
+    },
+    {
+      "label": "ToolGroup",
+      "properties": {
+        "id": "efcafab0-d000-1000-b400-00000000000b",
+        "name": "Облачные хранилища",
+        "description": "Сервисы хранения данных в облаке (Amazon S3, Google Drive, Dropbox)."
+      }
     }
-  },
-  {
-    "label": "SkillGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b200-000000000002",
-      "name": "Soft skills",
-      "description": "Навыки межличностного взаимодействия: коммуникация, управление временем, работа в команде, эмоциональный интеллект."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000001",
-      "name": "Нотации для моделирования процессов",
-      "description": "Стандартизированные языки визуализации бизнес-процессов (BPMN, UML) для проектирования workflow и анализа эффективности."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000002",
-      "name": "Стандарты автоматизации",
-      "description": "Протоколы и спецификации для автоматизации задач (RPA, промышленные стандарты IEC, ITIL)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000003",
-      "name": "Языки управления базами данных",
-      "description": "Языки запросов и манипулирования данными (SQL, NoSQL) для взаимодействия с СУБД."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000004",
-      "name": "Языки программирования",
-      "description": "Формальные языки для создания алгоритмов и программного обеспечения (Python, Java, C++)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000005",
-      "name": "Методологии тестирования",
-      "description": "Подходы к обеспечению качества ПО: TDD, Agile-тестирование, регрессионное тестирование."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000006",
-      "name": "Библиотеки и фреймворки для тестирования",
-      "description": "Инструменты для автоматизации проверки ПО (Selenium, JUnit, pytest)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000007",
-      "name": "Веб-API",
-      "description": "Интерфейсы для взаимодействия между сервисами через протоколы (REST, GraphQL, SOAP)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000008",
-      "name": "DevOps",
-      "description": "Практики интеграции разработки и эксплуатации (CI/CD, контейнеризация, инфраструктура как код)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-000000000009",
-      "name": "Библиотеки и фреймворки для разработки",
-      "description": "Готовые решения для ускорения создания приложений (React, Spring, Django)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-00000000000a",
-      "name": "Библиотеки для работы с базами данных",
-      "description": "ORM-инструменты и драйверы (Hibernate, SQLAlchemy, JDBC)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-00000000000b",
-      "name": "Библиотеки и фреймворки для анализа данных",
-      "description": "Инструменты обработки и визуализации данных (Pandas, NumPy, Matplotlib)."
-    }
-  },
-  {
-    "label": "TechnologyGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b300-00000000000c",
-      "name": "Библиотеки и фреймворки для машинного обучения",
-      "description": "Платформы для создания AI-моделей (TensorFlow, PyTorch, scikit-learn)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000001",
-      "name": "Работа с документами",
-      "description": "Редакторы и платформы для создания текстовых, табличных и презентационных файлов (Microsoft Office, Google Workspace)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000002",
-      "name": "Проектирование и моделирование процессов",
-      "description": "Программы для визуального проектирования workflow (Visio, Lucidchart, Bizagi)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000003",
-      "name": "Инструменты для распределения командной работы",
-      "description": "Платформы для коллаборации и управления задачами (Slack, Trello, Asana)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000004",
-      "name": "Программы для анализа данных",
-      "description": "Инструменты обработки Big Data и бизнес-аналитики (Tableau, Power BI, Excel)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000005",
-      "name": "Проведение опросов, клиент-аналитика",
-      "description": "Сервисы для сбора обратной связи и анализа аудитории (Google Forms, SurveyMonkey, Hotjar)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000007",
-      "name": "QA IDE (Инструменты для тестирования)",
-      "description": "Специализированные среды для автоматизации тестирования (TestComplete, SoapUI, Postman)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000008",
-      "name": "DevOps",
-      "description": "Инструменты для развертывания и мониторинга (Docker, Kubernetes, Jenkins)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-000000000009",
-      "name": "Текстовые редакторы",
-      "description": "Программы для написания и редактирования кода (VS Code, Sublime Text, Atom)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-00000000000a",
-      "name": "Системы управления базами данных (СУБД)",
-      "description": "ПО для администрирования и работы с базами (MySQL, PostgreSQL, MongoDB)."
-    }
-  },
-  {
-    "label": "ToolGroup",
-    "properties": {
-      "id": "efcafab0-d000-1000-b400-00000000000b",
-      "name": "Облачные хранилища",
-      "description": "Сервисы хранения данных в облаке (Amazon S3, Google Drive, Dropbox)."
-    }
-  }
   ],
   "relationships": [
     {
