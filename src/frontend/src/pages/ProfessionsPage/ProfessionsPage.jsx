@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/Filters';
 import AddButton from '../../components/AddButton/AddButton';
+import ProfessionModal from '../../components/ProfessionModal/ProfessionModal';
 import { v4 as uuidv4 } from 'uuid';
 
 import { 
@@ -15,7 +16,8 @@ import {
   fetchProfessionsFilteredByTechnology,
   searchProfessions,
   add,
-  getIdByName
+  getIdByName,
+  fetchProfessionDetails
 } from '../../services/api';
 
 const ProfessionsPage = () => {
@@ -31,6 +33,8 @@ const ProfessionsPage = () => {
   const [allTechnologies, setAllTechnologies] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProfession, setSelectedProfession] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Загрузка начальных данных
   useEffect(() => {
@@ -163,6 +167,19 @@ const ProfessionsPage = () => {
     setSearchTerm(term);
   };
 
+  const handleCardClick = async (professionName) => {
+    try {
+      setLoading(true);
+      const professionData = await fetchProfessionDetails(professionName);
+      setSelectedProfession(professionData);
+      setIsModalOpen(true);
+    } catch (err) {
+      console.error('Error fetching profession details:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleAddProfession = async (professionData) => {
     try {
       setLoading(true);
@@ -269,6 +286,7 @@ const ProfessionsPage = () => {
                 image={profession.image || '/static/images/default.png'}
                 title={profession.profession}
                 category={profession.category}
+                onClick={() => handleCardClick(profession.profession)}
               />
             ))}
           </div>
@@ -281,6 +299,13 @@ const ProfessionsPage = () => {
           tools={allTools}
           onAddProfession={handleAddProfession}
         />
+
+        {isModalOpen && (
+          <ProfessionModal 
+            profession={selectedProfession} 
+            onClose={() => setIsModalOpen(false)} 
+          />
+        )}
       </div>
     </div>
   );
