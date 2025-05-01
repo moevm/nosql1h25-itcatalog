@@ -65,26 +65,25 @@ async def get_group_name(name: str):
     try:
         with driver.session() as session:
             result = session.run(
-            """
-            MATCH (group)
-            WHERE (group:Category OR group:SkillGroup OR group:TechnologyGroup OR group:ToolGroup)
-            AND group.name = $name
-            RETURN group
-            LIMIT 1
-            """,
+                """
+                MATCH (g)
+                WHERE (g:Category OR g:SkillGroup OR g:TechnologyGroup OR g:ToolGroup)
+                AND group.name = $name
+                OPTIONAL MATCH (g)<-[R:BELONGS_TO OR R:GROUPS_SKILL OR R:GROUPS_TECH OR R:GROUPS_TOOL]-(e:Profession OR e:Skill OR e:Technology OR e:Tool)
+                RETURN g.name AS group_name, g.description AS description, collect(e.name) AS participants
+                LIMIT 1
+                """,
                 {"name": name}
             )
             record = result.single()
             
             if not record:
                 raise HTTPException(status_code=404, detail="Group not found")
-                
-            group_node = record["group"]
-            group_properties = dict(group_node)
             
             return {
-                "name": group_properties.get("name"),
-                "description": group_properties.get("description"),
+                "name":  record["group_name"],
+                "description": record["description"],
+                "participants": record["participants"], # участники группы, будь то професии, навыки, технологии или инструменты
                 "image": "http://localhost:8000/static/images/in_progress.jpg"
             }
             
