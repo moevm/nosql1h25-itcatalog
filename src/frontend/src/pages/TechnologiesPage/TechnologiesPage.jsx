@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
 import AddTechnologyButton from '../../components/AddTechnologyButton/AddTechnologyButton';
+import TechnologyModal from '../../components/TechnologyModal/TechnologyModal';
 import { v4 as uuidv4 } from 'uuid';
 import { 
   fetchTechnologies, 
@@ -10,7 +11,8 @@ import {
   searchTechnologies,
   searchTechnologiesDescription,
   getIdByName,
-  add
+  add,
+  getTechnologyDetails
 } from '../../services/api';
 
 const TechnologiesPage = () => {
@@ -21,6 +23,8 @@ const TechnologiesPage = () => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [searchNameTerm, setSearchNameTerm] = useState('');
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
+  const [selectedTechnology, setSelectedTechnology] = useState(null);
+  const [modalLoading, setModalLoading] = useState(false)
 
   useEffect(() => {
     const loadData = async () => {
@@ -155,6 +159,23 @@ const TechnologiesPage = () => {
     }
   };
 
+  const handleCardClick = async (techName) => {
+    try {
+      setModalLoading(true);
+      const techDetails = await getTechnologyDetails(techName);
+      setSelectedTechnology(techDetails);
+    } catch (error) {
+      console.error('Error fetching technology details:', error);
+      setError('Не удалось загрузить данные технологии');
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTechnology(null);
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -200,13 +221,14 @@ const TechnologiesPage = () => {
         
         <div className="cards">
           {technologies.map((tech, index) => (
-            <Card
-              key={index}
-              image={tech.image ? tech.image : '/static/images/default.png'}
-              title={tech.technology}
-              category={tech.technology_group}
-              description={tech.description}
-            />
+            <div key={index} onClick={() => handleCardClick(tech.technology)} style={{ cursor: 'pointer' }}>
+              <Card
+                image={tech.image ? tech.image : '/static/images/default.png'}
+                title={tech.technology}
+                category={tech.technology_group}
+                description={tech.description}
+              />
+            </div>
           ))}
         </div>
 
@@ -214,6 +236,14 @@ const TechnologiesPage = () => {
           groups={groups.map(g => g.name)}
           onAddTechnology={handleAddTechnology}
         />
+
+        {selectedTechnology && (
+          <TechnologyModal
+            technology={selectedTechnology}
+            onClose={handleCloseModal}
+            loading={modalLoading}
+          />
+        )}
       </div>
     </div>
   );
