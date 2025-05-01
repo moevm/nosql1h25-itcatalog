@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import AddGroupButton from '../../components/AddGroupButton/AddGroupButton';
+import GroupModal from '../../components/GroupModal/GroupModal';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchGroups, searchGroups, searchGroupsDescription, add } from '../../services/api';
+import { 
+  fetchGroups, 
+  searchGroups, 
+  searchGroupsDescription, 
+  add,
+  getGroupDetails
+} from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
   const groupConfig = {
     professions: {
       title: 'Категории профессий',
       apiEndpoint: 'categories',
-      defaultImage: '/images/default-category.png'
+      defaultImage: '/images/default-category.png',
+      label: 'Category'
     },
     skills: {
       title: 'Группы навыков',
       apiEndpoint: 'skillgroups',
-      defaultImage: '/images/default-skill.png'
+      defaultImage: '/images/default-skill.png',
+      label: 'SkillGroup'
     },
     technologies: {
       title: 'Группы технологий',
       apiEndpoint: 'technologygroups',
-      defaultImage: '/images/default-technology.png'
+      defaultImage: '/images/default-technology.png',
+      label: 'TechnologyGroup'
     },
     tools: {
       title: 'Группы инструментов',
       apiEndpoint: 'toolgroups',
-      defaultImage: '/images/default-tool.png'
+      defaultImage: '/images/default-tool.png',
+      label: 'ToolGroup'
     }
   };
 
@@ -33,6 +44,8 @@ const GroupPage = ({ groupType }) => {
   const [error, setError] = useState(null);
   const [searchNameTerm, setSearchNameTerm] = useState('');
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [modalLoading, setModalLoading] = useState(false);
   const config = groupConfig[groupType] || groupConfig.professions;
 
   const normalizeGroup = (group) => {
@@ -110,6 +123,23 @@ const GroupPage = ({ groupType }) => {
     return () => clearTimeout(debounceTimer);
   }, [searchNameTerm, searchDescriptionTerm, config.apiEndpoint, config.title, config.defaultImage]);
 
+  const handleCardClick = async (groupName) => {
+    try {
+      setModalLoading(true);
+      const groupDetails = await getGroupDetails(groupName);
+      setSelectedGroup(groupDetails);
+    } catch (error) {
+      console.error('Error fetching group details:', error);
+      setError('Не удалось загрузить данные группы');
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedGroup(null);
+  };
+
   const handleAddGroup = async (groupData) => {
     try {
       setLoading(true);
@@ -123,7 +153,7 @@ const GroupPage = ({ groupType }) => {
 
       const nodes = [
         {
-          label: "Group",
+          label: config.label,
           properties: {
             id: groupId,
             name: groupName,
@@ -147,7 +177,7 @@ const GroupPage = ({ groupType }) => {
       setGroups(prev => [...prev, {
         name: groupName,
         description: description || '',
-        image: `http://localhost:8000/uploads/${imageName}`
+        image: imageFile ? URL.createObjectURL(imageFile) : config.defaultImage
       }]);
 
     } catch (error) {
@@ -195,19 +225,29 @@ const GroupPage = ({ groupType }) => {
 
         <div className="cards">
           {groups.map((group, index) => (
-            <Card
-              key={index}
-              image={group.image}
-              title={group.name || 'Без названия'}
-              category={config.title}
-              description={group.description || 'Описание отсутствует'}
-            />
+            <div key={index} onClick={() => handleCardClick(group.name)} style={{ cursor: 'pointer' }}>
+              <Card
+                image={group.image}
+                title={group.name || 'Без названия'}
+                category={config.title}
+                description={group.description || 'Описание отсутствует'}
+              />
+            </div>
           ))}
         </div>
 
         <AddGroupButton
           onAddGroup={handleAddGroup}
         />
+
+        {selectedGroup && (
+          <GroupModal
+            group={selectedGroup}
+            onClose={handleCloseModal}
+            loading={modalLoading}
+            groupType={config.title}
+          />
+        )}
       </div>
     </div>
   );
