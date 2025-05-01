@@ -358,3 +358,16 @@ export const getTechnologyDetails = async (techName) => {
     throw error;
   }
 };
+
+export const getGroupDetails = async (groupName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/groups/name/${encodeURIComponent(groupName)}`);
+    if (!response.ok) {
+      throw new Error('Группа не найдена');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching group details:', error);
+    throw error;
+  }
+};
