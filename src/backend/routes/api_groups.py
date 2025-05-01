@@ -68,10 +68,18 @@ async def get_group_name(name: str):
                 """
                 MATCH (g)
                 WHERE (g:Category OR g:SkillGroup OR g:TechnologyGroup OR g:ToolGroup)
-                AND group.name = $name
-                OPTIONAL MATCH (g)<-[R:BELONGS_TO OR R:GROUPS_SKILL OR R:GROUPS_TECH OR R:GROUPS_TOOL]-(e:Profession OR e:Skill OR e:Technology OR e:Tool)
-                RETURN g.name AS group_name, g.description AS description, collect(e.name) AS participants
-                LIMIT 1
+                AND g.name = $name
+                OPTIONAL MATCH (g)<-[:BELONGS_TO]-(p:Profession)
+                OPTIONAL MATCH (g)<-[GROUPS_SKILL]-(s:Skill)
+                OPTIONAL MATCH (g)<-[:GROUPS_TECH]-(t:Technology)
+                OPTIONAL MATCH (g)<-[:GROUPS_TOOL]-(tool:Tool)
+                WITH g, collect(DISTINCT p.name) AS professions, 
+                    collect(DISTINCT s.name) AS skills, 
+                    collect(DISTINCT t.name) AS technologies, 
+                    collect(DISTINCT tool.name) AS tools
+                RETURN g.name AS group_name, g.description AS description, 
+                    professions + skills + technologies + tools AS participants
+                LIMIT 1 
                 """,
                 {"name": name}
             )
