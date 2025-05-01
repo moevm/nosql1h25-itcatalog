@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
 import AddSkillButton from '../../components/AddSkillButton/AddSkillButton';
+import SkillModal from '../../components/SkillModal/SkillModal';
 import { v4 as uuidv4 } from 'uuid';
-import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, getIdByName, add } from '../../services/api';
+
+import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, getIdByName, add, getSkillDetails } from '../../services/api';
 
 const SkillsPage = () => {
   const [skills, setSkills] = useState([]);
@@ -12,6 +14,8 @@ const SkillsPage = () => {
   const [error, setError] = useState(null);
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedSkill, setSelectedSkill] = useState(null); 
+  const [modalLoading, setModalLoading] = useState(false); 
 
   useEffect(() => {
     const loadData = async () => {
@@ -143,6 +147,23 @@ const SkillsPage = () => {
     }
   };  
 
+  const handleCardClick = async (skillName) => {
+    try {
+      setModalLoading(true);
+      const skillDetails = await getSkillDetails(skillName);
+      setSelectedSkill(skillDetails);
+    } catch (error) {
+      console.error('Error fetching skill details:', error);
+      setError('Не удалось загрузить данные навыка');
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedSkill(null);
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -161,12 +182,13 @@ const SkillsPage = () => {
         />
         <div className="cards">
           {skills.map((skill, index) => (
-            <Card
-              key={index}
-              title={skill.skill}
-              category={skill.skill_group}
-              image={skill.image}
-            />
+            <div key={index} onClick={() => handleCardClick(skill.skill)} style={{ cursor: 'pointer' }}>
+              <Card
+                title={skill.skill}
+                category={skill.skill_group}
+                image={skill.image}
+              />
+            </div>
           ))}
         </div>
 
@@ -174,6 +196,14 @@ const SkillsPage = () => {
           groups={groups.map(g => g.name)}
           onAddSkill={handleAddSkill}
         />
+
+        {selectedSkill && (
+          <SkillModal
+            skill={selectedSkill}
+            onClose={handleCloseModal}
+            loading={modalLoading}
+          />
+        )}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import Filters from '../../components/Filters/GroupFilter';
 import AddToolButton from '../../components/AddToolButton/AddToolButton';
+import ToolModal from '../../components/ToolModal/ToolModal';
 import { v4 as uuidv4 } from 'uuid';
 import { 
   fetchTools, 
@@ -10,7 +11,8 @@ import {
   searchTools,
   searchToolsDescription,
   add,
-  getIdByName
+  getIdByName,
+  getToolDetails
 } from '../../services/api';
 
 const ToolsPage = () => {
@@ -21,6 +23,8 @@ const ToolsPage = () => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [searchNameTerm, setSearchNameTerm] = useState('');
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
+  const [selectedTool, setSelectedTool] = useState(null); 
+  const [modalLoading, setModalLoading] = useState(false); 
 
   useEffect(() => {
     const loadData = async () => {
@@ -155,6 +159,23 @@ const ToolsPage = () => {
     }
   };
 
+  const handleCardClick = async (toolName) => {
+    try {
+      setModalLoading(true);
+      const toolDetails = await getToolDetails(toolName);
+      setSelectedTool(toolDetails);
+    } catch (error) {
+      console.error('Error fetching tool details:', error);
+      setError('Не удалось загрузить данные инструмента');
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTool(null);
+  };
+
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
@@ -200,13 +221,14 @@ const ToolsPage = () => {
         
         <div className="cards">
           {tools.map((tool, index) => (
-            <Card
-              key={index}
-              image={tool.image ? tool.image : '/static/images/default.png'}
-              title={tool.tool}
-              category={tool.tool_group}
-              description={tool.description}
-            />
+            <div key={index} onClick={() => handleCardClick(tool.tool)}>
+              <Card
+                image={tool.image ? tool.image : '/static/images/default.png'}
+                title={tool.tool}
+                category={tool.tool_group}
+                description={tool.description}
+              />
+            </div>
           ))}
         </div>
 
@@ -214,6 +236,14 @@ const ToolsPage = () => {
           groups={groups.map(g => g.name)}
           onAddTool={handleAddTool}
         />
+
+        {selectedTool && (
+          <ToolModal
+            tool={selectedTool}
+            onClose={handleCloseModal}
+            loading={modalLoading}
+          />
+        )}
       </div>
     </div>
   );

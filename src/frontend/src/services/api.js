@@ -301,3 +301,73 @@ export const fetchGraph = async () => {
     throw error;
   }
 };
+
+export const fetchProfessionDetails = async (name) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/professions/${name}`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    const data = await response.json();
+    return {
+      ...data,
+      skills: data.skills || [],
+      technologies: data.technologies || [],
+      tools: data.tools || [],
+      description: data.description || 'Описание отсутствует'
+    };
+  } catch (error) {
+    console.error('Error fetching profession details:', error);
+    throw error;
+  }
+};
+
+export const getToolDetails = async (toolName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/tools/${toolName}`);
+    if (!response.ok) {
+      throw new Error('Инструмент не найден');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching tool details:', error);
+    throw error;
+  }
+};
+
+export const getSkillDetails = async (skillName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/skills/${skillName}`);
+    if (!response.ok) {
+      throw new Error('Навык не найден');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching skill details:', error);
+    throw error;
+  }
+};
+
+export const getTechnologyDetails = async (techName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/technologies/${techName}`);
+    if (!response.ok) {
+      throw new Error('Технология не найдена');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching technology details:', error);
+    throw error;
+  }
+};
+
+export const getGroupDetails = async (groupName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/groups/name/${encodeURIComponent(groupName)}`);
+    if (!response.ok) {
+      throw new Error('Группа не найдена');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching group details:', error);
+    throw error;
+  }
+};
