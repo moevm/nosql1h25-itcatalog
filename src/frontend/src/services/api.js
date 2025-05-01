@@ -332,3 +332,29 @@ export const getToolDetails = async (toolName) => {
     throw error;
   }
 };
+
+export const getSkillDetails = async (skillName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/skills/${skillName}`);
+    if (!response.ok) {
+      throw new Error('Навык не найден');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching skill details:', error);
+    throw error;
+  }
+};
+
+export const getTechnologyDetails = async (techName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/technologies/${techName}`);
+    if (!response.ok) {
+      throw new Error('Технология не найдена');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching technology details:', error);
+    throw error;
+  }
+};
