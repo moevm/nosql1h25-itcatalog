@@ -291,11 +291,17 @@ export const getIdByName = async (name) => {
   }
 };
 
-export const fetchGraph = async () => {
+export const fetchGraph = async (filter = "") => {
+  const VALID_FILTERS = ["", "/professions", "/skills", "/technologies", "/tools", "/categories", "/skillgroups", "/technologygroups", "/toolgroups"];
   try {
-    const response = await fetch(`${API_BASE_URL}/graph`);
+    if (!VALID_FILTERS.includes(filter)) {
+      throw new Error(`Invalid filter value: ${filter}. Expected one of: ${VALID_FILTERS.join(", ")}`);
+    }
+
+    const response = await fetch(`${API_BASE_URL}/graph${filter}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
+    
   } catch (error) {
     console.error(`Error fetching graph:`, error);
     throw error;
