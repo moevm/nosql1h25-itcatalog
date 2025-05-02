@@ -5,10 +5,11 @@ import './GraphPage.css';
 
 const GraphPage = () => {
   const canvasRef = useRef(null);
-  const [activeFilter, setActiveFilter] = useState('');
+  const [activeFilters, setActiveFilters] = useState([]);
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  
   const filters = [
     { label: 'Всё', value: '' },
     { label: 'Профессии', value: '/professions' },
@@ -21,12 +22,62 @@ const GraphPage = () => {
     { label: 'Группы инструментов', value: '/toolgroups' }
   ];
 
+  const handleFilterChange = (value) => {
+    setActiveFilters(prev => {
+      if (value === '') {
+        return [];
+      }
+      if (prev.includes(value)) {
+        return prev.filter(v => v !== value);
+      }
+      return [...prev, value];
+    });
+  };
+
+  const mergeGraphData = (dataArray) => {
+    const mergedNodes = [];
+    const mergedLinks = [];
+    const nodeIds = new Set();
+    const linkIds = new Set();
+
+    dataArray.forEach(data => {
+      data.nodes.forEach(node => {
+        if (!nodeIds.has(node.id)) {
+          nodeIds.add(node.id);
+          mergedNodes.push(node);
+        }
+      });
+
+      data.links.forEach(link => {
+        const linkKey = `${link.source}-${link.target}`;
+        if (!linkIds.has(linkKey)) {
+          linkIds.add(linkKey);
+          mergedLinks.push(link);
+        }
+      });
+    });
+
+    return { nodes: mergedNodes, links: mergedLinks };
+  };
+
+
   useEffect(() => {
     const loadGraphData = async () => {
       try {
         setLoading(true);
-        const data = await fetchGraph(activeFilter);
-        setGraphData(data);
+        
+        if (activeFilters.length === 0) {
+          const data = await fetchGraph('');
+          setGraphData(data);
+          return;
+        }
+
+        const allData = await Promise.all(
+          activeFilters.map(filter => fetchGraph(filter))
+        );
+
+        const mergedData = mergeGraphData(allData);
+        setGraphData(mergedData);
       } catch (error) {
         console.error('Error loading graph data:', error);
       } finally {
@@ -35,7 +86,8 @@ const GraphPage = () => {
     };
 
     loadGraphData();
-  }, [activeFilter]);
+  }, [activeFilters]);
+
 
   useEffect(() => {
     if (!graphData) return;
@@ -129,11 +181,11 @@ const GraphPage = () => {
             context.clearRect(0, 0, width, height);
             drawGraphElements();
             context.restore();
-            ``` // Нервный граф
-            if (window.currentSimulation && window.currentSimulation.alpha() < 0.001) {
-              window.currentSimulation.alpha(0.1).restart();
-            }
-            ```
+
+            // Нервный граф
+            //if (window.currentSimulation && window.currentSimulation.alpha() < 0.001) {
+            //  window.currentSimulation.alpha(0.1).restart();
+            //}
           });
 
         const zoom = d3.zoom()
@@ -219,10 +271,13 @@ const GraphPage = () => {
         <div className="graph-filters">
           {filters.map(filter => (
             <button
-              key={filter.value}
-              className={`filter-button ${activeFilter === filter.value ? 'active' : ''}`}
-              onClick={() => setActiveFilter(filter.value)}
-            >
+            key={filter.value}
+            className={`filter-button ${
+              (filter.value === '' && activeFilters.length === 0) || 
+              activeFilters.includes(filter.value) ? 'active' : ''
+            }`}
+            onClick={() => handleFilterChange(filter.value)}
+          >
               {filter.label}
             </button>
           ))}
