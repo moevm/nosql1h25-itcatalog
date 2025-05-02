@@ -115,5 +115,15 @@
 
 #### Граф
 
-`@app.post("/api/graph")`
+`@app.post("/api/graph")` </br>
 `http GET http://localhost:8000/api/graph`
+- фильтрация: `@app.post("/api/graph/{entity}")`
+    * `http GET http://localhost:8000/api/graph/professions`
+    * `http GET http://localhost:8000/api/graph/skills`
+    * `http GET http://localhost:8000/api/graph/technologies`
+    * `http GET http://localhost:8000/api/graph/tools`
+    * `http GET http://localhost:8000/api/graph/categories`
+    * `http GET http://localhost:8000/api/graph/skillgroups`
+    * `http GET http://localhost:8000/api/graph/technologygroups`
+    * `http GET http://localhost:8000/api/graph/toolgroups`
+- поиск:
