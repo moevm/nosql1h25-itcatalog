@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver
-from utils import check_node_exists, create_node, create_relationship
+from utils import check_node_exists, create_node, create_relationship,update_node, delete_relationship
 import json
 
 router = APIRouter(prefix="/api", tags=["redact"])
@@ -68,6 +68,54 @@ async def add_node(file: UploadFile = File(...)):
                 )
 
         return { "status": "node added" }
+
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=422, detail="Invalid JSON file")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+        
+        
+@router.put("/edit")
+async def edit_node(file: UploadFile = File(...)):
+    try:
+        contents = await file.read()
+        data = json.loads(contents)
+
+        with driver.session() as session:
+            for node in data.get("nodes", []):
+                name=node.get("old_name")
+                new_label = node.get("label")
+                new_properties = node.get("properties", {})
+                new_name = new_properties.get("name")
+
+                if not name:
+                    continue
+
+                session.execute_write(
+                        update_node,
+                        name,
+                        new_name,
+                        new_label,
+                        new_properties
+                    )
+
+            for rel_group in data.get("relationships", []):
+                for rel in rel_group.get("add_rel", []):
+                    session.execute_write(
+                        create_relationship, 
+                        rel["startNode"],
+                        rel["endNode"],
+                        rel["type"]
+                    )
+
+                for rel in rel_group.get("del_rel", []):
+                    session.execute_write(
+                        delete_relationship,  
+                        rel["startNode"],
+                        rel["endNode"],
+                        rel["type"]
+                    )
+        return { "status": "node edited" }
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=422, detail="Invalid JSON file")
