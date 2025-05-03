@@ -129,6 +129,9 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
       formData.append("file", blob, "data.json");
   
       await onEdit(formData);   
+
+      setIsEditing(false);
+    
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
       alert(`Ошибка сохранения: ${error.message}`);
