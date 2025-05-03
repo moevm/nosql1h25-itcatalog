@@ -263,7 +263,6 @@ const ProfessionsPage = () => {
       await editProfession(formData);
       const updatedProfessions = await fetchProfessions();
       setProfessions(updatedProfessions);
-      setIsModalOpen(false);
     } catch (error) {
       console.error('Error editing profession:', error);
     } finally {
