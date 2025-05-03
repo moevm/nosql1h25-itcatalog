@@ -377,3 +377,22 @@ export const getGroupDetails = async (groupName) => {
     throw error;
   }
 };
+
+export const editProfession = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/edit`, {
+      method: 'PUT',
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to edit profession');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error editing profession:', error);
+    throw error;
+  }
+};
