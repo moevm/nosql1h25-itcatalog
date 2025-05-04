@@ -374,7 +374,7 @@ export const getGroupDetails = async (groupName) => {
   }
 };
 
-export const editProfession = async (formData) => {
+export const editCard = async (formData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/edit`, {
       method: 'PUT',
@@ -383,12 +383,12 @@ export const editProfession = async (formData) => {
     
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to edit profession');
+      throw new Error(errorData.message || 'Failed to edit card');
     }
     
     return await response.json();
   } catch (error) {
-    console.error('Error editing profession:', error);
+    console.error('Error editing card:', error);
     throw error;
   }
 };
