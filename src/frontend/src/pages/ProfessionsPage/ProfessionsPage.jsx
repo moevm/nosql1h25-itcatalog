@@ -1,314 +1,390 @@
-import React, { useEffect, useState } from 'react';
-import Card from '../../components/Card/Card';
-import Filters from '../../components/Filters/Filters';
-import AddButton from '../../components/AddButton/AddButton';
-import ProfessionModal from '../../components/ProfessionModal/ProfessionModal';
-import { v4 as uuidv4 } from 'uuid';
-
+import React, { useState, useEffect } from 'react';
+import './ProfessionModal.css';
 import { 
-  fetchProfessions, 
-  fetchGroups, 
-  fetchTools, 
-  fetchTechnologies,
-  fetchSkills,
-  fetchProfessionsFilteredByCategory,
-  fetchProfessionsFilteredByTool,
-  fetchProfessionsFilteredByTechnology,
-  searchProfessions,
-  add,
-  getIdByName,
-  fetchProfessionDetails
+  getIdByName
 } from '../../services/api';
 
-const ProfessionsPage = () => {
-  const [professions, setProfessions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    categories: [],
+const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologies, allTools }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedData, setEditedData] = useState({
+    profession: '',
+    skills: [],
+    technologies: [],
     tools: [],
-    technologies: []
+    image: '/static/images/default.png'
   });
-  const [allCategories, setAllCategories] = useState([]);
-  const [allTools, setAllTools] = useState([]);
-  const [allTechnologies, setAllTechnologies] = useState([]);
-  const [allSkills, setAllSkills] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedProfession, setSelectedProfession] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Загрузка начальных данных
-  useEffect(() => {
-    const loadInitialData = async () => {
-      try {
-        setLoading(true);
-        const [professionsData, categoriesData, toolsData, techData, skillsData] = await Promise.all([
-          fetchProfessions(),
-          fetchGroups('categories'),
-          fetchTools(),
-          fetchTechnologies(),
-          fetchSkills()
-        ]);
-        
-        setProfessions(professionsData);
-        setAllCategories(categoriesData);
-        setAllTools(toolsData);
-        setAllTechnologies(techData);
-        setAllSkills(skillsData);
-      } catch (error) {
-        console.error('Error loading initial data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadInitialData();
-  }, []);
-
-  useEffect(() => {
-    const filterProfessions = async () => {
-      try {
-        setLoading(true);
-        let filteredProfessions = [];
-        
-        if (searchTerm && searchTerm.trim() !== '') {
-          filteredProfessions = await searchProfessions(searchTerm);
-          
-          if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
-            let filteredByCategories = [];
-            let filteredByTools = [];
-            let filteredByTechnologies = [];
-            
-            if (filters.categories.length > 0) {
-              const categoryPromises = filters.categories.map(catId => 
-                fetchProfessionsFilteredByCategory(catId)
-              );
-              filteredByCategories = (await Promise.all(categoryPromises)).flat();
-            }
-            
-            if (filters.tools.length > 0) {
-              const toolPromises = filters.tools.map(toolId => 
-                fetchProfessionsFilteredByTool(toolId)
-              );
-              filteredByTools = (await Promise.all(toolPromises)).flat();
-            }
-            
-            if (filters.technologies.length > 0) {
-              const techPromises = filters.technologies.map(techId => 
-                fetchProfessionsFilteredByTechnology(techId)
-              );
-              filteredByTechnologies = (await Promise.all(techPromises)).flat();
-            }
-            
-            const allFilteredResults = [
-              ...filteredByCategories,
-              ...filteredByTools,
-              ...filteredByTechnologies
-            ];
-            
-            filteredProfessions = filteredProfessions.filter(searchProf => 
-              allFilteredResults.some(filterProf => 
-                filterProf.profession === searchProf.profession
-              )
-            );
-          }
-        } else if (filters.categories.length > 0 || filters.tools.length > 0 || filters.technologies.length > 0) {
-          const categoryPromises = filters.categories.map(catId => 
-            fetchProfessionsFilteredByCategory(catId)
-          );
-          
-          const toolPromises = filters.tools.map(toolId => 
-            fetchProfessionsFilteredByTool(toolId)
-          );
-          
-          const techPromises = filters.technologies.map(techId => 
-            fetchProfessionsFilteredByTechnology(techId)
-          );
-          
-          const [categoryResults, toolResults, techResults] = await Promise.all([
-            Promise.all(categoryPromises),
-            Promise.all(toolPromises),
-            Promise.all(techPromises)
-          ]);
-          
-          const allResults = [
-            ...categoryResults.flat(),
-            ...toolResults.flat(),
-            ...techResults.flat()
-          ];
-          
-          filteredProfessions = allResults.filter((prof, index, self) =>
-            index === self.findIndex(p => p.profession === prof.profession)
-          );
-        } else {
-          filteredProfessions = await fetchProfessions();
-        }
-        
-        setProfessions(filteredProfessions);
-      } catch (error) {
-        console.error('Error filtering professions:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    filterProfessions();
-  }, [filters, searchTerm]);
-
-  const handleFilterChange = (type, id) => {
-    setFilters(prev => ({
-      ...prev,
-      [type]: prev[type].includes(id)
-        ? prev[type].filter(item => item !== id)
-        : [...prev[type], id]
-    }));
+  const getDisplayName = (item) => {
+    if (!item) return '';
+    if (typeof item === 'string') return item;
+    return item.name || item.skill || item.technology || item.tool || '';
   };
 
-  const handleSearchChange = (term) => {
-    setSearchTerm(term);
-  };
-
-  const handleCardClick = async (professionName) => {
-    try {
-      setLoading(true);
-      const professionData = await fetchProfessionDetails(professionName);
-      setSelectedProfession(professionData);
-      setIsModalOpen(true);
-    } catch (err) {
-      console.error('Error fetching profession details:', err);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (profession) {
+      setEditedData({
+        profession: getDisplayName(profession.profession),
+        skills: profession.skills ? profession.skills.map(s => getDisplayName(s)) : [],
+        technologies: profession.technologies ? profession.technologies.map(t => getDisplayName(t)) : [],
+        tools: profession.tools ? profession.tools.map(t => getDisplayName(t)) : [],
+        image: profession.image || '/static/images/default.png'
+      });
+      setIsEditing(false);
     }
+  }, [profession]);
+
+  const [availableSkills, setAvailableSkills] = useState([]);
+  const [availableTechnologies, setAvailableTechnologies] = useState([]);
+  const [availableTools, setAvailableTools] = useState([]);
+
+  useEffect(() => {
+    const currentSkillNames = editedData.skills.map(getDisplayName);
+    setAvailableSkills(
+      allSkills.filter(skill => !currentSkillNames.includes(getDisplayName(skill)))
+    );
+    
+    const currentTechNames = editedData.technologies.map(getDisplayName);
+    setAvailableTechnologies(
+      allTechnologies.filter(tech => !currentTechNames.includes(getDisplayName(tech)))
+    );
+    
+    const currentToolNames = editedData.tools.map(getDisplayName);
+    setAvailableTools(
+      allTools.filter(tool => !currentToolNames.includes(getDisplayName(tool)))
+    );
+  }, [allSkills, allTechnologies, allTools, editedData]);
+
+  if (!profession) return null;
+
+  const handleEditClick = () => {
+    setIsEditing(true);
   };
 
-  const handleAddProfession = async (professionData) => {
+  const handleSaveClick = async () => {
     try {
-      setLoading(true);
-  
-      const professionName = professionData.profession;
-      const categoryName = professionData.category;
-      const skills = professionData.skills || [];
-      const technologies = professionData.technologies || [];
-      const tools = professionData.tools || [];
-  
-      const professionId = uuidv4();
-  
-      const category = allCategories.find(cat => 
-        cat.name === categoryName || cat.category === categoryName
-      );
-      const categoryId = category?.id || await getIdByName(categoryName);
-      
-      const skillIds = await Promise.all(skills.map(getIdByName));
-      const techIds = await Promise.all(technologies.map(getIdByName));
-      const toolIds = await Promise.all(tools.map(getIdByName));
-  
-      // Узел профессии
-      const nodes = [
-        {
-          label: "Profession",
-          properties: {
-            id: professionId,
-            name: professionName,
-            image: professionData.image?.name || "default.png",
-          },
-        },
-      ];
-  
-      // Связи
-      const relationships = [
-        {
-          startNode: professionId,
-          endNode: categoryId,
-          type: "BELONGS_TO",
-        },
-        ...skillIds.map((id) => ({
-          startNode: professionId,
-          endNode: id,
-          type: "REQUIRES",
-        })),
-        ...techIds.map((id) => ({
-          startNode: professionId,
-          endNode: id,
-          type: "USES_TECH",
-        })),
-        ...toolIds.map((id) => ({
-          startNode: professionId,
-          endNode: id,
-          type: "USES_TOOL",
-        })),
-      ];
-  
-      const data = { nodes, relationships };
+      const professionId = await getIdByName(profession.profession);
+      if (!professionId) {
+        throw new Error(`Не удалось получить ID для профессии: ${profession.profession}`);
+      }
+
+      const professionNode = {
+        old_name: profession.profession,
+        label: "Profession",
+        properties: {
+          id: professionId,
+          name: editedData.profession
+        }
+      };
+
+      if (editedData.image && editedData.image !== profession.image) {
+        professionNode.properties.image = editedData.image;
+      }
+
+      const getItemId = async (itemName) => {
+        const id = await getIdByName(itemName);
+        if (!id) console.warn(`Не найден ID для: ${itemName}`);
+        return id;
+      };
+
+      const [
+        currentSkillIds,
+        originalSkillIds,
+        currentTechIds,
+        originalTechIds,
+        currentToolIds,
+        originalToolIds
+      ] = await Promise.all([
+        Promise.all((editedData.skills || []).map(getItemId)),
+        Promise.all((profession.skills?.map(getDisplayName) || []).map(getItemId)),
+        Promise.all((editedData.technologies || []).map(getItemId)),
+        Promise.all((profession.technologies?.map(getDisplayName) || []).map(getItemId)),
+        Promise.all((editedData.tools || []).map(getItemId)),
+        Promise.all((profession.tools?.map(getDisplayName) || []).map(getItemId))
+      ]);
+
+      const getRelations = (current, original, type) => {
+        const added = current.filter(id => id && !original.includes(id))
+          .map(endNode => ({ startNode: professionId, endNode, type }));
+        const removed = original.filter(id => id && !current.includes(id))
+          .map(endNode => ({ startNode: professionId, endNode, type }));
+        return { added, removed };
+      };
+
+      const { added: addedSkills, removed: removedSkills } = 
+        getRelations(currentSkillIds, originalSkillIds, "REQUIRES");
+      const { added: addedTechs, removed: removedTechs } = 
+        getRelations(currentTechIds, originalTechIds, "USES_TECH");
+      const { added: addedTools, removed: removedTools } = 
+        getRelations(currentToolIds, originalToolIds, "USES_TOOL");
+
+      const data = {
+        nodes: [professionNode],
+        relationships: [{
+          add_rel: [...addedSkills, ...addedTechs, ...addedTools],
+          del_rel: [...removedSkills, ...removedTechs, ...removedTools]
+        }]
+      };
+
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-  
-      await add(formData);
-  
-      const newProfession = {
-        profession: professionName,
-        category: categoryName,
-        image: professionData.image?.name || '/static/images/default.png',
-      };
-  
-      setProfessions((prev) => [...prev, newProfession]);
-  
+
+      await onEdit(formData);   
+
+      profession.profession = editedData.profession;
+      profession.skills = editedData.skills;
+      profession.technologies = editedData.technologies;
+      profession.tools = editedData.tools;
+      setIsEditing(false);
+    
     } catch (error) {
-      console.error("Ошибка при добавлении профессии:", error);
-    } finally {
-      setLoading(false);
+      console.error("Ошибка при сохранении:", error);
+      alert(`Ошибка сохранения: ${error.message}`);
     }
   };
 
-  return (
-    <div className="page active">
-      <div className="container">
-        <Filters 
-          categories={allCategories.map(cat => cat.name || cat.category || cat)} 
-          tools={allTools} 
-          technologies={allTechnologies} 
-          selectedFilters={filters}
-          onFilterChange={handleFilterChange}
-          showSearch={true}
-          searchPlaceholder="Поиск профессий..."  
-          searchTerm={searchTerm} 
-          onSearchChange={handleSearchChange} 
-        />
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setEditedData({
+      profession: getDisplayName(profession.profession),
+      skills: profession.skills ? profession.skills.map(getDisplayName) : [],
+      technologies: profession.technologies ? profession.technologies.map(getDisplayName) : [],
+      tools: profession.tools ? profession.tools.map(getDisplayName) : [],
+      image: profession.image || '/static/images/default.png'
+    });
+  };
 
-        {loading ? (
-          <p>Загрузка...</p>
-        ) : professions.length === 0 ? (
-          <p>Профессии не найдены.</p>
-        ) : (
-          <div className="cards">
-            {professions.map((profession, index) => (
-              <Card
-                key={index}
-                image={profession.image || '/static/images/default.png'}
-                title={profession.profession}
-                category={profession.category}
-                onClick={() => handleCardClick(profession.profession)}
-              />
-            ))}
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddItem = (field, value) => {
+    if (!value) return;
+    setEditedData(prev => ({
+      ...prev,
+      [field]: [...prev[field], value]
+    }));
+  };
+
+  const handleRemoveItem = (field, index) => {
+    setEditedData(prev => ({
+      ...prev,
+      [field]: prev[field].filter((_, i) => i !== index)
+    }));
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <div className="image-container">
+            <img
+              src={editedData.image}
+              alt={editedData.profession}
+              className="modal-image"
+            />
+            {!isEditing && (
+              <button className="edit-button" onClick={handleEditClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </button>
+            )}
+          </div>
+          
+          {isEditing ? (
+            <input
+              type="text"
+              name="profession"
+              value={editedData.profession}
+              onChange={handleInputChange}
+              className="edit-title-input"
+            />
+          ) : (
+            <h1 className="profession-title">{editedData.profession}</h1>
+          )}
+          
+          <button className="modal-close" onClick={onClose}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        {isEditing && (
+          <div className="edit-controls">
+            <button className="save-button" onClick={handleSaveClick}>
+              Сохранить
+            </button>
+            <button className="cancel-button" onClick={handleCancelClick}>
+              Отмена
+            </button>
           </div>
         )}
 
-        <AddButton 
-          categories={allCategories.map(cat => cat.name || cat.category || cat)}
-          skills={allSkills}
-          technologies={allTechnologies}
-          tools={allTools}
-          onAddProfession={handleAddProfession}
-        />
+        <div className="modal-body">
+          <div className="skills-section">
+            <h2 className="section-title">НАВЫКИ</h2>
+            {isEditing ? (
+              <div className="edit-section">
+                <div className="current-items">
+                  {editedData.skills.map((skill, index) => (
+                    <div key={index} className="item-tag">
+                      <span>{skill}</span>
+                      <button 
+                        className="remove-item-button"
+                        onClick={() => handleRemoveItem('skills', index)}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="add-item-control">
+                  <select
+                    className="add-select"
+                    onChange={(e) => {
+                      handleAddItem('skills', e.target.value);
+                      e.target.value = '';
+                    }}
+                    value=""
+                  >
+                    <option value="">Добавить навык...</option>
+                    {availableSkills.map((skill, index) => (
+                      <option key={index} value={getDisplayName(skill)}>
+                        {getDisplayName(skill)}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="select-arrow">▼</div>
+                </div>
+              </div>
+            ) : (
+              <ul className="skills-list">
+                {editedData.skills?.length > 0 ? (
+                  editedData.skills.map((skill, index) => (
+                    <li key={index} className="skill-item">{skill}</li>
+                  ))
+                ) : (
+                  <li className="no-items">Не указано</li>
+                )}
+              </ul>
+            )}
+          </div>
 
-        {isModalOpen && (
-          <ProfessionModal 
-            profession={selectedProfession} 
-            onClose={() => setIsModalOpen(false)} 
-          />
-        )}
+          <div className="technologies-section">
+            <h2 className="section-title">ТЕХНОЛОГИИ</h2>
+            {isEditing ? (
+              <div className="edit-section">
+                <div className="current-items">
+                  {editedData.technologies.map((tech, index) => (
+                    <div key={index} className="item-tag">
+                      <span>{tech}</span>
+                      <button 
+                        className="remove-item-button"
+                        onClick={() => handleRemoveItem('technologies', index)}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="add-item-control">
+                  <select
+                    className="add-select"
+                    onChange={(e) => {
+                      handleAddItem('technologies', e.target.value);
+                      e.target.value = '';
+                    }}
+                    value=""
+                  >
+                    <option value="">Добавить технологию...</option>
+                    {availableTechnologies.map((tech, index) => (
+                      <option key={index} value={getDisplayName(tech)}>
+                        {getDisplayName(tech)}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="select-arrow">▼</div>
+                </div>
+              </div>
+            ) : (
+              <ul className="technologies-list">
+                {editedData.technologies?.length > 0 ? (
+                  editedData.technologies.map((tech, index) => (
+                    <li key={index} className="technology-item">{tech}</li>
+                  ))
+                ) : (
+                  <li className="no-items">Не указано</li>
+                )}
+              </ul>
+            )}
+          </div>
+
+          <div className="tools-section">
+            <h2 className="section-title">ИНСТРУМЕНТЫ</h2>
+            {isEditing ? (
+              <div className="edit-section">
+                <div className="current-items">
+                  {editedData.tools.map((tool, index) => (
+                    <div key={index} className="item-tag">
+                      <span>{tool}</span>
+                      <button 
+                        className="remove-item-button"
+                        onClick={() => handleRemoveItem('tools', index)}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="add-item-control">
+                  <select
+                    className="add-select"
+                    onChange={(e) => {
+                      handleAddItem('tools', e.target.value);
+                      e.target.value = '';
+                    }}
+                    value=""
+                  >
+                    <option value="">Добавить инструмент...</option>
+                    {availableTools.map((tool, index) => (
+                      <option key={index} value={getDisplayName(tool)}>
+                        {getDisplayName(tool)}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="select-arrow">▼</div>
+                </div>
+              </div>
+            ) : (
+              <ul className="tools-list">
+                {editedData.tools?.length > 0 ? (
+                  editedData.tools.map((tool, index) => (
+                    <li key={index} className="tool-item">{tool}</li>
+                  ))
+                ) : (
+                  <li className="no-items">Не указано</li>
+                )}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProfessionsPage;
+export default ProfessionModal;

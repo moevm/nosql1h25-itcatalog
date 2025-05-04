@@ -5,9 +5,11 @@ import json
 
 router = APIRouter(prefix="/api", tags=["redact"])
 
-@router.get("/get_id/{name}")
-async def get_id(name: str):
+@router.get("/get_id")
+async def get_id(name: str):  
     try:
+        decoded_name = unquote(name)
+        
         with driver.session() as session:
             result = session.run(
                 """
@@ -15,22 +17,14 @@ async def get_id(name: str):
                 RETURN n.id AS id
                 LIMIT 1
                 """,
-                {"name": name}
+                {"name": decoded_name}
             )
             record = result.single()
             if not record:
-                raise HTTPException(
-                    status_code=404,
-                    detail=f"Node with name '{name}' not found"
-                )
+                raise HTTPException(status_code=404, detail="Node not found")
             return {"id": record["id"]}
-    except HTTPException:
-        raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal server error: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/add")
 async def add_node(file: UploadFile = File(...)):
