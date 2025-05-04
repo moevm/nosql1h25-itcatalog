@@ -16,7 +16,7 @@ import {
   fetchProfessionsFilteredByTechnology,
   searchProfessions,
   add,
-  editProfession,
+  editCard,
   getIdByName,
   fetchProfessionDetails
 } from '../../services/api';
@@ -260,16 +260,24 @@ const ProfessionsPage = () => {
   const handleEditProfession = async (formData) => {
     try {
       setLoading(true);
-      await editProfession(formData);
+      await editCard(formData);
       const updatedProfessions = await fetchProfessions();
       setProfessions(updatedProfessions);
+      
+      if (selectedProfession) {
+        const updatedProfession = updatedProfessions.find(p => 
+          p.profession === selectedProfession.profession
+        );
+        if (updatedProfession) {
+          setSelectedProfession(updatedProfession);
+        }
+      }
     } catch (error) {
       console.error('Error editing profession:', error);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="page active">
       <div className="container">
