@@ -1,21 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import './ToolModal.css';
-import { getIdByName } from '../../services/api';
+import { getIdByName, fetchProfessions } from '../../services/api';
 
 const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     name: '',
     description: '',
-    group: ''
+    group: '',
+    professions: []
   });
+  const [allProfessions, setAllProfessions] = useState([]);
+  const [professionsLoading, setProfessionsLoading] = useState(false);
+
+  useEffect(() => {
+    const loadProfessions = async () => {
+      try {
+        setProfessionsLoading(true);
+        const professions = await fetchProfessions();
+        setAllProfessions(professions.map(p => p.profession));
+      } catch (error) {
+        console.error('Error loading professions:', error);
+      } finally {
+        setProfessionsLoading(false);
+      }
+    };
+    
+    loadProfessions();
+  }, []);
 
   useEffect(() => {
     if (tool) {
       setEditedData({
         name: tool.tool || '',
         description: tool.description || '',
-        group: tool.tool_group || ''
+        group: tool.tool_group || '',
+        professions: tool.professions || []
       });
     }
   }, [tool]);
@@ -31,6 +51,59 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
         throw new Error(`Не удалось получить ID для инструмента: ${tool.tool}`);
       }
 
+      const getItemId = async (itemName) => {
+        const id = await getIdByName(itemName);
+        if (!id) console.warn(`Не найден ID для: ${itemName}`);
+        return id;
+      };
+
+      const [
+        currentGroupId,
+        originalGroupId,
+        currentProfessionIds,
+        originalProfessionIds
+      ] = await Promise.all([
+        getItemId(editedData.group),
+        getItemId(tool.tool_group),
+        Promise.all((editedData.professions || []).map(getItemId)),
+        Promise.all((tool.professions || []).map(getItemId))
+      ]);
+
+      const getRelations = (current, original, type) => {
+        const added = current.filter(id => id && !original.includes(id))
+          .map(endNode => ({ startNode: toolId, endNode, type }));
+        const removed = original.filter(id => id && !current.includes(id))
+          .map(endNode => ({ startNode: toolId, endNode, type }));
+        return { added, removed };
+      };
+
+      const groupRelations = {
+        add_rel: [],
+        del_rel: []
+      };
+
+      if (currentGroupId !== originalGroupId) {
+        if (originalGroupId) {
+          groupRelations.del_rel.push({
+            startNode: toolId,
+            endNode: originalGroupId,
+            type: "GROUPS_TOOL"
+          });
+        }
+        if (currentGroupId) {
+          groupRelations.add_rel.push({
+            startNode: toolId,
+            endNode: currentGroupId,
+            type: "GROUPS_TOOL"
+          });
+        }
+      }
+
+      const { 
+        added: addedProfessions, 
+        removed: removedProfessions 
+      } = getRelations(currentProfessionIds, originalProfessionIds, "USES_TOOL");
+
       const data = {
         nodes: [
           {
@@ -39,12 +112,14 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
             properties: {
               id: toolId,
               name: editedData.name,
-              description: editedData.description,
-              group: editedData.group
+              description: editedData.description
             }
           }
         ],
-        relationships: []
+        relationships: [{
+          add_rel: [...groupRelations.add_rel, ...addedProfessions],
+          del_rel: [...groupRelations.del_rel, ...removedProfessions]
+        }]
       };
 
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
@@ -52,6 +127,12 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
       formData.append("file", blob, "data.json");
 
       await onEdit(formData);
+      
+      tool.tool = editedData.name;
+      tool.description = editedData.description;
+      tool.tool_group = editedData.group;
+      tool.professions = editedData.professions;
+      
       setIsEditing(false);
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
@@ -64,7 +145,8 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
     setEditedData({
       name: tool.tool || '',
       description: tool.description || '',
-      group: tool.tool_group || ''
+      group: tool.tool_group || '',
+      professions: tool.professions || []
     });
   };
 
@@ -72,6 +154,25 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
     const { name, value } = e.target;
     setEditedData(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleAddProfession = (profession) => {
+    if (!profession) return;
+    setEditedData(prev => ({
+      ...prev,
+      professions: [...prev.professions, profession]
+    }));
+  };
+
+  const handleRemoveProfession = (index) => {
+    setEditedData(prev => ({
+      ...prev,
+      professions: prev.professions.filter((_, i) => i !== index)
+    }));
+  };
+
+  const availableProfessions = allProfessions.filter(
+    p => !editedData.professions.includes(p)
+  );
 
   if (!tool) return null;
 
@@ -154,6 +255,7 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
                     onChange={handleInputChange}
                     className="edit-group-select"
                   >
+                    <option value="">Выберите группу</option>
                     {allGroups.map((group, index) => (
                       <option key={index} value={group.name}>
                         {group.name}
@@ -165,16 +267,56 @@ const ToolModal = ({ tool, onClose, onEdit, allGroups, loading }) => {
                 )}
               </div>
 
-              {tool.professions?.length > 0 && (
-                <div className="professions-section">
-                  <h2 className="section-title">ИСПОЛЬЗУЕТСЯ В ПРОФЕССИЯХ</h2>
+              <div className="professions-section">
+                <h2 className="section-title">ИСПОЛЬЗУЕТСЯ В ПРОФЕССИЯХ</h2>
+                {isEditing ? (
+                  <div className="edit-professions">
+                    <div className="current-professions">
+                      {editedData.professions.map((profession, index) => (
+                        <div key={index} className="profession-tag">
+                          <span>{profession}</span>
+                          <button 
+                            onClick={() => handleRemoveProfession(index)}
+                            className="remove-profession-button"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="add-profession-control">
+                      {professionsLoading ? (
+                        <div>Загрузка профессий...</div>
+                      ) : (
+                        <select
+                          onChange={(e) => {
+                            handleAddProfession(e.target.value);
+                            e.target.value = '';
+                          }}
+                          value=""
+                        >
+                          <option value="">Добавить профессию...</option>
+                          {availableProfessions.map((profession, index) => (
+                            <option key={index} value={profession}>
+                              {profession}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  </div>
+                ) : (
                   <ul className="professions-list">
-                    {tool.professions.map((profession, index) => (
-                      <li key={index} className="profession-item">{profession}</li>
-                    ))}
+                    {editedData.professions.length > 0 ? (
+                      editedData.professions.map((profession, index) => (
+                        <li key={index} className="profession-item">{profession}</li>
+                      ))
+                    ) : (
+                      <li className="no-items">Не указано</li>
+                    )}
                   </ul>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </>
         )}
