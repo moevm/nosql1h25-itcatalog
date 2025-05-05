@@ -1,23 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import './TechnologyModal.css';
-import { getIdByName } from '../../services/api';
+import { getIdByName, fetchProfessions, fetchGroups } from '../../services/api';
 
-const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) => {
+const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     name: '',
     description: '',
-    group: ''
+    group: '',
+    professions: []
   });
+  const [allGroups, setAllGroups] = useState([]);
+  const [allProfessions, setAllProfessions] = useState([]);
+  const [dataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
-    if (technology) {
-      setEditedData({
-        name: technology.technology || '',
-        description: technology.description || '',
-        group: technology.technology_group || ''
-      });
-    }
+    const loadData = async () => {
+      try {
+        setDataLoading(true);
+        const [groups, professions] = await Promise.all([
+          fetchGroups('technologygroups'), 
+          fetchProfessions()
+        ]);
+        
+        setAllGroups(groups);
+        setAllProfessions(professions.map(p => p.profession));
+        
+        if (technology) {
+          setEditedData({
+            name: technology.technology || '',
+            description: technology.description || '',
+            group: technology.technology_group || '',
+            professions: technology.professions || []
+          });
+        }
+      } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
+      } finally {
+        setDataLoading(false);
+      }
+    };
+    
+    loadData();
   }, [technology]);
 
   const handleEditClick = () => {
@@ -26,30 +50,111 @@ const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) =>
 
   const handleSaveClick = async () => {
     try {
-      const data = {
-        nodes: [
-          {
-            old_name: technology.technology, 
-            label: "Technology",
-            properties: {
-              name: editedData.name,
-              description: editedData.description,
-              group: editedData.group
-            }
-          }
-        ],
-        relationships: []
+      const technologyId = await getIdByName(technology.technology);
+      if (!technologyId) {
+        throw new Error(`Не удалось получить ID для технологии: ${technology.technology}`);
+      }
+
+      const getItemId = async (itemName) => {
+        const id = await getIdByName(itemName);
+        if (!id) console.warn(`Не найден ID для: ${itemName}`);
+        return id;
       };
-  
+
+      const [
+        currentGroupId,
+        originalGroupId,
+        currentProfessionIds,
+        originalProfessionIds
+      ] = await Promise.all([
+        editedData.group ? getItemId(editedData.group) : Promise.resolve(null),
+        technology.technology_group ? getItemId(technology.technology_group) : Promise.resolve(null),
+        Promise.all(editedData.professions.map(getItemId)),
+        Promise.all((technology.professions || []).map(getItemId))
+      ]);
+
+      const groupRelations = {
+        added: [],
+        removed: []
+      };
+      
+      if (currentGroupId && currentGroupId !== originalGroupId) {
+        groupRelations.added.push({
+          type: "GROUPS_TECH",
+          startNode: technologyId,
+          endNode: currentGroupId
+        });
+      }
+      
+      if (originalGroupId && currentGroupId !== originalGroupId) {
+        groupRelations.removed.push({
+          type: "GROUPS_TECH",
+          startNode: technologyId,
+          endNode: originalGroupId
+        });
+      }
+
+      const professionRelations = {
+        added: [],
+        removed: []
+      };
+
+      for (const professionId of currentProfessionIds) {
+        if (professionId && !originalProfessionIds.includes(professionId)) {
+          professionRelations.added.push({
+            type: "USES_TECH",
+            startNode: professionId,
+            endNode: technologyId
+          });
+        }
+      }
+
+      for (const professionId of originalProfessionIds) {
+        if (professionId && !currentProfessionIds.includes(professionId)) {
+          professionRelations.removed.push({
+            type: "USES_TECH",
+            startNode: professionId,
+            endNode: technologyId
+          });
+        }
+      }
+
+      const data = {
+        nodes: [{
+          old_name: technology.technology,
+          label: "Technology",
+          properties: {
+            id: technologyId,
+            name: editedData.name,
+            description: editedData.description
+          }
+        }],
+        relationships: [{
+          add_rel: [...groupRelations.added, ...professionRelations.added],
+          del_rel: [...groupRelations.removed, ...professionRelations.removed]
+        }]
+      };
+
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-  
+
       await onEdit(formData);
+      
+      const updatedTechnology = {
+        ...technology,
+        technology: editedData.name,
+        description: editedData.description,
+        technology_group: editedData.group,
+        professions: editedData.professions
+      };
+      
       setIsEditing(false);
+      return updatedTechnology;
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
       alert(`Ошибка сохранения: ${error.message}`);
+      throw error;
     }
   };
 
@@ -58,7 +163,8 @@ const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) =>
     setEditedData({
       name: technology.technology || '',
       description: technology.description || '',
-      group: technology.technology_group || ''
+      group: technology.technology_group || '',
+      professions: technology.professions || []
     });
   };
 
@@ -67,12 +173,31 @@ const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) =>
     setEditedData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleAddProfession = (profession) => {
+    if (!profession) return;
+    setEditedData(prev => ({
+      ...prev,
+      professions: [...prev.professions, profession]
+    }));
+  };
+
+  const handleRemoveProfession = (index) => {
+    setEditedData(prev => ({
+      ...prev,
+      professions: prev.professions.filter((_, i) => i !== index)
+    }));
+  };
+
+  const availableProfessions = allProfessions.filter(
+    p => !editedData.professions.includes(p)
+  );
+
   if (!technology) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {loading ? (
+        {loading || dataLoading ? (
           <div className="modal-loading">Загрузка...</div>
         ) : (
           <>
@@ -148,8 +273,9 @@ const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) =>
                     onChange={handleInputChange}
                     className="edit-group-select"
                   >
-                    {allGroups.map((group, index) => (
-                      <option key={index} value={group.name}>
+                    <option value="">Выберите группу</option>
+                    {allGroups.map((group) => (
+                      <option key={group.name} value={group.name}>
                         {group.name}
                       </option>
                     ))}
@@ -159,16 +285,54 @@ const TechnologyModal = ({ technology, onClose, onEdit, allGroups, loading }) =>
                 )}
               </div>
 
-              {technology.professions?.length > 0 && (
-                <div className="professions-section">
-                  <h2 className="section-title">ИСПОЛЬЗУЕТСЯ В ПРОФЕССИЯХ</h2>
+              <div className="professions-section">
+                <h2 className="section-title">ИСПОЛЬЗУЕТСЯ В ПРОФЕССИЯХ</h2>
+                {isEditing ? (
+                  <div className="edit-professions">
+                    <div className="current-professions">
+                      {editedData.professions.map((profession, index) => (
+                        <div key={index} className="profession-tag">
+                          <span>{profession}</span>
+                          <button 
+                            onClick={() => handleRemoveProfession(index)}
+                            className="remove-profession-button"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="add-profession-control">
+                      <select
+                        onChange={(e) => {
+                          if (e.target.value) {
+                            handleAddProfession(e.target.value);
+                            e.target.value = '';
+                          }
+                        }}
+                        value=""
+                      >
+                        <option value="">Добавить профессию...</option>
+                        {availableProfessions.map((profession, index) => (
+                          <option key={index} value={profession}>
+                            {profession}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ) : (
                   <ul className="professions-list">
-                    {technology.professions.map((profession, index) => (
-                      <li key={index} className="profession-item">{profession}</li>
-                    ))}
+                    {editedData.professions.length > 0 ? (
+                      editedData.professions.map((profession, index) => (
+                        <li key={index} className="profession-item">{profession}</li>
+                      ))
+                    ) : (
+                      <li className="no-items">Не указано</li>
+                    )}
                   </ul>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </>
         )}
