@@ -13,7 +13,7 @@ import {
   add,
   getIdByName,
   getToolDetails,
-  editTool 
+  editCard
 } from '../../services/api';
 
 const ToolsPage = () => {
@@ -164,7 +164,7 @@ const ToolsPage = () => {
   const handleCardClick = async (tool) => { 
     try {
       setModalLoading(true);
-      const toolDetails = await getToolDetails(tool.id || tool.tool); 
+      const toolDetails = await getToolDetails(tool.tool); 
       setSelectedTool(toolDetails);
       setIsModalOpen(true);
     } catch (error) {
@@ -178,7 +178,7 @@ const ToolsPage = () => {
   const handleEditTool = async (formData) => { 
     try {
       setLoading(true);
-      await editTool(formData);
+      await editCard(formData);
       const updatedTools = await fetchTools();
       setTools(updatedTools);
     } catch (error) {
