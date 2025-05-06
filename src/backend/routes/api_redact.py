@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver
 from utils import check_node_exists, create_node, create_relationship,update_node, delete_relationship
+from urllib.parse import unquote
 import json
 
 router = APIRouter(prefix="/api", tags=["redact"])
@@ -74,6 +75,9 @@ async def edit_node(file: UploadFile = File(...)):
     try:
         contents = await file.read()
         data = json.loads(contents)
+
+        print("Полученные данные:")
+        print(json.dumps(data, indent=2))
 
         with driver.session() as session:
             for node in data.get("nodes", []):
