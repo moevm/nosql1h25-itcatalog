@@ -4,7 +4,7 @@ import {
   getIdByName
 } from '../../services/api';
 
-const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologies, allTools }) => {
+const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologies, allTools, setSelectedProfession }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     profession: '',
@@ -29,6 +29,7 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
         tools: profession.tools ? profession.tools.map(t => getDisplayName(t)) : [],
         image: profession.image || '/static/images/default.png'
       });
+      setIsEditing(false);
     }
   }, [profession]);
 
@@ -129,9 +130,19 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
       formData.append("file", blob, "data.json");
   
       await onEdit(formData);   
-
+  
+      const updatedProfession = {
+        ...profession,
+        profession: editedData.profession,
+        skills: editedData.skills,
+        technologies: editedData.technologies,
+        tools: editedData.tools,
+        image: editedData.image
+      };
+      
       setIsEditing(false);
-    
+      setSelectedProfession(updatedProfession); 
+      
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
       alert(`Ошибка сохранения: ${error.message}`);
