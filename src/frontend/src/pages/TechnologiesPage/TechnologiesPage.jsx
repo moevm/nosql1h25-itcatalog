@@ -12,7 +12,8 @@ import {
   searchTechnologiesDescription,
   getIdByName,
   add,
-  getTechnologyDetails
+  getTechnologyDetails,
+  editCard
 } from '../../services/api';
 
 const TechnologiesPage = () => {
@@ -25,6 +26,7 @@ const TechnologiesPage = () => {
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [modalLoading, setModalLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -159,16 +161,31 @@ const TechnologiesPage = () => {
     }
   };
 
-  const handleCardClick = async (techName) => {
+  const handleCardClick = async (tech) => {
     try {
       setModalLoading(true);
-      const techDetails = await getTechnologyDetails(techName);
+      const techDetails = await getTechnologyDetails(tech.technology);
       setSelectedTechnology(techDetails);
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Error fetching technology details:', error);
       setError('Не удалось загрузить данные технологии');
     } finally {
       setModalLoading(false);
+    }
+  };
+
+  const handleEditTechnology = async (formData) => {
+    try {
+      setLoading(true);
+      await editCard(formData);
+      const updatedTechnologies = await fetchTechnologies();
+      setTechnologies(updatedTechnologies);
+    } catch (error) {
+      console.error('Error editing technology:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -221,7 +238,7 @@ const TechnologiesPage = () => {
         
         <div className="cards">
           {technologies.map((tech, index) => (
-            <div key={index} onClick={() => handleCardClick(tech.technology)} style={{ cursor: 'pointer' }}>
+            <div key={index} onClick={() => handleCardClick(tech)} style={{ cursor: 'pointer' }}>
               <Card
                 image={tech.image ? tech.image : '/static/images/default.png'}
                 title={tech.technology}
@@ -237,10 +254,12 @@ const TechnologiesPage = () => {
           onAddTechnology={handleAddTechnology}
         />
 
-        {selectedTechnology && (
+        {isModalOpen && selectedTechnology && (
           <TechnologyModal
             technology={selectedTechnology}
-            onClose={handleCloseModal}
+            onClose={() => setIsModalOpen(false)}
+            onEdit={handleEditTechnology}
+            allGroups={groups}
             loading={modalLoading}
           />
         )}

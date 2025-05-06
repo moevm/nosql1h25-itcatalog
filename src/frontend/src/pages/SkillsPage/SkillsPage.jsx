@@ -5,7 +5,7 @@ import AddSkillButton from '../../components/AddSkillButton/AddSkillButton';
 import SkillModal from '../../components/SkillModal/SkillModal';
 import { v4 as uuidv4 } from 'uuid';
 
-import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, getIdByName, add, getSkillDetails } from '../../services/api';
+import { fetchSkills, fetchGroups, fetchSkillsFilteredByGroup, searchSkills, getIdByName, add, getSkillDetails, editCard } from '../../services/api';
 
 const SkillsPage = () => {
   const [skills, setSkills] = useState([]);
@@ -16,6 +16,7 @@ const SkillsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSkill, setSelectedSkill] = useState(null); 
   const [modalLoading, setModalLoading] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -152,6 +153,7 @@ const SkillsPage = () => {
       setModalLoading(true);
       const skillDetails = await getSkillDetails(skillName);
       setSelectedSkill(skillDetails);
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Error fetching skill details:', error);
       setError('Не удалось загрузить данные навыка');
@@ -160,7 +162,22 @@ const SkillsPage = () => {
     }
   };
 
+  const handleEditSkill = async (formData) => { 
+      try {
+        setLoading(true);
+        await editCard(formData);
+        const updatedSkills = await fetchSkills();
+        setSkills(updatedSkills);
+      } catch (error) {
+        console.error('Error editing skill:', error);
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    };
+
   const handleCloseModal = () => {
+    setIsModalOpen(false);
     setSelectedSkill(null);
   };
 
@@ -197,10 +214,12 @@ const SkillsPage = () => {
           onAddSkill={handleAddSkill}
         />
 
-        {selectedSkill && (
+        {isModalOpen && selectedSkill && (
           <SkillModal
             skill={selectedSkill}
             onClose={handleCloseModal}
+            onEdit={handleEditSkill}
+            allGroups={groups}
             loading={modalLoading}
           />
         )}

@@ -8,7 +8,8 @@ import {
   searchGroups, 
   searchGroupsDescription, 
   add,
-  getGroupDetails
+  getGroupDetails,
+  editCard
 } from '../../services/api';
 
 const GroupPage = ({ groupType }) => {
@@ -17,25 +18,29 @@ const GroupPage = ({ groupType }) => {
       title: 'Категории профессий',
       apiEndpoint: 'categories',
       defaultImage: '/images/default-category.png',
-      label: 'Category'
+      label: 'Category',
+      participantType: 'professions'
     },
     skills: {
       title: 'Группы навыков',
       apiEndpoint: 'skillgroups',
       defaultImage: '/images/default-skill.png',
-      label: 'SkillGroup'
+      label: 'SkillGroup',
+      participantType: 'skills'
     },
     technologies: {
       title: 'Группы технологий',
       apiEndpoint: 'technologygroups',
       defaultImage: '/images/default-technology.png',
-      label: 'TechnologyGroup'
+      label: 'TechnologyGroup',
+      participantType: 'technologies'
     },
     tools: {
       title: 'Группы инструментов',
       apiEndpoint: 'toolgroups',
       defaultImage: '/images/default-tool.png',
-      label: 'ToolGroup'
+      label: 'ToolGroup',
+      participantType: 'tools'
     }
   };
 
@@ -46,6 +51,7 @@ const GroupPage = ({ groupType }) => {
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const config = groupConfig[groupType] || groupConfig.professions;
 
   const normalizeGroup = (group) => {
@@ -53,7 +59,8 @@ const GroupPage = ({ groupType }) => {
       return {
         name: group,
         description: '',
-        image: config.defaultImage
+        image: config.defaultImage,
+        participants: []
       };
     }
 
@@ -62,7 +69,8 @@ const GroupPage = ({ groupType }) => {
     return {
       name,
       description: group.description || '',
-      image: group.image || config.defaultImage
+      image: group.image || config.defaultImage,
+      participants: group.participants || []
     };
   };
 
@@ -127,7 +135,8 @@ const GroupPage = ({ groupType }) => {
     try {
       setModalLoading(true);
       const groupDetails = await getGroupDetails(groupName);
-      setSelectedGroup(groupDetails);
+      setSelectedGroup(normalizeGroup(groupDetails));
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Error fetching group details:', error);
       setError('Не удалось загрузить данные группы');
@@ -137,6 +146,7 @@ const GroupPage = ({ groupType }) => {
   };
 
   const handleCloseModal = () => {
+    setIsModalOpen(false);
     setSelectedGroup(null);
   };
 
@@ -177,7 +187,8 @@ const GroupPage = ({ groupType }) => {
       setGroups(prev => [...prev, {
         name: groupName,
         description: description || '',
-        image: imageFile ? URL.createObjectURL(imageFile) : config.defaultImage
+        image: imageFile ? URL.createObjectURL(imageFile) : config.defaultImage,
+        participants: []
       }]);
 
     } catch (error) {
@@ -188,6 +199,37 @@ const GroupPage = ({ groupType }) => {
     }
   };
 
+  const handleEditGroup = async ({ formData, oldName, newName }) => { 
+    try {
+      setLoading(true);
+      const response = await editCard(formData);
+      
+      const updatedGroupDetails = await getGroupDetails(newName);
+      const normalizedGroup = normalizeGroup(updatedGroupDetails);
+      
+      setSelectedGroup(normalizedGroup);
+      
+      const updatedGroups = await fetchGroups(config.apiEndpoint);
+      setGroups(updatedGroups.map(normalizeGroup));
+      
+      return response;
+    } catch (error) {
+      console.error('Error editing group:', error);
+      
+      try {
+        const fallbackGroupDetails = await getGroupDetails(oldName);
+        const normalizedFallbackGroup = normalizeGroup(fallbackGroupDetails);
+        setSelectedGroup(normalizedFallbackGroup);
+      } catch (fallbackError) {
+        console.error('Fallback error:', fallbackError);
+      }
+      
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   if (error) return <div className="error">Ошибка: {error}</div>;
 
   return (
@@ -240,12 +282,15 @@ const GroupPage = ({ groupType }) => {
           onAddGroup={handleAddGroup}
         />
 
-        {selectedGroup && (
+        {isModalOpen && selectedGroup && (
           <GroupModal
             group={selectedGroup}
             onClose={handleCloseModal}
+            onEdit={handleEditGroup}
             loading={modalLoading}
             groupType={config.title}
+            label={config.label}
+            participantType={config.participantType}
           />
         )}
       </div>

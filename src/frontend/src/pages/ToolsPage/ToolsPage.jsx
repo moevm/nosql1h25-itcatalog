@@ -12,7 +12,8 @@ import {
   searchToolsDescription,
   add,
   getIdByName,
-  getToolDetails
+  getToolDetails,
+  editCard
 } from '../../services/api';
 
 const ToolsPage = () => {
@@ -25,6 +26,7 @@ const ToolsPage = () => {
   const [searchDescriptionTerm, setSearchDescriptionTerm] = useState('');
   const [selectedTool, setSelectedTool] = useState(null); 
   const [modalLoading, setModalLoading] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -159,11 +161,12 @@ const ToolsPage = () => {
     }
   };
 
-  const handleCardClick = async (toolName) => {
+  const handleCardClick = async (tool) => { 
     try {
       setModalLoading(true);
-      const toolDetails = await getToolDetails(toolName);
+      const toolDetails = await getToolDetails(tool.tool); 
       setSelectedTool(toolDetails);
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Error fetching tool details:', error);
       setError('Не удалось загрузить данные инструмента');
@@ -172,7 +175,22 @@ const ToolsPage = () => {
     }
   };
 
+  const handleEditTool = async (formData) => { 
+    try {
+      setLoading(true);
+      await editCard(formData);
+      const updatedTools = await fetchTools();
+      setTools(updatedTools);
+    } catch (error) {
+      console.error('Error editing tool:', error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleCloseModal = () => {
+    setIsModalOpen(false);
     setSelectedTool(null);
   };
 
@@ -221,7 +239,7 @@ const ToolsPage = () => {
         
         <div className="cards">
           {tools.map((tool, index) => (
-            <div key={index} onClick={() => handleCardClick(tool.tool)}>
+            <div key={index} onClick={() => handleCardClick(tool)}> 
               <Card
                 image={tool.image ? tool.image : '/static/images/default.png'}
                 title={tool.tool}
@@ -237,10 +255,12 @@ const ToolsPage = () => {
           onAddTool={handleAddTool}
         />
 
-        {selectedTool && (
+        {isModalOpen && selectedTool && (
           <ToolModal
             tool={selectedTool}
             onClose={handleCloseModal}
+            onEdit={handleEditTool}
+            allGroups={groups}
             loading={modalLoading}
           />
         )}
