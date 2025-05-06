@@ -13,7 +13,7 @@ import {
   getIdByName,
   add,
   getTechnologyDetails,
-  editTechnology
+  editCard
 } from '../../services/api';
 
 const TechnologiesPage = () => {
@@ -178,7 +178,7 @@ const TechnologiesPage = () => {
   const handleEditTechnology = async (formData) => {
     try {
       setLoading(true);
-      await editTechnology(formData);
+      await editCard(formData);
       const updatedTechnologies = await fetchTechnologies();
       setTechnologies(updatedTechnologies);
     } catch (error) {
