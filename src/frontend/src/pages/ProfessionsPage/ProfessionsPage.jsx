@@ -16,6 +16,7 @@ import {
   fetchProfessionsFilteredByTechnology,
   searchProfessions,
   add,
+  editCard,
   getIdByName,
   fetchProfessionDetails
 } from '../../services/api';
@@ -36,7 +37,6 @@ const ProfessionsPage = () => {
   const [selectedProfession, setSelectedProfession] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Загрузка начальных данных
   useEffect(() => {
     const loadInitialData = async () => {
       try {
@@ -201,7 +201,6 @@ const ProfessionsPage = () => {
       const techIds = await Promise.all(technologies.map(getIdByName));
       const toolIds = await Promise.all(tools.map(getIdByName));
   
-      // Узел профессии
       const nodes = [
         {
           label: "Profession",
@@ -213,7 +212,6 @@ const ProfessionsPage = () => {
         },
       ];
   
-      // Связи
       const relationships = [
         {
           startNode: professionId,
@@ -259,6 +257,28 @@ const ProfessionsPage = () => {
     }
   };
 
+  const handleEditProfession = async (formData) => {
+    try {
+      setLoading(true);
+      await editCard(formData);
+      const updatedProfessions = await fetchProfessions();
+      setProfessions(updatedProfessions);
+      
+      // Обновляем выбранную профессию
+      if (selectedProfession) {
+        const updatedProfession = updatedProfessions.find(p => 
+          p.profession === selectedProfession.profession
+        );
+        if (updatedProfession) {
+          setSelectedProfession(updatedProfession);
+        }
+      }
+    } catch (error) {
+      console.error('Error editing profession:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="page active">
       <div className="container">
@@ -303,7 +323,11 @@ const ProfessionsPage = () => {
         {isModalOpen && (
           <ProfessionModal 
             profession={selectedProfession} 
-            onClose={() => setIsModalOpen(false)} 
+            onClose={() => setIsModalOpen(false)}
+            onEdit={handleEditProfession}
+            allSkills={allSkills}
+            allTechnologies={allTechnologies}
+            allTools={allTools}
           />
         )}
       </div>
