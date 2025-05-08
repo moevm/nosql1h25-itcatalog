@@ -1,18 +1,105 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { fetchGraph } from '../../services/api';
 import * as d3 from 'd3';
 import './GraphPage.css';
 
 const GraphPage = () => {
   const canvasRef = useRef(null);
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [graphData, setGraphData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  
+  const filters = [
+    { label: 'Всё', value: '' },
+    { label: 'Профессии', value: '/professions' },
+    { label: 'Навыки', value: '/skills' },
+    { label: 'Технологии', value: '/technologies' },
+    { label: 'Инструменты', value: '/tools' },
+    { label: 'Категории', value: '/categories' },
+    { label: 'Группы навыков', value: '/skillgroups' },
+    { label: 'Группы технологий', value: '/technologygroups' },
+    { label: 'Группы инструментов', value: '/toolgroups' }
+  ];
+
+  const handleFilterChange = (value) => {
+    setActiveFilters(prev => {
+      if (value === '') {
+        return [];
+      }
+      if (prev.includes(value)) {
+        return prev.filter(v => v !== value);
+      }
+      return [...prev, value];
+    });
+  };
+
+  const mergeGraphData = (dataArray) => {
+    const mergedNodes = [];
+    const mergedLinks = [];
+    const nodeIds = new Set();
+    const linkIds = new Set();
+
+    dataArray.forEach(data => {
+      data.nodes.forEach(node => {
+        if (!nodeIds.has(node.id)) {
+          nodeIds.add(node.id);
+          mergedNodes.push(node);
+        }
+      });
+
+      data.links.forEach(link => {
+        const linkKey = `${link.source}-${link.target}`;
+        if (!linkIds.has(linkKey)) {
+          linkIds.add(linkKey);
+          mergedLinks.push(link);
+        }
+      });
+    });
+
+    return { nodes: mergedNodes, links: mergedLinks };
+  };
+
 
   useEffect(() => {
-    const drawGraph = async () => {
+    const loadGraphData = async () => {
       try {
-        const graphData = await fetchGraph();
-        const nodes = graphData.nodes;
-        const links = graphData.links;
+        setLoading(true);
+        
+        if (activeFilters.length === 0) {
+          const data = await fetchGraph('');
+          setGraphData(data);
+          return;
+        }
 
+        const allData = await Promise.all(
+          activeFilters.map(filter => fetchGraph(filter))
+        );
+
+        const mergedData = mergeGraphData(allData);
+        setGraphData(mergedData);
+      } catch (error) {
+        console.error('Error loading graph data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadGraphData();
+  }, [activeFilters]);
+
+
+  useEffect(() => {
+    if (!graphData) return;
+
+    const drawGraph = () => {
+      if (window.currentSimulation) {
+        window.currentSimulation.stop();
+        window.currentSimulation = null;
+      }
+
+      try {
+        const { nodes, links } = graphData;
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         const width = canvas.width;
@@ -32,6 +119,7 @@ const GraphPage = () => {
 
           'Default': '#808080'     // Серый
         };
+
 
         const wrapText = (text, maxWidth, maxLines = 4) => {
           const words = text.split(' ');
@@ -73,9 +161,19 @@ const GraphPage = () => {
           return lines;
         };
 
-        const simulation = d3.forceSimulation(nodes)
-          .force("link", d3.forceLink(links).id(d => d.id).distance(100))
-          .force("charge", d3.forceManyBody().strength(-300))
+        const nodeCount = nodes.length;
+        const chargeStrength = -300 * Math.min(nodeCount/100, 1);
+
+        window.currentSimulation = d3.forceSimulation(nodes)
+          .force("link", d3.forceLink()
+            .id(d => d.id)
+            .distance(100 * Math.min(1, nodeCount/50))
+            .links(links.filter(link => 
+              nodes.find(n => n.id === link.source) && 
+              nodes.find(n => n.id === link.target)
+            ))
+          )
+          .force("charge", d3.forceManyBody().strength(chargeStrength))
           .force("collision", d3.forceCollide().radius(d => d.label.endsWith('Group') ? 100 : 50))
           .force("center", d3.forceCenter(width / 2, height / 2))
           .on('tick', () => {
@@ -83,6 +181,11 @@ const GraphPage = () => {
             context.clearRect(0, 0, width, height);
             drawGraphElements();
             context.restore();
+
+            // Нервный граф
+            //if (window.currentSimulation && window.currentSimulation.alpha() < 0.001) {
+            //  window.currentSimulation.alpha(0.1).restart();
+            //}
           });
 
         const zoom = d3.zoom()
@@ -102,11 +205,18 @@ const GraphPage = () => {
           .call(zoom.transform, d3.zoomIdentity);
 
         function drawGraphElements() {
-
           context.beginPath();
           links.forEach(link => {
-            context.moveTo(link.source.x, link.source.y);
-            context.lineTo(link.target.x, link.target.y);
+            if (link.source && link.target && 
+                typeof link.source.x === 'number' && 
+                typeof link.source.y === 'number' &&
+                typeof link.target.x === 'number' && 
+                typeof link.target.y === 'number') {
+              context.moveTo(link.source.x, link.source.y);
+              context.lineTo(link.target.x, link.target.y);
+            } else {
+              console.warn('Invalid link detected:', link);
+            }
           });
           context.strokeStyle = 'rgba(150, 150, 150, 0.5)';
           context.stroke();
@@ -140,8 +250,11 @@ const GraphPage = () => {
               });
             }
           });
-
         }
+
+        return () => {
+          window.currentSimulation.stop();
+        };
 
       } catch (error) {
         console.error('Error drawing graph:', error);
@@ -149,28 +262,42 @@ const GraphPage = () => {
     };
 
     drawGraph();
-
-    return () => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-      }
-    };
-  }, []);
+  }, [graphData]);
 
   return (
     <div className="page">
       <div className="container">
+
+        <div className="graph-filters">
+          {filters.map(filter => (
+            <button
+            key={filter.value}
+            className={`filter-button ${
+              (filter.value === '' && activeFilters.length === 0) || 
+              activeFilters.includes(filter.value) ? 'active' : ''
+            }`}
+            onClick={() => handleFilterChange(filter.value)}
+          >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
         <div className="graph-container">
-          <div className="graph-frame"> 
-            <canvas 
-              ref={canvasRef}
-              id="graphCanvas" 
-              width={1500} 
-              height={800}
-            />
+          <div className="graph-frame">
+            {loading ? (
+              <div className="graph-loading">Загрузка графа...</div>
+            ) : (
+              <canvas 
+                ref={canvasRef}
+                id="graphCanvas" 
+                width={1500} 
+                height={800}
+              />
+            )}
           </div>
         </div>
+
       </div>
     </div>
   );

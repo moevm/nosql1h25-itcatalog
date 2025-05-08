@@ -275,27 +275,29 @@ export const add = async (formData) => {
 export const getIdByName = async (name) => {
   try {
     const encodedName = encodeURIComponent(name);
-    console.log(`Requesting ID for: ${encodedName}`); 
-
-    const response = await fetch(`${API_BASE_URL}/get_id/${encodedName}`);
-
-    if (!response.ok) {
-      throw new Error(`Ошибка получения ID для "${name}" (код ${response.status})`);
-    }
-
-    const data = await response.json();
-    return data.id;
+    const url = `${API_BASE_URL}/get_id?name=${encodedName}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+    
+    return (await response.json()).id;
   } catch (error) {
-    console.error(`Error getting ID for "${name}":`, error);
+    console.error(`Failed to get ID for "${name}":`, error);
     throw error;
   }
 };
 
-export const fetchGraph = async () => {
+export const fetchGraph = async (filter = "") => {
+  const VALID_FILTERS = ["", "/professions", "/skills", "/technologies", "/tools", "/categories", "/skillgroups", "/technologygroups", "/toolgroups"];
   try {
-    const response = await fetch(`${API_BASE_URL}/graph`);
+    if (!VALID_FILTERS.includes(filter)) {
+      throw new Error(`Invalid filter value: ${filter}. Expected one of: ${VALID_FILTERS.join(", ")}`);
+    }
+
+    const response = await fetch(`${API_BASE_URL}/graph${filter}`);
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();
+    
   } catch (error) {
     console.error(`Error fetching graph:`, error);
     throw error;
@@ -368,6 +370,25 @@ export const getGroupDetails = async (groupName) => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching group details:', error);
+    throw error;
+  }
+};
+
+export const editCard = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/edit`, {
+      method: 'PUT',
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to edit card');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error editing card:', error);
     throw error;
   }
 };
