@@ -9,13 +9,78 @@
 .import-export-buttons__button {
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;
-    width: 100px;
-    height: 35px;
+    width: 90px;
+    height: 30px;
+    font-size: 14px;
 }
 
 .import-export-buttons__button:hover {
     background-color: #f5f5f5;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 500px; /* Increased width */
+  height: 300px; /* Increased height */
+  padding: 40px; /* Increased padding */
+  border-radius: 12px; /* Slightly larger border radius */
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px; /* Adjust heading margin */
+}
+
+.modal-content p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sections__button {
+  margin-top: 10px; /* Adjust button margin */
+}
+
+.filename-input {
+  margin: 20px 0;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.file-input {
+  display: none; /* Hide the file input field */
 }
