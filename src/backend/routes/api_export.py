@@ -1,6 +1,10 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Response
 from database import driver, check_database_empty
+from pathlib import Path
+from io import BytesIO
+import zipfile
 import json
+
 
 router = APIRouter(prefix="/api", tags=["export"])
 
@@ -10,7 +14,6 @@ def export_to_json(driver):
     result = {"nodes": [], "relationships": []}
 
     with driver.session() as session:
-        # Обрабатываем узлы внутри транзакции
         nodes = session.execute_read(lambda tx:
                                      list(tx.run("MATCH (n) RETURN labels(n) AS labels, properties(n) AS properties")))
         for record in nodes:
@@ -19,7 +22,6 @@ def export_to_json(driver):
                 "properties": dict(record["properties"])
             })
 
-        # Обрабатываем связи внутри транзакции
         relationships = session.execute_read(lambda tx:
                                              list(tx.run(
                                                  "MATCH (s)-[r]->(e) RETURN type(r) AS type, s.id AS startNode, e.id AS endNode")))
@@ -35,16 +37,33 @@ def export_to_json(driver):
 @router.get("/export")
 async def export_data():
     try:
-        # Получаем данные из Neo4j
         data = export_to_json(driver)
-
-        # Сериализуем в JSON с правильной кодировкой
         json_data = json.dumps(data, ensure_ascii=False, indent=2)
+        
+        images_dir = Path("static/images")
+        
+        if not images_dir.exists():
+            raise HTTPException(status_code=404, detail="Images directory not found")
+        
+        zip_buffer = BytesIO()
+        
+        with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+            zip_file.writestr("data.json", json_data)
+
+            for img_path in images_dir.rglob("*"):
+                if img_path.is_file():
+                    arcname = str(img_path.relative_to(images_dir.parent))
+                    zip_file.write(img_path, arcname=arcname)
+
+        zip_buffer.seek(0)
 
         return Response(
-            content=json_data,
-            media_type="application/json",
-            headers={"Content-Disposition": "attachment; filename=export.json"}
+            content=zip_buffer.getvalue(),
+            media_type="application/zip",
+            headers={"Content-Disposition": "attachment; filename=export.zip"}
         )
+    
+    except HTTPException as he:
+        raise he
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
