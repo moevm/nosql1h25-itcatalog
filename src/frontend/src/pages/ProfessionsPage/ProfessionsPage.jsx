@@ -264,7 +264,6 @@ const ProfessionsPage = () => {
       const updatedProfessions = await fetchProfessions();
       setProfessions(updatedProfessions);
       
-      // Обновляем выбранную профессию
       if (selectedProfession) {
         const updatedProfession = updatedProfessions.find(p => 
           p.profession === selectedProfession.profession
