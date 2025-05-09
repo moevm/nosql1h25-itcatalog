@@ -1,13 +1,19 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver
 from utils import check_node_exists, create_node, create_relationship,update_node, delete_relationship
+from urllib.parse import unquote
 import json
+import os
 
 router = APIRouter(prefix="/api", tags=["redact"])
+IMAGE_DIR = "/app/static/images"
+os.makedirs(IMAGE_DIR, exist_ok=True)
 
-@router.get("/get_id/{name}")
-async def get_id(name: str):
+@router.get("/get_id")
+async def get_id(name: str):  
     try:
+        decoded_name = unquote(name)
+        
         with driver.session() as session:
             result = session.run(
                 """
@@ -15,25 +21,18 @@ async def get_id(name: str):
                 RETURN n.id AS id
                 LIMIT 1
                 """,
-                {"name": name}
+                {"name": decoded_name}
             )
             record = result.single()
             if not record:
-                raise HTTPException(
-                    status_code=404,
-                    detail=f"Node with name '{name}' not found"
-                )
+                raise HTTPException(status_code=404, detail="Node not found")
             return {"id": record["id"]}
-    except HTTPException:
-        raise
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal server error: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/add")
-async def add_node(file: UploadFile = File(...)):
+async def add_node(file: UploadFile = File(...),
+                   image: UploadFile = File(None, description="Optional image file")):
     try:
         contents = await file.read()
         data = json.loads(contents)
@@ -67,6 +66,21 @@ async def add_node(file: UploadFile = File(...)):
                     rel["type"]
                 )
 
+        target_id = new_properties.get("id")
+            
+        if not target_id:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Node with ID {target_id} not found"
+            )
+
+        file_ext = image.filename.split(".")[-1] if "." in image.filename else ""
+        filename = f"{target_id}.{file_ext}" if file_ext else str(target_id)
+        file_path = os.path.join(IMAGE_DIR, filename)
+            
+        contents = await image.read()
+        with open(file_path, "wb") as f:
+            f.write(contents)
         return { "status": "node added" }
 
     except json.JSONDecodeError:
@@ -76,7 +90,8 @@ async def add_node(file: UploadFile = File(...)):
         
         
 @router.put("/edit")
-async def edit_node(file: UploadFile = File(...)):
+async def edit_node(file: UploadFile = File(...),
+                    image: UploadFile = File(None, description="Optional image file")):
     try:
         contents = await file.read()
         data = json.loads(contents)
@@ -115,6 +130,29 @@ async def edit_node(file: UploadFile = File(...)):
                         rel["endNode"],
                         rel["type"]
                     )
+                    
+        if image:
+            target_id = new_properties.get("id")
+            
+            if not target_id:
+                raise HTTPException(
+                    status_code=422,
+                    detail=f"Node with ID {target_id} not found"
+                )
+
+            # Удаляем старые файлы
+            for filename in os.listdir(IMAGE_DIR):
+                if filename.startswith(str(target_id)):
+                    os.remove(os.path.join(IMAGE_DIR, filename))
+
+            # Сохраняем новое изображение
+            file_ext = image.filename.split(".")[-1] if "." in image.filename else ""
+            filename = f"{target_id}.{file_ext}" if file_ext else str(target_id)
+            file_path = os.path.join(IMAGE_DIR, filename)
+            
+            contents = await image.read()
+            with open(file_path, "wb") as f:
+                f.write(contents)
         return { "status": "node edited" }
 
     except json.JSONDecodeError:
