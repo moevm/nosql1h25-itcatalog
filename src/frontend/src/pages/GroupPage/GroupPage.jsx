@@ -207,6 +207,10 @@ const GroupPage = ({ groupType }) => {
       const updatedGroupDetails = await getGroupDetails(newName);
       const normalizedGroup = normalizeGroup(updatedGroupDetails);
       
+      if (formData.has('image')) {
+        normalizedGroup.image = URL.createObjectURL(formData.get('image'));
+      }
+
       setSelectedGroup(normalizedGroup);
       
       const updatedGroups = await fetchGroups(config.apiEndpoint);
