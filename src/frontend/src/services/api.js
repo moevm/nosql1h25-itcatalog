@@ -426,3 +426,30 @@ export const exportCatalog = async (fileName) => {
     throw error;
   }
 };
+
+
+export const importCatalog = async (file) => {
+  try {
+    console.log(`Starting import with file: ${file.name}`);
+    
+    const formData = new FormData();
+    formData.append('archive', file);
+    
+    const response = await fetch(`${API_BASE_URL}/import`, {
+      method: 'POST',
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Import failed: ${errorText}`);
+    }
+    
+    const result = await response.json();
+    console.log('Import completed successfully:', result);
+    return result;
+  } catch (error) {
+    console.error('Import error:', error);
+    throw error;
+  }
+};
