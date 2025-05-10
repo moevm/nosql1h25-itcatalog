@@ -392,3 +392,37 @@ export const editCard = async (formData) => {
     throw error;
   }
 };
+
+
+export const exportCatalog = async (fileName) => {
+  try {
+    console.log(`Starting export with filename: ${fileName}`);
+    
+    const response = await fetch(`${API_BASE_URL}/export`);
+
+    if (!response.ok) {
+      throw new Error(`Export failed with status: ${response.status}`);
+    }
+
+    const blob = await response.blob();
+    
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    
+    a.download = `${fileName || 'export'}.zip`;
+    
+    document.body.appendChild(a);
+    a.click();
+    
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    
+    console.log('Export completed successfully');
+    return true;
+  } catch (error) {
+    console.error('Export error:', error);
+    throw error;
+  }
+};
