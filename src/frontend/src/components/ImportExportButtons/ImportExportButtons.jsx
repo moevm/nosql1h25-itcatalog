@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ImportExportButtons.css';
-import { exportCatalog } from '../../services/api';
+import { exportCatalog, importCatalog } from '../../services/api';
 
 const ImportExportButtons = () => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
@@ -9,6 +9,7 @@ const ImportExportButtons = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [exportLoading, setExportLoading] = useState(false);
+  const [importLoading, setImportLoading] = useState(false);
 
   useEffect(() => {
     console.log('Export modal state changed:', isExportModalOpen);
@@ -57,26 +58,21 @@ const ImportExportButtons = () => {
       alert('Выберите файл для импорта.');
       return;
     }
-
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-
+  
     try {
-      const response = await fetch('/api/import', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to import data: ${errorText}`);
-      }
-
-      alert('Импорт данных успешно выполнен.');
+      setImportLoading(true);
+      console.log('Starting import process with file:', selectedFile.name);
+      
+      await importCatalog(selectedFile);
+      
       setIsImportModalOpen(false);
+      alert('Импорт данных успешно выполнен.');
+      console.log('Import completed successfully');
     } catch (error) {
       console.error('Error importing data:', error);
       alert(`Ошибка при импорте данных: ${error.message}`);
+    } finally {
+      setImportLoading(false);
     }
   };
 
@@ -143,14 +139,19 @@ const ImportExportButtons = () => {
               Выбрать файл
               <input
                 type="file"
+                accept=".zip"
                 className="ie-file-input"
                 onChange={handleFileChange}
               />
             </label>
             {uploadedFileName && <p>Загружен файл: {uploadedFileName}</p>}
             {uploadedFileName && (
-              <button className="ie-import-button" onClick={handleImport}>
-                Импортировать
+              <button 
+                className={`ie-import-button ${importLoading ? 'ie-button-loading' : ''}`}
+                onClick={handleImport}
+                disabled={importLoading}
+              >
+                {importLoading ? 'Импортируется...' : 'Импортировать'}
               </button>
             )}
           </div>
