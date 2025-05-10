@@ -66,7 +66,7 @@ async def add_node(file: UploadFile = File(...),
                     rel["type"]
                 )
 
-        target_id = new_properties.get("id")
+        target_id = properties.get("id")
             
         if not target_id:
             raise HTTPException(
@@ -95,9 +95,6 @@ async def edit_node(file: UploadFile = File(...),
     try:
         contents = await file.read()
         data = json.loads(contents)
-
-        print("Полученные данные:")
-        print(json.dumps(data, indent=2))
 
         with driver.session() as session:
             for node in data.get("nodes", []):
