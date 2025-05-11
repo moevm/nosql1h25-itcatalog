@@ -147,7 +147,7 @@ const ToolsPage = () => {
       const newTool = {
         tool: toolName,
         tool_group: groupName,
-        image: toolData.image?.name || '/static/images/default.png',
+        image: toolData.image ? URL.createObjectURL(toolData.image) : '/static/images/default.png',
         description: description
       };
   
