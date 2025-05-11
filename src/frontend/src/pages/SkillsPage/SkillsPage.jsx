@@ -135,7 +135,7 @@ const SkillsPage = () => {
       const newSkill = {
         skill: skillName,
         skill_group: groupName,
-        image: skillData.image?.name || '/static/images/default.png'
+        image: skillData.image ? URL.createObjectURL(skillData.image) : '/static/images/default.png'
       };
     
       setSkills(prev => [...prev, newSkill]);
