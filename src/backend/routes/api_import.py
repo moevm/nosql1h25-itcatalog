@@ -10,54 +10,68 @@ import tempfile
 
 router = APIRouter(prefix="/api", tags=["import"])
 
-
-
 @router.post("/import")
 async def import_data(
-    file: UploadFile = File(...),
-    archive: UploadFile = File(...)
+    archive: UploadFile = File(..., description="ZIP file containing data.json and images")
 ):
     try:
         with tempfile.TemporaryDirectory() as temp_dir:
-            # Обработка архива
+        
             archive_data = await archive.read()
             with zipfile.ZipFile(io.BytesIO(archive_data)) as zip_ref:
                 zip_ref.extractall(temp_dir)
 
-            # Получаем список изображений из архива
-            image_extensions = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'}
-            file_list = []
+            json_candidates = []
+            
             for root, _, files in os.walk(temp_dir):
-                for filename in files:
-                    if os.path.splitext(filename)[1].lower() in image_extensions:
-                        file_list.append(os.path.join(root, filename))
-            # Обработка JSON
-            json_data = await file.read()
-            data = json.loads(json_data)
+                if "data.json" in files:
+                    json_candidates.append(os.path.join(root, "data.json"))
+            
+            if not json_candidates:
+                raise HTTPException(status_code=400, detail="ZIP archive must contain a data.json file")
+            if len(json_candidates) > 1:
+                raise HTTPException(status_code=400, detail="Multiple data.json files found in ZIP archive")
+            
+            json_file_path = json_candidates[0]
+            
 
-            # Проверка структуры данных
+            with open(json_file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+
             if "nodes" not in data:
                 raise HTTPException(status_code=400, detail="JSON must contain 'nodes' array")
 
-            # Проверка соответствия количества файлов и нод
-            if len(file_list) != len(data["nodes"]):
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"Number of images ({len(file_list)}) doesn't match nodes count ({len(data['nodes'])})"
-                )
 
-            # Очистка и инициализация данных
+            image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.webp'}
+            image_files = {}
+            
+            for root, _, files in os.walk(temp_dir):
+                for filename in files:
+                    if filename == "data.json":
+                        continue
+                    ext = os.path.splitext(filename)[1].lower()
+                    if ext in image_extensions:
+                    
+                        file_key = os.path.splitext(filename)[0]
+                        image_files[file_key] = os.path.join(root, filename)
+
+
             if not check_database_empty(driver):
                 delete_nodes(driver)
-            node_ids=[]
+            
+            node_ids = []
             with driver.session() as session:
+
                 for node in data.get("nodes", []):
                     label = node.get("label")
                     properties = node.get("properties", {})
                     name = properties.get("name")
                     node_id = properties.get("id")
-                    node_ids.append(node_id)
- 
+                    
+                    if node_id:
+                        node_ids.append(node_id)
+                    
                     if not name:
                         continue
     
@@ -71,7 +85,8 @@ async def import_data(
                             create_node,
                             label,
                             properties
-                    )
+                        )
+
 
                 for rel in data.get("relationships", []):
                     session.execute_write(
@@ -82,19 +97,21 @@ async def import_data(
                     )
 
 
-            # Сохранение изображений
             os.makedirs("static/images", exist_ok=True)
-            for idx, node_id in enumerate(node_ids):
-                src_path = os.path.join(temp_dir, file_list[idx])
-                ext = os.path.splitext(file_list[idx])[1].lower()
-                dest_path = f"static/images/{node_id}{ext}"
-                
-                if os.path.exists(src_path):
-                    shutil.copy(src_path, dest_path)
-                else:
-                    print(f"Missing image for node {node_id}")
+            saved_images_count = 0
+            
+            for node_id in node_ids:
 
-            return {"message": f"Imported {len(node_ids)} nodes with images"}
+                if str(node_id) in image_files:
+                    src_path = image_files[str(node_id)]
+                    ext = os.path.splitext(src_path)[1].lower()
+                    dest_path = f"static/images/{node_id}{ext}"
+                    
+                    if os.path.exists(src_path):
+                        shutil.copy(src_path, dest_path)
+                        saved_images_count += 1
+            
+            return {"message": f"Imported {len(node_ids)} nodes with {saved_images_count} images"}
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON format")
@@ -103,5 +120,4 @@ async def import_data(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
-        await file.close()
         await archive.close()
