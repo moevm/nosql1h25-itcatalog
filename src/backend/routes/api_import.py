@@ -25,7 +25,7 @@ async def import_data(
                 zip_ref.extractall(temp_dir)
 
             # Получаем список изображений из архива
-            image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
+            image_extensions = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'}
             file_list = []
             for root, _, files in os.walk(temp_dir):
                 for filename in files:
