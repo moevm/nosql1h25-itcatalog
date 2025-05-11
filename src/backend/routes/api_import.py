@@ -23,9 +23,6 @@ async def import_data(
 
             json_candidates = []
             
-            image_extensions = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'}
-            file_list = []
-            
             for root, _, files in os.walk(temp_dir):
                 if "data.json" in files:
                     json_candidates.append(os.path.join(root, "data.json"))
