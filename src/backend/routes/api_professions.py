@@ -22,7 +22,7 @@ async def get_professions():
                 static_path = "static/images"  # Путь к папке с изображениями
                 
                 # Проверяем существование файла с разными расширениями
-                extensions = ['.jpg', '.png', '.webp']
+                extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']
                 image_url = "http://localhost:8000/static/images/in_progress.jpg"
                 
                 for ext in extensions:
@@ -70,7 +70,7 @@ async def get_profession(name: str):
             # Определяем расширение изображения
             image_id = record["id"]
             static_path = "static/images"  # Путь относительно корня проекта
-            extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+            extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']
             image_url = "http://localhost:8000/static/images/in_progress.jpg"
             
             for ext in extensions:
@@ -108,7 +108,7 @@ async def get_professions_sorted_by_categories():
             for record in result:
                 image_id = record["id"]
                 static_path = "static/images"  # Путь относительно корня проекта
-                extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+                extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']
                 image_url = "http://localhost:8000/static/images/in_progress.jpg"
                 
                 # Проверяем существование файла с разными расширениями
@@ -147,7 +147,7 @@ async def get_professions_filtered_by_category(name: str):
             for record in result:
                 image_id = record["id"]
                 static_path = "static/images"  # Путь к папке с изображениями
-                extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+                extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']
                 image_url = "http://localhost:8000/static/images/in_progress.jpg"
 
                 # Проверяем существование файла с разными расширениями
