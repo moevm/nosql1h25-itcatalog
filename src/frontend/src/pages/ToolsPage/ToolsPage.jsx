@@ -147,7 +147,7 @@ const ToolsPage = () => {
       const newTool = {
         tool: toolName,
         tool_group: groupName,
-        image: toolData.image?.name || '/static/images/default.png',
+        image: toolData.image ? URL.createObjectURL(toolData.image) : '/static/images/default.png',
         description: description
       };
   
@@ -179,8 +179,14 @@ const ToolsPage = () => {
     try {
       setLoading(true);
       await editCard(formData);
-      const updatedTools = await fetchTools();
-      setTools(updatedTools);
+      
+      if (formData.has('image')) {
+        const updatedTools = await fetchTools();
+        setTools(updatedTools);
+      } else {
+        const updatedTools = await fetchTools();
+        setTools(updatedTools);
+      }
     } catch (error) {
       console.error('Error editing tool:', error);
       throw error;

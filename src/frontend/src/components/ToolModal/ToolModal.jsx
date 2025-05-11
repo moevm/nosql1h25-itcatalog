@@ -8,7 +8,8 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
     name: '',
     description: '',
     group: '',
-    professions: []
+    professions: [],
+    image: '/static/images/default.png'
   });
   const [allGroups, setAllGroups] = useState([]);
   const [allProfessions, setAllProfessions] = useState([]);
@@ -29,7 +30,8 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
             name: tool.tool || '',
             description: tool.description || '',
             group: tool.tool_group || '',
-            professions: tool.professions || []
+            professions: tool.professions || [],
+            image: tool.image || '/static/images/default.png'
           });
         }
         
@@ -43,6 +45,21 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
 
   const handleEditClick = () => {
     setIsEditing(true);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEditedData(prev => ({
+          ...prev,
+          image: event.target.result,
+          imageFile: file 
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSaveClick = async () => {
@@ -114,16 +131,28 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
         }
       }
 
+      const formData = new FormData();
+      
+      if (editedData.imageFile) {
+        formData.append('image', editedData.imageFile);
+      }
+
+      const toolNode = {
+        old_name: tool.tool,
+        label: "Tool",
+        properties: {
+          id: toolId,
+          name: editedData.name,
+          description: editedData.description
+        }
+      };
+
+      if (editedData.image && editedData.image !== tool.image) {
+        toolNode.properties.image = editedData.imageFile ? editedData.imageFile.name : editedData.image;
+      }
+
       const data = {
-        nodes: [{
-          old_name: tool.tool,
-          label: "Tool",
-          properties: {
-            id: toolId,
-            name: editedData.name,
-            description: editedData.description
-          }
-        }],
+        nodes: [toolNode],
         relationships: [{
           add_rel: [...groupRelations.added, ...professionRelations.added],
           del_rel: [...groupRelations.removed, ...professionRelations.removed]
@@ -131,19 +160,21 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
       };
 
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-      const formData = new FormData();
       formData.append("file", blob, "data.json");
 
       await onEdit(formData);
 
-      console.log(JSON.stringify(data));
-      
-      tool.tool = editedData.name;
-      tool.description = editedData.description;
-      tool.tool_group = editedData.group;
-      tool.professions = editedData.professions;
+      const updatedTool = {
+        ...tool,
+        tool: editedData.name,
+        description: editedData.description,
+        tool_group: editedData.group,
+        professions: editedData.professions,
+        image: editedData.imageFile ? URL.createObjectURL(editedData.imageFile) : editedData.image
+      };
       
       setIsEditing(false);
+      
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
       alert(`Ошибка сохранения: ${error.message}`);
@@ -156,7 +187,8 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
       name: tool.tool || '',
       description: tool.description || '',
       group: tool.tool_group || '',
-      professions: tool.professions || []
+      professions: tool.professions || [],
+      image: tool.image || '/static/images/default.png'
     });
   };
 
@@ -199,10 +231,24 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
             <div className="modal-header">
               <div className="image-container">
                 <img
-                  src={tool.image || '/static/images/default.png'}
+                  src={editedData.image}
                   alt={editedData.name}
                   className="modal-image"
                 />
+                {isEditing && (
+                  <div className="image-upload">
+                    <label htmlFor="image-upload" className="upload-button">
+                      Сменить изображение
+                      <input
+                        id="image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                  </div>
+                )}
                 {!isEditing && (
                   <button className="edit-button" onClick={handleEditClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

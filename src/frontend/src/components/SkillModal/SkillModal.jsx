@@ -7,7 +7,9 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
   const [editedData, setEditedData] = useState({
     name: '',
     group: '',
-    professions: []
+    professions: [],
+    image: '/static/images/default.png',
+    imageFile: null
   });
   const [allProfessions, setAllProfessions] = useState([]);
   const [professionsLoading, setProfessionsLoading] = useState(false);
@@ -33,7 +35,9 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
       setEditedData({
         name: skill.skill || '',
         group: skill.skill_group || '',
-        professions: skill.professions || []
+        professions: skill.professions || [],
+        image: skill.image || '/static/images/default.png',
+        imageFile: null
       });
     }
   }, [skill]);
@@ -41,9 +45,38 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
   const handleEditClick = () => {
     setIsEditing(true);
   };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEditedData(prev => ({
+          ...prev,
+          image: event.target.result,
+          imageFile: file
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (editedData.image && editedData.image.startsWith('blob:')) {
+        URL.revokeObjectURL(editedData.image);
+      }
+    };
+  }, [editedData.image]);
       
   const handleSaveClick = async () => {
     try {
+      const formData = new FormData();
+      
+      if (editedData.imageFile) {
+        formData.append('image', editedData.imageFile);
+      }
+
       const oldSkillName = skill.skill;
       
       const skillId = await getIdByName(oldSkillName);
@@ -122,7 +155,10 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
           label: "Skill",
           properties: {
             id: skillId,
-            name: editedData.name
+            name: editedData.name,
+            image: editedData.imageFile 
+              ? `skill_${editedData.name}_${Date.now()}.jpg` 
+              : skill.image
           }
         }],
         relationships: [{
@@ -132,7 +168,6 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
       };
       
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-      const formData = new FormData();
       formData.append("file", blob, "data.json");
 
       await onEdit(formData);
@@ -142,11 +177,17 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
         ...skill,
         skill: editedData.name,
         skill_group: editedData.group,
-        professions: editedData.professions
+        professions: editedData.professions,
+        image: editedData.imageFile 
+          ? URL.createObjectURL(editedData.imageFile)
+          : skill.image
       };
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
-      alert(`Ошибка сохранения: ${error.message}`);
+      setEditedData(prev => ({
+        ...prev,
+        image: skill.image || '/static/images/default.png'
+      }));
       throw error;
     }
   };
@@ -196,10 +237,24 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
             <div className="modal-header">
               <div className="image-container">
                 <img
-                  src={skill.image || '/static/images/default.png'}
-                  alt={skill.skill}
+                  src={editedData.image}
+                  alt={editedData.skill}
                   className="modal-image"
                 />
+                {isEditing && (
+                  <div className="image-upload">
+                    <label htmlFor="image-upload" className="upload-button">
+                      Сменить изображение
+                      <input
+                        id="image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                  </div>
+                )}
                 {!isEditing && (
                   <button className="edit-button" onClick={handleEditClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

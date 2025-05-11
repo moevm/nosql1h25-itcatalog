@@ -239,13 +239,15 @@ const ProfessionsPage = () => {
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
       const formData = new FormData();
       formData.append("file", blob, "data.json");
-  
+      if (professionData.image) {
+        formData.append("image", professionData.image);
+      }
       await add(formData);
   
       const newProfession = {
         profession: professionName,
         category: categoryName,
-        image: professionData.image?.name || '/static/images/default.png',
+        image: professionData.image ? URL.createObjectURL(professionData.image) : '/static/images/default.png',
       };
   
       setProfessions((prev) => [...prev, newProfession]);
@@ -264,7 +266,6 @@ const ProfessionsPage = () => {
       const updatedProfessions = await fetchProfessions();
       setProfessions(updatedProfessions);
       
-      // Обновляем выбранную профессию
       if (selectedProfession) {
         const updatedProfession = updatedProfessions.find(p => 
           p.profession === selectedProfession.profession

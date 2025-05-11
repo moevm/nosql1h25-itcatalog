@@ -147,7 +147,7 @@ const TechnologiesPage = () => {
       const newTechnology = {
         technology: technologyName,
         technology_group: groupName,
-        image: technologyData.image?.name || '/static/images/default.png',
+        image: technologyData.image ? URL.createObjectURL(technologyData.image) : '/static/images/default.png',
         description: description
       };
   
@@ -178,9 +178,15 @@ const TechnologiesPage = () => {
   const handleEditTechnology = async (formData) => {
     try {
       setLoading(true);
-      await editCard(formData);
-      const updatedTechnologies = await fetchTechnologies();
-      setTechnologies(updatedTechnologies);
+      const response = await editCard(formData);
+      
+      if (formData.has('image')) {
+        const updatedTechnologies = await fetchTechnologies();
+        setTechnologies(updatedTechnologies);
+      } else {
+        const updatedTechnologies = await fetchTechnologies();
+        setTechnologies(updatedTechnologies);
+      }
     } catch (error) {
       console.error('Error editing technology:', error);
       throw error;

@@ -7,7 +7,9 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
   const [editedData, setEditedData] = useState({
     name: '',
     description: '',
-    participants: []
+    participants: [],
+    image: null, 
+    imageFile: null 
   });
   const [allParticipants, setAllParticipants] = useState([]);
   const [participantsLoading, setParticipantsLoading] = useState(false);
@@ -61,7 +63,9 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
       setEditedData({
         name: group.name || '',
         description: group.description || '',
-        participants: normalizedParticipants
+        participants: normalizedParticipants,
+        image: group.image || '/static/images/default.png',
+        imageFile: null
       });
     }
   }, [group]);
@@ -72,6 +76,12 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
 
   const handleSaveClick = async () => {
     try {
+      const formData = new FormData();
+
+      if (editedData.imageFile) {
+        formData.append('image', editedData.imageFile);
+      }
+
       const groupId = await getIdByName(group.name);
       if (!groupId) {
         throw new Error(`Не удалось получить ID для группы: ${group.name}`);
@@ -130,7 +140,10 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
           properties: {
             id: groupId,
             name: editedData.name,
-            description: editedData.description
+            description: editedData.description,
+            image: editedData.imageFile 
+              ? `group_${editedData.name}_${Date.now()}.jpg` 
+              : group.image
           }
         }],
         relationships: relations
@@ -139,7 +152,7 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
       console.log('Отправляемые данные:', data); 
   
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-      const formData = new FormData();
+      
       formData.append("file", blob, "data.json");
   
 
@@ -153,7 +166,10 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
       setIsEditing(false);
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
-      alert(`Ошибка сохранения: ${error.message}`);
+      setEditedData(prev => ({
+        ...prev,
+        image: group.image || '/static/images/default.png'
+      }));
     }
   };
 
@@ -186,6 +202,29 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEditedData(prev => ({
+          ...prev,
+          image: event.target.result, 
+          imageFile: file 
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (editedData.image && editedData.image.startsWith('blob:')) {
+        URL.revokeObjectURL(editedData.image);
+      }
+    };
+  }, [editedData.image]);
+
   const availableParticipants = allParticipants.filter(
     p => !editedData.participants.includes(p)
   );
@@ -202,10 +241,24 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
             <div className="modal-header">
               <div className="image-container">
                 <img
-                  src={group.image || '/static/images/default.png'}
+                  src={editedData.image}
                   alt={editedData.name}
                   className="modal-image"
                 />
+                {isEditing && (
+                  <div className="image-upload">
+                    <label htmlFor="image-upload" className="upload-button">
+                      Сменить изображение
+                      <input
+                        id="image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                  </div>
+                )}
                 {!isEditing && (
                   <button className="edit-button" onClick={handleEditClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

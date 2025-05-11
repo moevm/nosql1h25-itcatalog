@@ -98,27 +98,40 @@ const GroupPage = ({ groupType }) => {
         let resultGroups = await fetchGroups(config.apiEndpoint);
 
         if (searchNameTerm.trim() !== '') {
-          const nameSearchResults = await searchGroups(config.apiEndpoint, searchNameTerm);
-          resultGroups = resultGroups.filter(group => 
-            nameSearchResults.some(result => 
-              (result.name || result.group) === (group.name || group.group)
-            )
-          );
+          try {
+            const nameSearchResults = await searchGroups(config.apiEndpoint, searchNameTerm);
+            resultGroups = resultGroups.filter(group => 
+              nameSearchResults.some(result => 
+                (result.name || result.group) === (group.name || group.group)
+              )
+            );
+          } catch (error) {
+            console.error(`Error searching by name:`, error);
+            resultGroups = [];
+          }
         }
 
         if (searchDescriptionTerm.trim() !== '') {
-          const descSearchResults = await searchGroupsDescription(config.apiEndpoint, searchDescriptionTerm);
-          resultGroups = resultGroups.filter(group => 
-            descSearchResults.some(result => 
-              (result.name || result.group) === (group.name || group.group))
-          );
+          try {
+            const descSearchResults = await searchGroupsDescription(config.apiEndpoint, searchDescriptionTerm);
+            resultGroups = resultGroups.filter(group => 
+              descSearchResults.some(result => 
+                (result.name || result.group) === (group.name || group.group)
+              )
+            );
+          } catch (error) {
+            console.error(`Error searching by description:`, error);
+            resultGroups = [];
+          }
         }
 
         const normalizedGroups = resultGroups.map(normalizeGroup);
         setGroups(normalizedGroups);
+        setError(null);
       } catch (error) {
         console.error(`Error searching ${config.apiEndpoint}:`, error);
         setError(`Ошибка при поиске ${config.title}`);
+        setGroups([]);
       } finally {
         setLoading(false);
       }
@@ -134,6 +147,7 @@ const GroupPage = ({ groupType }) => {
   const handleCardClick = async (groupName) => {
     try {
       setModalLoading(true);
+      console.log('groupName', groupName);
       const groupDetails = await getGroupDetails(groupName);
       setSelectedGroup(normalizeGroup(groupDetails));
       setIsModalOpen(true);
@@ -207,6 +221,10 @@ const GroupPage = ({ groupType }) => {
       const updatedGroupDetails = await getGroupDetails(newName);
       const normalizedGroup = normalizeGroup(updatedGroupDetails);
       
+      if (formData.has('image')) {
+        normalizedGroup.image = URL.createObjectURL(formData.get('image'));
+      }
+
       setSelectedGroup(normalizedGroup);
       
       const updatedGroups = await fetchGroups(config.apiEndpoint);
@@ -266,16 +284,30 @@ const GroupPage = ({ groupType }) => {
         </div>
 
         <div className="cards">
-          {groups.map((group, index) => (
-            <div key={index} onClick={() => handleCardClick(group.name)} style={{ cursor: 'pointer' }}>
-              <Card
-                image={group.image}
-                title={group.name || 'Без названия'}
-                category={config.title}
-                description={group.description || 'Описание отсутствует'}
-              />
+          {groups.length === 0 ? (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '20px',
+              color: '#666',
+              fontSize: '16px'
+            }}>
+              {searchNameTerm || searchDescriptionTerm 
+                ? `По вашему запросу не найдено ${config.title.toLowerCase()}`
+                : `Нет доступных ${config.title.toLowerCase()}`
+              }
             </div>
-          ))}
+          ) : (
+            groups.map((group, index) => (
+              <div key={index} onClick={() => handleCardClick(group.name)} style={{ cursor: 'pointer' }}>
+                <Card
+                  image={group.image}
+                  title={group.name || 'Без названия'}
+                  category={config.title}
+                  description={group.description || 'Описание отсутствует'}
+                />
+              </div>
+            ))
+          )}
         </div>
 
         <AddGroupButton

@@ -219,6 +219,25 @@
   color: #555;
 }
 
+.image-upload {
+  margin-top: 10px;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #e0e0e0;
+}
+
 @media (max-width: 768px) {
   .modal-content {
     width: 95%;
