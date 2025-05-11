@@ -60,6 +60,21 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
     setIsEditing(true);
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEditedData(prev => ({
+          ...prev,
+          image: event.target.result,
+          imageFile: file 
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSaveClick = async () => {
     try {
       const professionId = await getIdByName(profession.profession);
@@ -67,6 +82,13 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
         throw new Error(`Не удалось получить ID для профессии: ${profession.profession}`);
       }
   
+      const formData = new FormData();
+      
+      // Добавляем файл изображения, если он был изменен
+      if (editedData.imageFile) {
+        formData.append('image', editedData.imageFile);
+      }
+
       const professionNode = {
         old_name: profession.profession,
         label: "Profession",
@@ -126,7 +148,8 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
       };
   
       const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
-      const formData = new FormData();
+      
+
       formData.append("file", blob, "data.json");
   
       await onEdit(formData);   
@@ -190,6 +213,20 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
               alt={editedData.profession}
               className="modal-image"
             />
+            {isEditing && (
+              <div className="image-upload">
+                <label htmlFor="image-upload" className="upload-button">
+                  Сменить изображение
+                  <input
+                    id="image-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: 'none' }}
+                  />
+                </label>
+              </div>
+            )}
             {!isEditing && (
               <button className="edit-button" onClick={handleEditClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
