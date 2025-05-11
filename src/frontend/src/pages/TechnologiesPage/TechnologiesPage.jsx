@@ -147,7 +147,7 @@ const TechnologiesPage = () => {
       const newTechnology = {
         technology: technologyName,
         technology_group: groupName,
-        image: technologyData.image?.name || '/static/images/default.png',
+        image: technologyData.image ? URL.createObjectURL(technologyData.image) : '/static/images/default.png',
         description: description
       };
   
