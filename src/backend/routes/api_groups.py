@@ -236,7 +236,7 @@ async def get_group_name(name: str):
                     collect(DISTINCT s.name) AS skills, 
                     collect(DISTINCT t.name) AS technologies, 
                     collect(DISTINCT tool.name) AS tools
-                RETURN g.name AS group_name, g.id AS id, g.description AS description, 
+                RETURN g.name AS name, g.id AS id, g.description AS description, 
                     professions + skills + technologies + tools AS participants
                 LIMIT 1 
                 """,
@@ -250,10 +250,7 @@ async def get_group_name(name: str):
                     detail=f"Group '{name}' not found"
                 )
             
-            group_node = record["group"]
-            group_properties = dict(group_node)
             group_id = record["id"]
-            group_type = record["type"]
             
             # Определяем расширение изображения
             static_path = "static/images"
@@ -267,8 +264,8 @@ async def get_group_name(name: str):
                     break
                     
             return {
-                "name": group_properties.get("name"),
-                "description": group_properties.get("description"),
+                "name": record["name"],
+                "description": record["description"],
                 "participants": record["participants"],
                 "image": image_url
             }
