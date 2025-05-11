@@ -22,9 +22,17 @@ async def import_data(
                 zip_ref.extractall(temp_dir)
 
 
-            json_file_path = os.path.join(temp_dir, "data.json")
-            if not os.path.exists(json_file_path):
+            json_candidates = []
+            for root, _, files in os.walk(temp_dir):
+                if "data.json" in files:
+                    json_candidates.append(os.path.join(root, "data.json"))
+            
+            if not json_candidates:
                 raise HTTPException(status_code=400, detail="ZIP archive must contain a data.json file")
+            if len(json_candidates) > 1:
+                raise HTTPException(status_code=400, detail="Multiple data.json files found in ZIP archive")
+            
+            json_file_path = json_candidates[0]
             
 
             with open(json_file_path, 'r', encoding='utf-8') as f:
