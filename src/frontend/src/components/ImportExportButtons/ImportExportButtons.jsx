@@ -55,7 +55,7 @@ const ImportExportButtons = () => {
 
   const handleImport = async () => {
     if (!selectedFile) {
-      alert('Выберите файл для импорта.');
+      alert('Выберите файл ghgghдля импорта.');
       return;
     }
   
@@ -68,6 +68,9 @@ const ImportExportButtons = () => {
       setIsImportModalOpen(false);
       alert('Импорт данных успешно выполнен.');
       console.log('Import completed successfully');
+
+      window.location.reload();
+      
     } catch (error) {
       console.error('Error importing data:', error);
       alert(`Ошибка при импорте данных: ${error.message}`);
