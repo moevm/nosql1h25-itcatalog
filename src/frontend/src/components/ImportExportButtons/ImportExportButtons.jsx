@@ -55,7 +55,7 @@ const ImportExportButtons = () => {
 
   const handleImport = async () => {
     if (!selectedFile) {
-      alert('Выберите файл ghgghдля импорта.');
+      alert('Выберите файл для импорта.');
       return;
     }
   
