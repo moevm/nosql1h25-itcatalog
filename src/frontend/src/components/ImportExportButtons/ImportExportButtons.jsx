@@ -68,6 +68,9 @@ const ImportExportButtons = () => {
       setIsImportModalOpen(false);
       alert('Импорт данных успешно выполнен.');
       console.log('Import completed successfully');
+
+      window.location.reload();
+      
     } catch (error) {
       console.error('Error importing data:', error);
       alert(`Ошибка при импорте данных: ${error.message}`);
