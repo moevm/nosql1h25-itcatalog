@@ -304,6 +304,7 @@ const GroupPage = ({ groupType }) => {
                   title={group.name || 'Без названия'}
                   category={config.title}
                   description={group.description || 'Описание отсутствует'}
+                  time={group.time}
                 />
               </div>
             ))

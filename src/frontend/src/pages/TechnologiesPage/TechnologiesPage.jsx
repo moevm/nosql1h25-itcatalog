@@ -238,8 +238,13 @@ const TechnologiesPage = () => {
           items={groups}
           selectedItems={selectedGroups}
           onItemChange={handleGroupChange}
+          onSearchChange={setSearchNameTerm}
+          searchTerm={searchNameTerm}
+          showSearch={true}
+          searchPlaceholder="Поиск технологий..."
           filterLabel="Группы технологий"
           itemLabelProp="name"
+          filteredCount={technologies.length}
         />
         
         <div className="cards">
@@ -250,6 +255,7 @@ const TechnologiesPage = () => {
                 title={tech.technology}
                 category={tech.technology_group}
                 description={tech.description}
+                time={tech.time}
               />
             </div>
           ))}

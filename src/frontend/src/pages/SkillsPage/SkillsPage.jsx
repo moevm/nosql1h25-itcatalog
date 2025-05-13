@@ -196,6 +196,7 @@ const SkillsPage = () => {
           searchPlaceholder="Поиск навыков..."
           filterLabel="Группы навыков"
           itemLabelProp="name"
+          filteredCount={skills.length}
         />
         <div className="cards">
           {skills.map((skill, index) => (
@@ -204,6 +205,7 @@ const SkillsPage = () => {
                 title={skill.skill}
                 category={skill.skill_group}
                 image={skill.image}
+                time={skill.time}
               />
             </div>
           ))}

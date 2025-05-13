@@ -13,7 +13,8 @@ const Filters = ({
   onFilterChange,
   onSearchChange,
   showSearch = true,
-  searchPlaceholder = "Поиск профессий..."
+  searchPlaceholder = "Поиск профессий...",
+  filteredCount = 0
 }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -187,13 +188,20 @@ const Filters = ({
       {/* Поле поиска */}
       {showSearch && (
         <div className="search-box">
-          <input
-            type="text"
-            placeholder={searchPlaceholder}
-            onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
-          />
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              placeholder={searchPlaceholder}
+              onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
+            />
+          </form>
         </div>
       )}
+
+      {/* Отображение количества найденных объектов */}
+      <div className="filtered-count">
+        Найдено объектов: {filteredCount}
+      </div>
     </div>
   );
 };

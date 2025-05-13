@@ -10,7 +10,8 @@ const GroupFilter = ({
     showSearch = true,
     searchPlaceholder = "Поиск...",
     filterLabel = "Фильтры",
-    itemLabelProp = "name"
+    itemLabelProp = "name",
+    filteredCount = 0
 }) => {
     const [activeDropdown, setActiveDropdown] = useState(null);
   
@@ -74,6 +75,11 @@ const GroupFilter = ({
             </form>
           </div>
         )}
+
+        {/* Отображение количества найденных объектов */}
+        <div className="filtered-count">
+          Найдено объектов: {filteredCount}
+        </div>
       </div>
     );
 };
