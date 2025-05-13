@@ -250,6 +250,7 @@ const TechnologiesPage = () => {
                 title={tech.technology}
                 category={tech.technology_group}
                 description={tech.description}
+                time={tech.time}
               />
             </div>
           ))}
