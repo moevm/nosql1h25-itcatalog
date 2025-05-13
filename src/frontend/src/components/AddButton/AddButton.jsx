@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../Modal/Modal';
 import './AddButton.css';
 
@@ -6,7 +6,7 @@ const AddButton = ({
   categories = [], 
   skills = [], 
   technologies = [], 
-  tools = [],
+  tools = [], 
   onAddProfession 
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +18,17 @@ const AddButton = ({
     technologies: [], 
     tools: []    
   });
+
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,18 +49,30 @@ const AddButton = ({
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddProfession(formData);
-    setIsModalOpen(false);
-    setFormData({
-      profession: '',
-      image: null,
-      category: '',
-      skills: [],
-      technologies: [],
-      tools: []
-    });
+    try {
+      await onAddProfession(formData);
+      setIsModalOpen(false);
+      setFormData({
+        profession: '',
+        image: null,
+        category: '',
+        skills: [],
+        technologies: [],
+        tools: []
+      });
+
+      setShowToast(true);
+
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
+    } catch (error) {
+      console.error("Error adding profession:", error);
+      alert(`Ошибка при добавлении профессии: ${error.message}`);
+    }
   };
 
   return (
@@ -156,6 +179,13 @@ const AddButton = ({
           <button type="submit" className="submit-button">Добавить</button>
         </form>
       </Modal>
+
+      {/* Toast notification */}
+      {showToast && (
+        <div className="success-toast">
+          Профессия успешно добавлена!
+        </div>
+      )}
     </>
   );
 };

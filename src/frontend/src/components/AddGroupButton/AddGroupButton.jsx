@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../Modal/Modal';
 import './AddGroupButton.css';
 
@@ -9,6 +9,16 @@ const AddGroupButton = ({ onAddGroup }) => {
     image: null,
     description: ''
   });
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +39,14 @@ const AddGroupButton = ({ onAddGroup }) => {
         image: null,
         description: ''
       });
+
+      setShowToast(true);
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } catch (error) {
       console.error('Error adding group:', error);
-      alert('Ошибка при добавлении группы');
+      alert(`Ошибка при добавлении группы: ${error.message}`);
     }
   };
 
@@ -41,7 +56,7 @@ const AddGroupButton = ({ onAddGroup }) => {
         className="add-button" 
         onClick={() => setIsModalOpen(true)}
       >
-        <span>+</span> Добавить группу
+        <span className="plus-icon">+</span> Добавить группу
       </button>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -90,6 +105,12 @@ const AddGroupButton = ({ onAddGroup }) => {
           </form>
         </div>
       </Modal>
+
+      {showToast && (
+        <div className="success-toast">
+          Группа успешно добавлена!
+        </div>
+      )}
     </>
   );
 };
