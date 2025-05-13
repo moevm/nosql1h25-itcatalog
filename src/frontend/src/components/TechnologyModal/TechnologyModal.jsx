@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './TechnologyModal.css';
 import { getIdByName, fetchProfessions, fetchGroups } from '../../services/api';
 
-const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
+const TechnologyModal = ({ isOpen, onClose, technology, onEdit, loading }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     name: '',
@@ -15,6 +15,8 @@ const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
   const [allGroups, setAllGroups] = useState([]);
   const [allProfessions, setAllProfessions] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -48,6 +50,17 @@ const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
     loadData();
   }, [technology]);
 
+  useEffect(() => {
+    return () => {
+      if (editedData.image && editedData.image.startsWith('blob:')) {
+        URL.revokeObjectURL(editedData.image);
+      }
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, [editedData.image]);
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -66,14 +79,6 @@ const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
       reader.readAsDataURL(file);
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (editedData.image && editedData.image.startsWith('blob:')) {
-        URL.revokeObjectURL(editedData.image);
-      }
-    };
-  }, [editedData.image]);
 
   const handleSaveClick = async () => {
     try {
@@ -188,6 +193,13 @@ const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
       };
       
       setIsEditing(false);
+
+      setShowToast(true);
+      
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
       return updatedTechnology;
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
@@ -391,6 +403,13 @@ const TechnologyModal = ({ technology, onClose, onEdit, loading }) => {
                 )}
               </div>
             </div>
+
+            {/* Toast notification */}
+            {showToast && (
+              <div className="success-toast">
+                Все сохранено успешно!
+              </div>
+            )}
           </>
         )}
       </div>

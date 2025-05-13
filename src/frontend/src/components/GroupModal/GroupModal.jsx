@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './GroupModal.css';
 import { getIdByName, fetchProfessions, fetchSkills, fetchTechnologies, fetchTools } from '../../services/api';
 
-const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, participantType }) => {
+const GroupModal = ({ isOpen, onClose, group, onEdit, loading, groupType, label, participantType }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     name: '',
@@ -13,6 +13,8 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
   });
   const [allParticipants, setAllParticipants] = useState([]);
   const [participantsLoading, setParticipantsLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   const extractName = (participant) => {
     if (typeof participant === 'string') return participant;
@@ -69,6 +71,14 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
       });
     }
   }, [group]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -164,8 +174,15 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
       });
     
       setIsEditing(false);
+
+      setShowToast(true);
+      
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
+      alert(`Ошибка сохранения: ${error.message}`);
       setEditedData(prev => ({
         ...prev,
         image: group.image || '/static/images/default.png'
@@ -369,6 +386,13 @@ const GroupModal = ({ group, onClose, onEdit, loading, groupType, label, partici
                 )}
               </div>
             </div>
+
+            {/* Toast notification */}
+            {showToast && (
+              <div className="success-toast">
+                Все сохранено успешно!
+              </div>
+            )}
           </>
         )}
       </div>

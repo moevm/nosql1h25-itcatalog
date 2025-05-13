@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ToolModal.css';
 import { getIdByName, fetchProfessions, fetchGroups } from '../../services/api';
 
@@ -13,6 +13,8 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
   });
   const [allGroups, setAllGroups] = useState([]);
   const [allProfessions, setAllProfessions] = useState([]);
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -42,6 +44,14 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
     
     loadData();
   }, [tool]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -174,6 +184,12 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
       };
       
       setIsEditing(false);
+      
+      setShowToast(true);
+      
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
       
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
@@ -375,6 +391,13 @@ const ToolModal = ({ tool, onClose, onEdit, loading }) => {
                 )}
               </div>
             </div>
+
+            {/* Toast notification */}
+            {showToast && (
+              <div className="success-toast">
+                Все сохранено успешно!
+              </div>
+            )}
           </>
         )}
       </div>

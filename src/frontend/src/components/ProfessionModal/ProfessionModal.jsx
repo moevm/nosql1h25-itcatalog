@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ProfessionModal.css';
 import { 
   getIdByName
 } from '../../services/api';
 
-const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologies, allTools, setSelectedProfession }) => {
+const ProfessionModal = ({ isOpen, onClose, profession, onEdit, allSkills, allTechnologies, allTools, setSelectedProfession }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({
     profession: '',
@@ -13,6 +13,9 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
     tools: [],
     image: '/static/images/default.png'
   });
+
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   const getDisplayName = (item) => {
     if (!item) return '';
@@ -53,6 +56,14 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
       allTools.filter(tool => !currentToolNames.includes(getDisplayName(tool)))
     );
   }, [allSkills, allTechnologies, allTools, editedData]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   if (!profession) return null;
 
@@ -165,6 +176,14 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
       
       setIsEditing(false);
       setSelectedProfession(updatedProfession); 
+
+      // Show toast instead of alert
+      setShowToast(true);
+      
+      // Auto-hide toast after 3 seconds
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
       
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
@@ -425,6 +444,13 @@ const ProfessionModal = ({ profession, onClose, onEdit, allSkills, allTechnologi
             )}
           </div>
         </div>
+
+        {/* Toast notification */}
+        {showToast && (
+          <div className="success-toast">
+            Все сохранено успешно!
+          </div>
+        )}
       </div>
     </div>
   );
