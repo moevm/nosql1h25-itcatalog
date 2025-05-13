@@ -251,6 +251,7 @@ const ToolsPage = () => {
                 title={tool.tool}
                 category={tool.tool_group}
                 description={tool.description}
+                time={tool.time}
               />
             </div>
           ))}
