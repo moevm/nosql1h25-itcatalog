@@ -25,7 +25,7 @@ async def get_groups(group_type: str):
             result = session.run(
                 f"""
                 MATCH (g:{valid_types[group_type]})
-                RETURN g.name as name, g.description AS description, g.id AS id
+                RETURN g.name as name, g.description AS description, g.time AS time, g.id AS id
                 ORDER BY toLower(g.name)
                 """,
             )
@@ -47,6 +47,7 @@ async def get_groups(group_type: str):
                 groups.append({
                     "name": record["name"],
                     "description": record.get("description", ""),
+                    "time": record["time"],
                     "image": image_url
                 })
 
