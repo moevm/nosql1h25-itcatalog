@@ -63,11 +63,25 @@ const ImportExportButtons = () => {
       setImportLoading(true);
       console.log('Starting import process with file:', selectedFile.name);
       
-      await importCatalog(selectedFile);
+      const response = await importCatalog(selectedFile);
+      console.log('Import response:', response);
+      const importedNodes = response?.count || 0;
+      const importedRelationships = response?.relationships || 0;
+      const importedImages = response?.images || 0;
       
       setIsImportModalOpen(false);
-      alert('Импорт данных успешно выполнен.');
-      console.log('Import completed successfully');
+      
+      const successMessage = `Импорт данных успешно выполнен.\n` +
+        `Импортировано объектов: ${importedNodes}\n` +
+        `Импортировано связей: ${importedRelationships}\n` +
+        `Импортировано изображений: ${importedImages}`;
+      
+      alert(successMessage);
+      console.log('Import completed successfully with counts:', {
+        nodes: importedNodes,
+        relationships: importedRelationships,
+        images: importedImages
+      });
 
       window.location.reload();
       

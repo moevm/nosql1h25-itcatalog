@@ -61,6 +61,7 @@ async def import_data(
                 delete_nodes(driver)
             
             node_ids = []
+            relationship_count = 0
             with driver.session() as session:
 
                 for node in data.get("nodes", []):
@@ -95,6 +96,7 @@ async def import_data(
                         rel["endNode"],
                         rel["type"]
                     )
+                    relationship_count += 1
 
 
             os.makedirs("static/images", exist_ok=True)
@@ -111,7 +113,13 @@ async def import_data(
                         shutil.copy(src_path, dest_path)
                         saved_images_count += 1
             
-            return {"message": f"Imported {len(node_ids)} nodes with {saved_images_count} images"}
+            return {
+                "success": True,
+                "message": f"Import completed successfully",
+                "count": len(node_ids),
+                "relationships": relationship_count,
+                "images": saved_images_count
+            }
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON format")
