@@ -17,10 +17,14 @@ def export_to_json(driver):
         nodes = session.execute_read(lambda tx:
                                      list(tx.run("MATCH (n) RETURN labels(n) AS labels, properties(n) AS properties")))
         for record in nodes:
+            props = dict(record["properties"])
+            props.pop("time", None)
+            
             result["nodes"].append({
                 "label": record["labels"][0],
-                "properties": dict(record["properties"])
+                "properties": props
             })
+            
 
         relationships = session.execute_read(lambda tx:
                                              list(tx.run(
