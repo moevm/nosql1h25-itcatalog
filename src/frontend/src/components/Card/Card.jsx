@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ title, category, description, image, onClick }) => {
+const Card = ({ title, category, description, time, image, onClick }) => {
   const imageUrl = image || "http://localhost:8000/static/images/in_progress.jpg";
 
   const formatTime = (timestamp) => {
