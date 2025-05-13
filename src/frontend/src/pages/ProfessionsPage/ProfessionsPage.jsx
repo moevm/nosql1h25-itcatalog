@@ -308,6 +308,7 @@ const ProfessionsPage = () => {
                 image={profession.image || '/static/images/default.png'}
                 title={profession.profession}
                 category={profession.category}
+                time={profession.time}
                 onClick={() => handleCardClick(profession.profession)}
               />
             ))}
