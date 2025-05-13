@@ -239,8 +239,13 @@ const ToolsPage = () => {
           items={groups}
           selectedItems={selectedGroups}
           onItemChange={handleGroupChange}
+          onSearchChange={setSearchNameTerm}
+          searchTerm={searchNameTerm}
+          showSearch={true}
+          searchPlaceholder="Поиск инструментов..."
           filterLabel="Группы инструментов"
           itemLabelProp="name"
+          filteredCount={tools.length}
         />
         
         <div className="cards">
