@@ -12,7 +12,7 @@ async def get_tools():
             result = session.run(
                 """
                 MATCH (t:Tool)-[:GROUPS_TOOL]->(g:ToolGroup)
-                RETURN t.name AS tool_name, t.description AS description, g.name AS group_name, t.id AS id
+                RETURN t.name AS tool_name, t.description AS description, t.time AS time, g.name AS group_name, t.id AS id
                 ORDER BY toLower(t.name)
                 """
             )
@@ -31,6 +31,7 @@ async def get_tools():
                 tools.append({
                     "tool": record["tool_name"],
                     "description": record["description"],
+                    "time": record["time"],
                     "tool_group": record["group_name"],
                     "image": image_url
                 })
