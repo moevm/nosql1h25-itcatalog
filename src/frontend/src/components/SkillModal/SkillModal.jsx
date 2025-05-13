@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './SkillModal.css';
 import { getIdByName, fetchProfessions } from '../../services/api';
 
@@ -13,6 +13,8 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
   });
   const [allProfessions, setAllProfessions] = useState([]);
   const [professionsLoading, setProfessionsLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   useEffect(() => {
     const loadProfessions = async () => {
@@ -42,6 +44,17 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
     }
   }, [skill]);
 
+  useEffect(() => {
+    return () => {
+      if (editedData.image && editedData.image.startsWith('blob:')) {
+        URL.revokeObjectURL(editedData.image);
+      }
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, [editedData.image]);
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -61,14 +74,6 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (editedData.image && editedData.image.startsWith('blob:')) {
-        URL.revokeObjectURL(editedData.image);
-      }
-    };
-  }, [editedData.image]);
-      
   const handleSaveClick = async () => {
     try {
       const formData = new FormData();
@@ -173,6 +178,14 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
       await onEdit(formData);
       setIsEditing(false);
 
+      // Show toast notification
+      setShowToast(true);
+      
+      // Auto-hide toast after 3 seconds
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
       return {
         ...skill,
         skill: editedData.name,
@@ -184,6 +197,7 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
       };
     } catch (error) {
       console.error("Ошибка при сохранении:", error);
+      alert(`Ошибка сохранения: ${error.message}`);
       setEditedData(prev => ({
         ...prev,
         image: skill.image || '/static/images/default.png'
@@ -368,6 +382,13 @@ const SkillModal = ({ skill, onClose, onEdit, allGroups, loading }) => {
                 )}
               </div>
             </div>
+
+            {/* Toast notification */}
+            {showToast && (
+              <div className="success-toast">
+                Все сохранено успешно!
+              </div>
+            )}
           </>
         )}
       </div>
