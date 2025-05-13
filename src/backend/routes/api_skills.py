@@ -63,7 +63,7 @@ async def get_skill(name: str):
                 MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
                 WHERE s.name = $skill_name
                 OPTIONAL MATCH (p:Profession)-[:REQUIRES]->(s)
-                RETURN s.name AS skill_name, g.name AS group_name, collect(p.name) AS professions, s.id AS id
+                RETURN s.name AS skill_name, s.time AS time, g.name AS group_name, collect(p.name) AS professions, s.id AS id
                 """,
                 {"skill_name": name}
             )
@@ -88,6 +88,7 @@ async def get_skill(name: str):
 
             return {
                 "skill": record["skill_name"],
+                "time": record["time"],
                 "skill_group": record["group_name"],
                 "professions": record["professions"],
                 "description": record.get("description", ""),

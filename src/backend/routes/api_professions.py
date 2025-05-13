@@ -55,6 +55,7 @@ async def get_profession(name: str):
                 OPTIONAL MATCH (p)-[:BELONGS_TO]->(c:Category)
                 RETURN p.name AS profession_name, 
                        p.id AS id,
+                       p.time AS time,
                        c.name AS category_name,
                        collect(DISTINCT s.name) AS skills,
                        collect(DISTINCT t.name) AS technologies,
@@ -80,6 +81,7 @@ async def get_profession(name: str):
             
             return {
                 "profession": record["profession_name"],
+                "time": record["time"],
                 "category": record["category_name"],
                 "skills": record["skills"],
                 "technologies": record["technologies"],
