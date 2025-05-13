@@ -2,6 +2,7 @@ import os
 import time
 import json
 from neo4j import GraphDatabase
+from utils import get_utc3_time
 import datetime 
 
 NEO4J_URI = os.getenv("NEO4J_URI")
@@ -39,7 +40,7 @@ def load_data_from_json(file_path):
         for node in data["nodes"]:
             label = node["label"]
             properties = node["properties"]
-            properties["time"] = datetime.datetime.now().isoformat()
+            properties["time"] = get_utc3_time()
             session.execute_write(create_node, label, properties)
 
         # Создаем связи

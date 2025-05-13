@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver, check_database_empty
-from utils import check_node_exists, delete_nodes, create_node, create_relationship
-from datetime import datetime
+from utils import check_node_exists, delete_nodes, create_node, create_relationship, get_utc3_time
 import json
 import zipfile
 import io
@@ -83,7 +82,7 @@ async def import_data(
                         name
                     )
                     if not exists:
-                        properties["time"] = datetime.now().isoformat()
+                        properties["time"] = get_utc3_time()
                         session.execute_write(
                             create_node,
                             label,

@@ -1,4 +1,5 @@
 from neo4j import GraphDatabase
+from datetime import datetime, timezone, timedelta
 
 def delete_nodes(driver):
     with driver.session() as session:
@@ -39,3 +40,7 @@ def delete_relationship(tx, start_node_id, end_node_id, rel_type):
     )
     tx.run(query, start_node_id=start_node_id, end_node_id=end_node_id)
 
+def get_utc3_time():
+    utc_time = datetime.now(timezone.utc)
+    utc3_time = utc_time + timedelta(hours=3)
+    return utc3_time.isoformat()
