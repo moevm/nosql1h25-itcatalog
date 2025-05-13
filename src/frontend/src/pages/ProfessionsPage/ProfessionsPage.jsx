@@ -293,7 +293,8 @@ const ProfessionsPage = () => {
           showSearch={true}
           searchPlaceholder="Поиск профессий..."  
           searchTerm={searchTerm} 
-          onSearchChange={handleSearchChange} 
+          onSearchChange={handleSearchChange}
+          filteredCount={professions.length}
         />
 
         {loading ? (
