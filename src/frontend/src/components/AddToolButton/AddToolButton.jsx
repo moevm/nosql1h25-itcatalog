@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../../components/Modal/Modal';
 
 const AddToolButton = ({ groups, onAddTool }) => {
@@ -9,6 +9,8 @@ const AddToolButton = ({ groups, onAddTool }) => {
     image: null,
     description: ''
   });
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (groups.length > 0 && typeof groups[0] === 'string') {
@@ -25,6 +27,12 @@ const AddToolButton = ({ groups, onAddTool }) => {
         group: groups[0].name 
       }));
     }
+
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
   }, [groups]);
 
   const handleInputChange = (e) => {
@@ -49,9 +57,14 @@ const AddToolButton = ({ groups, onAddTool }) => {
         image: null,
         description: ''
       });
+
+      setShowToast(true);
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } catch (error) {
       console.error('Error adding tool:', error);
-      alert('Ошибка при добавлении инструмента');
+      alert(`Ошибка при добавлении инструмента: ${error.message}`);
     }
   };
 
@@ -61,7 +74,7 @@ const AddToolButton = ({ groups, onAddTool }) => {
         className="add-button" 
         onClick={() => setIsModalOpen(true)}
       >
-        <span>+</span> Добавить инструмент
+        <span className="plus-icon">+</span> Добавить инструмент
       </button>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -89,7 +102,6 @@ const AddToolButton = ({ groups, onAddTool }) => {
                   required
                 >
                   {groups.map((group, index) => {
-                    // Обрабатываем как строки, так и объекты
                     const groupName = typeof group === 'string' ? group : group.name;
                     return (
                       <option key={index} value={groupName}>
@@ -130,6 +142,12 @@ const AddToolButton = ({ groups, onAddTool }) => {
           </form>
         </div>
       </Modal>
+
+      {showToast && (
+        <div className="success-toast">
+          Инструмент успешно добавлен!
+        </div>
+      )}
     </>
   );
 };

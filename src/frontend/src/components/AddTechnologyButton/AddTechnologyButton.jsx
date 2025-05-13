@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../Modal/Modal';
+import './AddTechnologyButton.css';
 
 const AddTechnologyButton = ({ groups, onAddTechnology }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,6 +10,18 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
     image: null,
     description: ''
   });
+  // Add state for toast notification
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (groups.length > 0 && !technologyData.group) {
@@ -21,17 +34,32 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTechnologyData(prev => ({ ...prev, [name]: value }));
+    setTechnologyData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleFileChange = (e) => {
-    setTechnologyData(prev => ({ ...prev, image: e.target.files[0] }));
+    setTechnologyData(prev => ({
+      ...prev,
+      image: e.target.files[0]
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!technologyData.group) {
+      alert('Пожалуйста, выберите группу технологий');
+      return;
+    }
+
     try {
-      await onAddTechnology(technologyData);
+      await onAddTechnology({
+        ...technologyData,
+        group: technologyData.group
+      });
+      
       setIsModalOpen(false);
       setTechnologyData({
         name: '',
@@ -39,9 +67,18 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
         image: null,
         description: ''
       });
+
+      // Show success toast
+      setShowToast(true);
+      
+      // Auto-hide toast after 3 seconds
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+      
     } catch (error) {
       console.error('Error adding technology:', error);
-      alert('Ошибка при добавлении технологии');
+      alert('Ошибка при добавлении технологии: ' + error.message);
     }
   };
 
@@ -71,7 +108,7 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
               </div>
 
               <div className="form-group">
-                <label>Группа технологии</label>
+                <label>Группа технологий</label>
                 <select
                   name="group"
                   value={technologyData.group}
@@ -87,23 +124,21 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
               </div>
 
               <div className="form-group">
+                <label>Описание</label>
+                <textarea
+                  name="description"
+                  value={technologyData.description}
+                  onChange={handleInputChange}
+                  rows="3"
+                />
+              </div>
+
+              <div className="form-group">
                 <label>Изображение технологии</label>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Описание технологии</label>
-                <textarea
-                    name="description"
-                    value={technologyData.description}
-                    onChange={handleInputChange}
-                    rows={4}
-                    className="description-textarea"
-                    placeholder="Введите описание технологии..."
                 />
               </div>
             </div>
@@ -116,6 +151,13 @@ const AddTechnologyButton = ({ groups, onAddTechnology }) => {
           </form>
         </div>
       </Modal>
+
+      {/* Toast notification */}
+      {showToast && (
+        <div className="success-toast">
+          Технология успешно добавлена!
+        </div>
+      )}
     </>
   );
 };

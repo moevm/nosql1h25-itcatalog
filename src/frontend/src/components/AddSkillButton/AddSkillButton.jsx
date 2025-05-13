@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from '../Modal/Modal';
+import './AddSkillButton.css';
 
 const AddSkillButton = ({ groups, onAddSkill }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -8,6 +9,18 @@ const AddSkillButton = ({ groups, onAddSkill }) => {
     group: '', 
     image: null
   });
+  // Add state for toast notification
+  const [showToast, setShowToast] = useState(false);
+  const toastTimeoutRef = useRef(null);
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (groups.length > 0 && !skillData.group) {
@@ -35,7 +48,6 @@ const AddSkillButton = ({ groups, onAddSkill }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!skillData.group) {
       alert('Пожалуйста, выберите группу навыков');
       return;
@@ -53,6 +65,15 @@ const AddSkillButton = ({ groups, onAddSkill }) => {
         group: groups.length > 0 ? groups[0] : '', 
         image: null
       });
+
+      // Show success toast
+      setShowToast(true);
+      
+      // Auto-hide toast after 3 seconds
+      toastTimeoutRef.current = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+      
     } catch (error) {
       console.error('Error adding skill:', error);
       alert('Ошибка при добавлении навыка: ' + error.message);
@@ -118,6 +139,13 @@ const AddSkillButton = ({ groups, onAddSkill }) => {
           </form>
         </div>
       </Modal>
+
+      {/* Toast notification */}
+      {showToast && (
+        <div className="success-toast">
+          Навык успешно добавлен!
+        </div>
+      )}
     </>
   );
 };
