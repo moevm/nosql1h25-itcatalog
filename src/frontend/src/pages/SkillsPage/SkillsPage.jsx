@@ -204,6 +204,7 @@ const SkillsPage = () => {
                 title={skill.skill}
                 category={skill.skill_group}
                 image={skill.image}
+                time={skill.time}
               />
             </div>
           ))}
