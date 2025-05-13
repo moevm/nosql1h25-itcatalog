@@ -63,11 +63,25 @@ const ImportExportButtons = () => {
       setImportLoading(true);
       console.log('Starting import process with file:', selectedFile.name);
       
-      await importCatalog(selectedFile);
+      const response = await importCatalog(selectedFile);
+      console.log('Import response:', response);
+      const importedNodes = response?.count || 0;
+      const importedRelationships = response?.relationships || 0;
+      const importedImages = response?.images || 0;
       
       setIsImportModalOpen(false);
-      alert('Импорт данных успешно выполнен.');
-      console.log('Import completed successfully');
+      
+      const successMessage = `Импорт данных успешно выполнен.\n` +
+        `Импортировано объектов: ${importedNodes}\n` +
+        `Импортировано связей: ${importedRelationships}\n` +
+        `Импортировано изображений: ${importedImages}`;
+      
+      alert(successMessage);
+      console.log('Import completed successfully with counts:', {
+        nodes: importedNodes,
+        relationships: importedRelationships,
+        images: importedImages
+      });
 
       window.location.reload();
       
@@ -87,7 +101,7 @@ const ImportExportButtons = () => {
   };
 
   return (
-    <div className="import-export-buttons">
+    <div className="ie-buttons-container">
       <button
         className="import-export-buttons__button import-export-buttons__import"
         onClick={() => setIsImportModalOpen(true)}
@@ -136,7 +150,17 @@ const ImportExportButtons = () => {
             <button className="ie-close-button" onClick={() => setIsImportModalOpen(false)}>
               &times;
             </button>
-            <h2>Импорт</h2>
+            <h2>
+              Импорт
+              <div className="ie-info-icon-container">
+                <span className="ie-info-icon">i</span>
+                <div className="ie-info-tooltip">
+                  <p>1. Предоставьте json файл и изображения в .zip формате</p>
+                  <p>2. Допустимы разрешения изображений: jpg, jpeg, png, webp, gif, svg</p>
+                  <p>3. Изображение должно быть названо по id node, к которой оно собирается прикрепиться</p>
+                </div>
+              </div>
+            </h2>
             <p>Выберите файл для импорта:</p>
             <label className="ie-file-upload-button">
               Выбрать файл
