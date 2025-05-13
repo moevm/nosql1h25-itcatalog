@@ -2,6 +2,7 @@ import os
 import time
 import json
 from neo4j import GraphDatabase
+import datetime 
 
 NEO4J_URI = os.getenv("NEO4J_URI")
 NEO4J_USER = os.getenv("NEO4J_USER")
@@ -38,6 +39,7 @@ def load_data_from_json(file_path):
         for node in data["nodes"]:
             label = node["label"]
             properties = node["properties"]
+            properties["time"] = datetime.datetime.now().isoformat()
             session.execute_write(create_node, label, properties)
 
         # Создаем связи

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
+from datetime import datetime
 from database import driver
 from utils import check_node_exists, create_node, create_relationship,update_node, delete_relationship
 from urllib.parse import unquote
@@ -52,6 +53,7 @@ async def add_node(file: UploadFile = File(...),
                     name
                 )
                 if not exists:
+                    properties["time"] = datetime.now().isoformat()
                     session.execute_write(
                         create_node,
                         label,
@@ -105,7 +107,7 @@ async def edit_node(file: UploadFile = File(...),
 
                 if not name:
                     continue
-
+                new_properties["time"] = datetime.now().isoformat()
                 session.execute_write(
                         update_node,
                         name,

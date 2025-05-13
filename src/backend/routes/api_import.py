@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from database import driver, check_database_empty
 from utils import check_node_exists, delete_nodes, create_node, create_relationship
+from datetime import datetime
 import json
 import zipfile
 import io
@@ -82,6 +83,7 @@ async def import_data(
                         name
                     )
                     if not exists:
+                        properties["time"] = datetime.now().isoformat()
                         session.execute_write(
                             create_node,
                             label,
