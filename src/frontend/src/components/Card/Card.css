@@ -73,3 +73,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.card__time {
+    font-size: 12px;
+    color: #999;
+    margin-top: auto;
+    padding: 10px 15px;
+    width: 100%;
+    text-align: right;
+    border-top: 1px solid #eee;
+}

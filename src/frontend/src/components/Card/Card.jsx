@@ -4,6 +4,18 @@ import './Card.css';
 const Card = ({ title, category, description, image, onClick }) => {
   const imageUrl = image || "http://localhost:8000/static/images/in_progress.jpg";
 
+  const formatTime = (timestamp) => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    return new Intl.DateTimeFormat('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
+  };
+
   return (
     <div className="card" onClick={onClick}>
       <div className="card__image-container">
@@ -22,6 +34,11 @@ const Card = ({ title, category, description, image, onClick }) => {
         {category && <div className="card__category">{category}</div>}
         {description && (
           <div className="card__description">{description}</div>
+        )}
+	{time && (
+          <div className="card__time">
+            Изменено: {formatTime(time)}
+	  </div>
         )}
       </div>
     </div>
