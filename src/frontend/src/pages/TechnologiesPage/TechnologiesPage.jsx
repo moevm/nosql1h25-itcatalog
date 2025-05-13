@@ -238,8 +238,13 @@ const TechnologiesPage = () => {
           items={groups}
           selectedItems={selectedGroups}
           onItemChange={handleGroupChange}
+          onSearchChange={setSearchNameTerm}
+          searchTerm={searchNameTerm}
+          showSearch={true}
+          searchPlaceholder="Поиск технологий..."
           filterLabel="Группы технологий"
           itemLabelProp="name"
+          filteredCount={technologies.length}
         />
         
         <div className="cards">
