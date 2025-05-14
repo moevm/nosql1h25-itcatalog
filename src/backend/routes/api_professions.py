@@ -12,7 +12,7 @@ async def get_professions():
             result = session.run(
                 """
                 MATCH (p:Profession)-[:BELONGS_TO]->(c:Category)
-                RETURN p.name AS profession_name, c.name AS category_name, p.id AS id
+                RETURN p.name AS profession_name, c.name AS category_name, p.id AS id, p.time AS time
                 ORDER BY toLower(p.name)
                 """
             )
@@ -33,7 +33,8 @@ async def get_professions():
                 professions.append({
                     "profession": record["profession_name"],
                     "category": record["category_name"],
-                    "image": image_url
+                    "image": image_url,
+                    "time": record["time"]
                 })
             
             return professions
