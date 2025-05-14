@@ -60,17 +60,19 @@ const GroupPage = ({ groupType }) => {
         name: group,
         description: '',
         image: config.defaultImage,
-        participants: []
+        participants: [],
+        time: '' 
       };
     }
-
+  
     const name = group.name || group.group || 'Без названия';
-
+  
     return {
       name,
       description: group.description || '',
       image: group.image || config.defaultImage,
-      participants: group.participants || []
+      participants: group.participants || [],
+      time: group.time || '' 
     };
   };
 
