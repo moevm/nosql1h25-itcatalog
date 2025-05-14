@@ -12,7 +12,7 @@ async def get_skills():
             result = session.run(
                 """
                 MATCH (s:Skill)-[:GROUPS_SKILL]->(g:SkillGroup)
-                RETURN s.name AS skill_name, g.name AS group_name, s.id AS id
+                RETURN s.name AS skill_name, g.name AS group_name, s.id AS id, s.time AS time
                 ORDER BY toLower(s.name)
                 """
             )
@@ -34,7 +34,8 @@ async def get_skills():
                 skills.append({
                     "skill": record["skill_name"],
                     "skill_group": record["group_name"],
-                    "image": image_url
+                    "image": image_url,
+                    "time": record["time"]
                 })
 
             if not skills:
